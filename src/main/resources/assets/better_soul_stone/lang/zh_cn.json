@@ -1,0 +1,11 @@
+{
+  "better_soul_stone_tab": "更好的魂石",
+  "curios.identifier.soul_stone_slot": "魂石栏",
+  "curios.modifiers.soul_stone_slot": "佩戴在魂石栏时",
+
+  "item.better_soul_stone.blank_soul_stone": "无魂石",
+  "item.better_soul_stone.sword_soul_stone": "剑魂石",
+  "item.better_soul_stone.armor_soul_stone": "甲魂石",
+  "item.better_soul_stone.pickaxe_soul_stone": "镐魂石",
+  "item.better_soul_stone.axe_soul_stone": "斧魂石"
+}

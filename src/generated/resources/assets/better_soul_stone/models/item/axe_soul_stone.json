@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "better_soul_stone:item/axe_soul_stone"
+  }
+}

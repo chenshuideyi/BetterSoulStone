@@ -1,0 +1,4 @@
+{
+  "entities": ["player"],
+  "slots": ["soul_stone_slot"]
+}
