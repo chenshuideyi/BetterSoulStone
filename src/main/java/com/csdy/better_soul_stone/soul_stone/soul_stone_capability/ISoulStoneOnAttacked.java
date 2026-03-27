@@ -1,4 +1,4 @@
-package com.csdy.better_soul_stone.soul_stone;
+package com.csdy.better_soul_stone.soul_stone.soul_stone_capability;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
 import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
@@ -6,13 +6,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.List;
 
-public interface ISoulStoneOnAttacked {
+public interface ISoulStoneOnAttacked extends ISoulStoneCapability {
     /**
      * @param event 原生受击事件
      * @param wearer 佩戴魂石的人（受害者）

@@ -1,6 +1,7 @@
-// 1.20.1	2026-03-24T10:05:40.5043903	Item Models: better_soul_stone
+// 1.20.1	2026-03-24T12:18:37.1917058	Item Models: better_soul_stone
 3bd9be46939061071dcdaef09ca46e5af915380f assets/better_soul_stone/models/item/armor_soul_stone.json
 616682d3865df5c809816d14ce6f09da90b856f8 assets/better_soul_stone/models/item/axe_soul_stone.json
 81e51729792998d592e2c84b500c2da69a600a18 assets/better_soul_stone/models/item/blank_soul_stone.json
 be4b3bd475acd71678b919703d6fe295b42a3328 assets/better_soul_stone/models/item/pickaxe_soul_stone.json
 9d89954202a28b35bec276446c4208a2ab6142c6 assets/better_soul_stone/models/item/sword_soul_stone.json
+222f6947ceef71d86943aa62920ed2189029509f assets/better_soul_stone/models/item/test_soul_stone.json

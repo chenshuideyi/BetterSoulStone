@@ -23,4 +23,9 @@ public class BlankSoulStone extends BaseSoulStone {
         return false;
     }
 
+    @Override
+    public boolean shouldRenderIconBackground(ItemStack stack) {
+        return false;
+    }
+
 }

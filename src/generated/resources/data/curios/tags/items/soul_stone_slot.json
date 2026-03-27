@@ -1,28 +1,5 @@
 {
   "values": [
-    {
-      "id": "better_soul_stone:blank_soul_stone",
-      "required": false
-    },
-    {
-      "id": "better_soul_stone:armor_soul_stone",
-      "required": false
-    },
-    {
-      "id": "better_soul_stone:axe_soul_stone",
-      "required": false
-    },
-    {
-      "id": "better_soul_stone:pickaxe_soul_stone",
-      "required": false
-    },
-    {
-      "id": "better_soul_stone:sword_soul_stone",
-      "required": false
-    },
-    {
-      "id": "better_soul_stone:test_soul_stone",
-      "required": false
-    }
+    "#better_soul_stone:soul_stone"
   ]
 }

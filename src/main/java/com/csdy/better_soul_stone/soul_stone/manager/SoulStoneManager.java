@@ -1,8 +1,9 @@
 package com.csdy.better_soul_stone.soul_stone.manager;
 
-import com.csdy.better_soul_stone.soul_stone.ISoulStoneAttack;
-import com.csdy.better_soul_stone.soul_stone.ISoulStoneOnAttacked;
-import com.csdy.better_soul_stone.soul_stone.ISoulStoneTick;
+import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneAttack;
+import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneCapability;
+import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneOnAttacked;
+import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneTick;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -26,11 +27,8 @@ public class SoulStoneManager {
         Map<Class<?>, List<SlotResult>> playerAbilities = new HashMap<>();
 
         CuriosApi.getCuriosHelper().getCuriosHandler(entity).ifPresent(handler -> {
-            Map<String, ICurioStacksHandler> curios = handler.getCurios();
-            for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
-                String identifier = entry.getKey();
-                IItemHandlerModifiable stacks = entry.getValue().getStacks();
-
+            handler.getCurios().forEach((identifier, stackHandler) -> {
+                IItemHandlerModifiable stacks = stackHandler.getStacks();
                 for (int i = 0; i < stacks.getSlots(); i++) {
                     ItemStack stack = stacks.getStackInSlot(i);
                     if (stack.isEmpty()) continue;
@@ -39,13 +37,15 @@ public class SoulStoneManager {
                     SlotContext slotContext = new SlotContext(identifier, entity, i, false, true);
                     SlotResult result = new SlotResult(slotContext, stack);
 
-                    registerIfMatch(item, ISoulStoneOnAttacked.class, result, playerAbilities);
-                    registerIfMatch(item, ISoulStoneAttack.class, result, playerAbilities);
-                    registerIfMatch(item, ISoulStoneTick.class, result, playerAbilities);
+                    Class<?>[] interfaces = item.getClass().getInterfaces();
+                    for (Class<?> iface : interfaces) {
+                        if (ISoulStoneCapability.class.isAssignableFrom(iface) && iface != ISoulStoneCapability.class) {
+                            playerAbilities.computeIfAbsent(iface, k -> new ArrayList<>()).add(result);
+                        }
+                    }
                 }
-            }
+            });
         });
-
         ABILITY_CACHE.put(entity.getUUID(), playerAbilities);
     }
 

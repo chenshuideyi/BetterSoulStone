@@ -1,3 +1,3 @@
-// 1.20.1	2026-03-23T18:33:07.6838544	Tags for minecraft:item mod id better_soul_stone
-7fc49ed05e51e0347eb779f3f791f294b3fdfdc2 data/better_soul_stone/tags/items/soul_stone_slot.json
-97a003f0d80d6c8dc598af462376b3a68a377e15 data/curios/tags/items/soul_stone_slot.json
+// 1.20.1	2026-03-27T15:38:06.9310849	Tags for minecraft:item mod id better_soul_stone
+ea3205e1a3169fde7e4f11d2391d0384613d4d69 data/better_soul_stone/tags/items/soul_stone.json
+8d9caa6f527fe46485335e0991c0cd17be5c13c3 data/curios/tags/items/soul_stone_slot.json

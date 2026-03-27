@@ -25,7 +25,7 @@ public class SoulStoneTagsProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
 
         TagKey<Item> SOUL_STONE_TAG = TagKey.create(Registries.ITEM,
-                ResourceLocation.fromNamespaceAndPath("better_soul_stone", "soul_stone_slot"));
+                ResourceLocation.fromNamespaceAndPath("better_soul_stone", "soul_stone"));
 
         IntrinsicTagAppender<Item> appender = this.tag(SOUL_STONE_TAG);
 

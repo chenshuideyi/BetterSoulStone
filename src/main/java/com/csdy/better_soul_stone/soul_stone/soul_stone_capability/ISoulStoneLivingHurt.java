@@ -1,11 +1,11 @@
-package com.csdy.better_soul_stone.soul_stone;
+package com.csdy.better_soul_stone.soul_stone.soul_stone_capability;
 
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-public interface ISoulStoneLivingHurt {
+public interface ISoulStoneLivingHurt extends ISoulStoneCapability {
 
     /**
      * 当持有者受到伤害时触发

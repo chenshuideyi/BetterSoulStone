@@ -1,7 +1,6 @@
 package com.csdy.better_soul_stone.event;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
-import com.csdy.better_soul_stone.soul_stone.ISoulStoneOnAttacked;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +11,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.function.BiConsumer;
 
-import static com.csdy.better_soul_stone.soul_stone.ISoulStoneOnAttacked.dispatchAttackTrigger;
+import static com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneOnAttacked.dispatchAttackTrigger;
 
 @Mod.EventBusSubscriber(modid = BetterSoulStoneModMain.MODID)
 public class SoulStoneEventHandler {
