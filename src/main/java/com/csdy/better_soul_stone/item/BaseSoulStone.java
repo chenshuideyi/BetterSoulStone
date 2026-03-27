@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -41,7 +42,7 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
 
     @Override
     public boolean isFoil(@NotNull ItemStack stack) {
-        return true;
+        return false;
     }
 
     @Override
@@ -51,8 +52,22 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
 
 
     public int getTier(ItemStack stack) {
-        if (!stack.hasTag()) return 1;
-        return stack.getTag().getInt("SoulStoneTier");
+        if (stack.hasTag()) {
+            return stack.getOrCreateTag().getInt("SoulStoneTier");
+        }
+        return 1;
+    }
+
+
+    public void setTier(ItemStack stack, int tier) {
+        stack.getOrCreateTag().putInt("SoulStoneTier", tier);
+    }
+
+    @Override
+    public void onCraftedBy(ItemStack stack, Level level, Player player) {
+        if (!stack.hasTag()) {
+            this.setTier(stack, 1);
+        }
     }
 
     @OnlyIn(Dist.CLIENT)

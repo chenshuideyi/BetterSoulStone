@@ -1,10 +1,12 @@
 package com.csdy.better_soul_stone.event;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
+import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneTick;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -24,6 +26,13 @@ public class SoulStoneEventHandler {
         Entity attacker = event.getSource().getEntity();
         boolean shouldCancel = dispatchAttackTrigger(target, event, attacker);
         if (shouldCancel) event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void onLivingTick(LivingEvent.LivingTickEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity == null || entity.level().isClientSide) return;
+        dispatch(entity, ISoulStoneTick.class, (item, stack) -> item.onTick(stack, entity));
     }
 
 

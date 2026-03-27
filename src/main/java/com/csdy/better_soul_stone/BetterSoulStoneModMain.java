@@ -13,6 +13,9 @@ public class BetterSoulStoneModMain {
     public static final String MODID = "better_soul_stone";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+
+    // TODO 一些弃用方法的更换，接口补全，tier和分组系统
+
     public BetterSoulStoneModMain() {
         LOGGER.info("\n\n\n\n\nn\n\n\n\n\nn\n\n\n\n\nn\n\n\n\n +  HEELLLLLO");
 

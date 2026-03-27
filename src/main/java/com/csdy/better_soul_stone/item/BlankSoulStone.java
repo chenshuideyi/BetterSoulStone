@@ -19,11 +19,6 @@ public class BlankSoulStone extends BaseSoulStone {
     }
 
     @Override
-    public boolean isFoil(@NotNull ItemStack stack) {
-        return false;
-    }
-
-    @Override
     public boolean shouldRenderIconBackground(ItemStack stack) {
         return false;
     }
