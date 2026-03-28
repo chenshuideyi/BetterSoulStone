@@ -16,10 +16,8 @@ public class BetterSoulStoneModMain {
 
     // TODO 一些弃用方法的更换，接口补全，tier和分组系统
 
-    public BetterSoulStoneModMain() {
-        LOGGER.info("\n\n\n\n\nn\n\n\n\n\nn\n\n\n\n\nn\n\n\n\n +  HEELLLLLO");
-
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+    public BetterSoulStoneModMain(FMLJavaModLoadingContext context) {
+        IEventBus bus = context.getModEventBus();
 
         SoulStoneItemRegister.autoRegisterSoulStones();
         SoulStoneItemRegister.ITEMS.register(bus);

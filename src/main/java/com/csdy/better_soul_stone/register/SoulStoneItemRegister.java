@@ -2,6 +2,7 @@ package com.csdy.better_soul_stone.register;
 
 import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.item.BaseSoulStone;
+import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,24 +20,23 @@ public class SoulStoneItemRegister {
     public static void autoRegisterSoulStones() {
         String packageName = "com.csdy.better_soul_stone.item";
         try {
-            List<Class<?>> classes = getClasses(packageName);
-            for (Class<?> clazz : classes) {
-
-                if (clazz.isAnnotationPresent(SoulStoneItems.class)) {
-                    SoulStoneItems annotation = clazz.getAnnotation(SoulStoneItems.class);
-                    String registryId = annotation.id();
-
-//                    System.out.println("成功扫描到注解 ID: " + registryId);
-
-                    ITEMS.register(registryId, () -> {
-                        try {
-                            return (Item) clazz.getDeclaredConstructor().newInstance();
-                        } catch (Exception e) {
-                            throw new RuntimeException("实例化失败: " + registryId, e);
-                        }
+            getClasses(packageName).stream()
+                    .filter(clazz -> clazz.isAnnotationPresent(SoulStoneItems.class))
+                    .filter(clazz -> {
+                        String modId = clazz.getAnnotation(SoulStoneItems.class).requiredMod();
+                        return modId.isEmpty() || net.minecraftforge.fml.ModList.get().isLoaded(modId);
+                    })
+                    .forEach(clazz -> {
+                        SoulStoneManager.markInterfaceAsActive(clazz);
+                        String registryId = clazz.getAnnotation(SoulStoneItems.class).id();
+                        ITEMS.register(registryId, () -> {
+                            try {
+                                return (Item) clazz.getDeclaredConstructor().newInstance();
+                            } catch (Exception e) {
+                                throw new RuntimeException("实例化失败: " + registryId, e);
+                            }
+                        });
                     });
-                }
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

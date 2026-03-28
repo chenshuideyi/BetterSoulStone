@@ -5,6 +5,7 @@ import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
@@ -12,8 +13,13 @@ import top.theillusivec4.curios.api.event.CurioChangeEvent;
 @Mod.EventBusSubscriber(modid = BetterSoulStoneModMain.MODID)
 public class SoulStoneSyncHandler {
 
+//    @SubscribeEvent
+//    public static void onCurioChange(CurioChangeEvent event) {
+//        SoulStoneManager.refresh(event.getEntity());
+//    }
+
     @SubscribeEvent
-    public static void onCurioChange(CurioChangeEvent event) {
+    public static void onPlayerClone(PlayerEvent.Clone event) {
         SoulStoneManager.refresh(event.getEntity());
     }
 
