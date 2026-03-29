@@ -4,6 +4,7 @@ import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.item.BaseSoulStone;
 import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -11,6 +12,7 @@ import java.io.File;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SoulStoneItemRegister {
@@ -23,8 +25,8 @@ public class SoulStoneItemRegister {
             getClasses(packageName).stream()
                     .filter(clazz -> clazz.isAnnotationPresent(SoulStoneItems.class))
                     .filter(clazz -> {
-                        String modId = clazz.getAnnotation(SoulStoneItems.class).requiredMod();
-                        return modId.isEmpty() || net.minecraftforge.fml.ModList.get().isLoaded(modId);
+                        String[] requiredMods = clazz.getAnnotation(SoulStoneItems.class).requiredMod();
+                        return requiredMods.length == 0 || Arrays.stream(requiredMods).allMatch(ModList.get()::isLoaded);
                     })
                     .forEach(clazz -> {
                         SoulStoneManager.markInterfaceAsActive(clazz);

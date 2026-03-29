@@ -5,9 +5,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface SoulStoneItems {
+
     String id();
-    String requiredMod() default "";
+    //尼玛 只有这样才叫常量
+    String[] requiredMod() default {};
+    boolean isSponsor() default false;
+
 }

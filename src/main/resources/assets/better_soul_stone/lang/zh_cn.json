@@ -3,26 +3,53 @@
   "curios.identifier.soul_stone_slot": "魂石栏",
   "curios.modifiers.soul_stone_slot": "佩戴在魂石栏时",
 
-  "item.better_soul_stone.blank_soul_stone": "无魂石",
+  "item.better_soul_stone.blank_soul_stone": "空普通魂石",
+  "item.better_soul_stone.blank_nether_soul_stone": "空下界魂石",
+  "item.better_soul_stone.blank_end_soul_stone": "空末地魂石",
+  "item.better_soul_stone.blank_pure_soul_stone": "空纯粹魂石",
+  "item.better_soul_stone.blank_theorem_soul_stone": "空定理魂石",
+  "item.better_soul_stone.blank_absolute_soul_stone": "空绝对魂石",
+  "item.better_soul_stone.blank_better_soul_stone": "空更好的魂石",
+
   "item.better_soul_stone.test_soul_stone": "测试魂石",
   "item.better_soul_stone.sword_soul_stone": "剑魂石",
   "item.better_soul_stone.armor_soul_stone": "甲魂石",
   "item.better_soul_stone.pickaxe_soul_stone": "镐魂石",
   "item.better_soul_stone.axe_soul_stone": "斧魂石",
 
-  "flavor.better_soul_stone.blank_soul_stone": "纯粹容器",
+  "flavor.better_soul_stone.blank_soul_stone": "卑微的开始...... ",
+  "flavor.better_soul_stone.blank_nether_soul_stone": "火热的开始...... ",
+  "flavor.better_soul_stone.blank_end_soul_stone": "怕水的开始...... ",
+  "flavor.better_soul_stone.blank_pure_soul_stone": "超凡的开始...... ",
+  "flavor.better_soul_stone.blank_theorem_soul_stone": "真理的开始...... ",
+  "flavor.better_soul_stone.blank_absolute_soul_stone": "真正的开始...... ",
+  "flavor.better_soul_stone.blank_better_soul_stone": "更好的开始...... ",
+
   "flavor.better_soul_stone.test_soul_stone": "你能拿到这个，绝对是开创了",
   "flavor.better_soul_stone.sword_soul_stone": "低版本PVP享受者",
   "flavor.better_soul_stone.armor_soul_stone": "勇者不能不穿裤子",
   "flavor.better_soul_stone.pickaxe_soul_stone": "这下能挖个爽了",
   "flavor.better_soul_stone.axe_soul_stone": "高版本PVP享受者",
 
-  "text.better_soul_stone.blank_soul_stone": "",
+  "text.better_soul_stone.blank_soul_stone": "灵魂容器",
+  "text.better_soul_stone.blank_nether_soul_stone": "炙热容器",
+  "text.better_soul_stone.blank_end_soul_stone": "虚幻容器",
+  "text.better_soul_stone.blank_pure_soul_stone": "纯粹容器",
+  "text.better_soul_stone.blank_theorem_soul_stone": "真理容器",
+  "text.better_soul_stone.blank_absolute_soul_stone": "绝对容器",
+  "text.better_soul_stone.blank_better_soul_stone": "和模组名字一样的容器",
   "text.better_soul_stone.test_soul_stone": "请输入文本",
   "text.better_soul_stone.sword_soul_stone": "砍的更快！",
   "text.better_soul_stone.armor_soul_stone": "多挨点揍!",
   "text.better_soul_stone.pickaxe_soul_stone": "橡胶手臂!",
   "text.better_soul_stone.axe_soul_stone": "锤人更痛!"
+
+
+
+
+
+
+
 
 
 }

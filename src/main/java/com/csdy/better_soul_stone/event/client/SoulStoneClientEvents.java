@@ -26,7 +26,6 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = BetterSoulStoneModMain.MODID, value = Dist.CLIENT)
 public class SoulStoneClientEvents {
 
-    // 随便找个原版材质做个演示，你可以换成你自己的 "better_soul_stone:textures/gui/tooltip_bg.png"
     private static final ResourceLocation TOOLTIP_BG = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/gui/light_dirt_background.png");
 
     private static void renderStaticItem(ItemStack stack, int light, PoseStack ms, MultiBufferSource buffer, LivingEntity entity) {
@@ -41,6 +40,10 @@ public class SoulStoneClientEvents {
                 entity.getId()
         );
     }
+
+//    public static void onRegisterTooltipFactories(RegisterClientTooltipComponentFactoriesEvent event) {
+//        event.register(CustomFontTooltipComponent.class, component -> component);
+//    }
 
     @SubscribeEvent
     public static void onRenderLivingPost(RenderLivingEvent.Post<LivingEntity, ?> event) {
@@ -146,7 +149,7 @@ public class SoulStoneClientEvents {
         graphics.pose().mulPose(Axis.ZP.rotationDegrees(rotationAngle));
 
 
-        float targetSize = 128.0f;
+        float targetSize = 96.0f;
         float scale = targetSize / 16.0f;
         graphics.pose().scale(scale, scale, 1.0F);
         graphics.renderFakeItem(stack, -8, -8);

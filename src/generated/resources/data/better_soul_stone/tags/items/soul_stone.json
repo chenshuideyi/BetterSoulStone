@@ -1,6 +1,12 @@
 {
   "values": [
+    "better_soul_stone:blank_absolute_soul_stone",
+    "better_soul_stone:blank_better_soul_stone",
+    "better_soul_stone:blank_end_soul_stone",
+    "better_soul_stone:blank_nether_soul_stone",
+    "better_soul_stone:blank_pure_soul_stone",
     "better_soul_stone:blank_soul_stone",
+    "better_soul_stone:blank_theorem_soul_stone",
     "better_soul_stone:test_soul_stone",
     "better_soul_stone:armor_soul_stone",
     "better_soul_stone:axe_soul_stone",

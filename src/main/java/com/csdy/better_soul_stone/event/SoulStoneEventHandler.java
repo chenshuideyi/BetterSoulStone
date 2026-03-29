@@ -74,14 +74,14 @@ public class SoulStoneEventHandler {
     }
 
 
-    @SuppressWarnings("all")
-    private static <T> void dispatch(LivingEntity entity, Class<T> clazz, BiConsumer<T, ItemStack> action) {
-        CuriosApi.getCuriosHelper().getCuriosHandler(entity).ifPresent(handler -> {
-            handler.findCurios(stack -> clazz.isInstance(stack.getItem())).forEach(result -> {
-                ItemStack stack = result.stack();
-                action.accept(clazz.cast(stack.getItem()), stack);
-            });
-        });
-    }
+//    @SuppressWarnings("all")
+//    private static <T> void dispatch(LivingEntity entity, Class<T> clazz, BiConsumer<T, ItemStack> action) {
+//        CuriosApi.getCuriosHelper().getCuriosHandler(entity).ifPresent(handler -> {
+//            handler.findCurios(stack -> clazz.isInstance(stack.getItem())).forEach(result -> {
+//                ItemStack stack = result.stack();
+//                action.accept(clazz.cast(stack.getItem()), stack);
+//            });
+//        });
+//    }
 
 }

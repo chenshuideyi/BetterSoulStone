@@ -41,7 +41,7 @@ minecraft {
     mappings channel: 'official', version: '1.20.1'
 
     // 如果没有 AT 文件，建议先注释掉这一行，避免找不到文件报错
-    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     copyIdeResources = true
 
@@ -109,6 +109,10 @@ dependencies {
     implementation fg.deobf("curse.maven:jade-324717:6271651")
     implementation fg.deobf("curse.maven:jei-238222:6075247")
     implementation fg.deobf("curse.maven:curios-309927:6418456")
+    //现代化UI
+//    implementation fg.deobf("curse.maven:modern-ui-352491:6956345")
+
+
 
 }
 

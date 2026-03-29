@@ -1,5 +1,6 @@
 package com.csdy.better_soul_stone;
 
+import com.csdy.better_soul_stone.event.client.SoulStoneClientEvents;
 import com.csdy.better_soul_stone.register.SoulStoneItemRegister;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.common.MinecraftForge;
@@ -8,11 +9,16 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import java.util.List;
+
 @Mod(BetterSoulStoneModMain.MODID)
 public class BetterSoulStoneModMain {
     public static final String MODID = "better_soul_stone";
     public static final Logger LOGGER = LogUtils.getLogger();
-
+    //操你妈这个甚至不算常量 死吗了JAVA
+    //public static final String[] NO_REQUIRED = {""};
+    //操你妈JAVA为什么不能这么写？？？？
+    //public static final String[] noRequired = [""];
 
     // TODO 一些弃用方法的更换，接口补全，tier和分组系统
 
@@ -22,6 +28,7 @@ public class BetterSoulStoneModMain {
         SoulStoneItemRegister.autoRegisterSoulStones();
         SoulStoneItemRegister.ITEMS.register(bus);
         BetterSoulStoneTab.CREATIVE_MODE_TABS.register(bus);
+//        bus.addListener(SoulStoneClientEvents::onRegisterTooltipFactories);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

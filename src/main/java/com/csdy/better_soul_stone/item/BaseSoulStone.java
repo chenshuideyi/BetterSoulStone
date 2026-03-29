@@ -1,9 +1,11 @@
 package com.csdy.better_soul_stone.item;
 
+import com.csdy.better_soul_stone.font.factory.SoulStoneFontFactory;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.client.ISpecialTooltipRendering;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -14,6 +16,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -22,6 +25,7 @@ import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 
 @SuppressWarnings({"all", "removal"})
 public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecialTooltipRendering {
@@ -32,6 +36,27 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
 
     public BaseSoulStone(Item.Properties properties) {
         super(properties);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public String getSoulStoneType() {
+        return null;
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(new IClientItemExtensions() {
+            @Override
+            public @Nullable Font getFont(ItemStack stack, FontContext context) {
+                if (stack.getItem() instanceof BaseSoulStone soulStone) {
+                    String type = soulStone.getSoulStoneType();
+                    if (type != null) {
+                        return SoulStoneFontFactory.getOrCreateFont(type);
+                    }
+                }
+                return null;
+            }
+        });
     }
 
 

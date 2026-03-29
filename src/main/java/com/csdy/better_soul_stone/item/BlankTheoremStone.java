@@ -7,17 +7,17 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.SlotContext;
 
-@SoulStoneItems(id = "blank_soul_stone")
-public class BlankSoulStone extends BaseSoulStone {
+@SoulStoneItems(id = "blank_theorem_soul_stone")
+public class BlankTheoremStone extends BaseSoulStone {
 
-    public BlankSoulStone() {
-        super(new Item.Properties().stacksTo(64));
+    public BlankTheoremStone() {
+        super(new Properties().stacksTo(64));
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public String getSoulStoneType() {
-        return "blank";
+        return "theorem";
     }
 
     @Override
