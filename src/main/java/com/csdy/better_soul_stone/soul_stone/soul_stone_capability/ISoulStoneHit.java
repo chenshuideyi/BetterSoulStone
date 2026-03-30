@@ -14,44 +14,16 @@ public interface ISoulStoneHit extends ISoulStoneCapability {
 
     void beforeHit(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack);
 
-    void afterHit(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack);
+    void afterHit(LivingDamageEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack);
 
-    void failedMeleeHit(LivingEntity attacker, LivingEntity target, ItemStack stack, float damageAttempted);
-
-    /**
-     * 在 LivingAttackEvent 中调用，用来捕捉那些“本该发生但没发生的伤害”
-     */
-    static void checkAttackFailure(LivingAttackEvent event) {
-        if (!(event.getSource().getEntity() instanceof LivingEntity attacker)) return;
-        LivingEntity target = event.getEntity();
-
-        boolean isFailed = false;
-        if (target.invulnerableTime > 10) isFailed = true;
-        if (target.isInvulnerable()) isFailed = true;
-        if (event.isCanceled()) isFailed = true;
-
-        if (isFailed) {
-            List<SlotResult> stones = SoulStoneManager.getStones(attacker, ISoulStoneHit.class);
-            for (SlotResult result : stones) {
-                if (result.stack().getItem() instanceof ISoulStoneHit logic) {
-                    logic.failedMeleeHit(attacker, target, result.stack(), event.getAmount());
-                }
-            }
-        }
+    static void dispatchBeforeHit(LivingHurtEvent event, LivingEntity attacker, LivingEntity target) {
+        SoulStoneManager.forEachStone(attacker, ISoulStoneHit.class, (logic, stack) ->
+                logic.beforeHit(event, attacker, target, stack));
     }
 
-    static void dispatchAfterHit(LivingDamageEvent event) {
-        if (!(event.getSource().getEntity() instanceof LivingEntity attacker) || attacker.level().isClientSide) return;
-        LivingEntity target = event.getEntity();
-
-        List<SlotResult> stones = SoulStoneManager.getStones(attacker, ISoulStoneHit.class);
-        for (SlotResult result : stones) {
-            ItemStack stack = result.stack();
-            if (stack.getItem() instanceof ISoulStoneHit logic) {
-
-                logic.afterHit(null, attacker, target, stack);
-            }
-        }
+    static void dispatchAfterHit(LivingDamageEvent event, LivingEntity attacker, LivingEntity target) {
+        SoulStoneManager.forEachStone(attacker, ISoulStoneHit.class, (logic, stack) ->
+                logic.afterHit(event, attacker, target, stack));
     }
 
 }

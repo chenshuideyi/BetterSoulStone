@@ -9,19 +9,20 @@ import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.List;
 
-public interface ISoulStoneLivingHurt extends ISoulStoneCapability {
+public interface ISoulStoneDamage extends ISoulStoneCapability{
 
-    float livingHurt(LivingHurtEvent event, LivingEntity wearer, DamageSource source, float amount, ItemStack stack);
+    float onDealingDamage(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, DamageSource source, float amount, ItemStack stack);
 
-    static float dispatchHurtTrigger(LivingEntity wearer, LivingHurtEvent event, DamageSource source, float amount) {
-        List<SlotResult> soulStones = SoulStoneManager.getStones(wearer, ISoulStoneLivingHurt.class);
+
+    static float dispatchDamageTrigger(LivingEntity attacker, LivingHurtEvent event, LivingEntity target, DamageSource source, float amount) {
+        List<SlotResult> soulStones = SoulStoneManager.getStones(attacker, ISoulStoneDamage.class);
         if (soulStones.isEmpty()) return amount;
 
         float currentAmount = amount;
         for (SlotResult result : soulStones) {
             ItemStack stack = result.stack();
-            if (stack.getItem() instanceof ISoulStoneLivingHurt logic) {
-                currentAmount = logic.livingHurt(event, wearer, source, currentAmount, stack);
+            if (stack.getItem() instanceof ISoulStoneDamage logic) {
+                currentAmount = logic.onDealingDamage(event, attacker, target, source, currentAmount, stack);
             }
         }
         return currentAmount;

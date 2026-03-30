@@ -1,11 +1,16 @@
 package com.csdy.better_soul_stone;
 
 import com.csdy.better_soul_stone.event.client.SoulStoneClientEvents;
+import com.csdy.better_soul_stone.network.BetterSoulStoneSyncing;
 import com.csdy.better_soul_stone.register.SoulStoneItemRegister;
 import com.mojang.logging.LogUtils;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
@@ -24,7 +29,7 @@ public class BetterSoulStoneModMain {
 
     public BetterSoulStoneModMain(FMLJavaModLoadingContext context) {
         IEventBus bus = context.getModEventBus();
-
+        BetterSoulStoneSyncing.Init();
         SoulStoneItemRegister.autoRegisterSoulStones();
         SoulStoneItemRegister.ITEMS.register(bus);
         BetterSoulStoneTab.CREATIVE_MODE_TABS.register(bus);
@@ -32,4 +37,11 @@ public class BetterSoulStoneModMain {
 
         MinecraftForge.EVENT_BUS.register(this);
     }
+
+//    @SubscribeEvent
+//    public static void onFMLCommonSetup(FMLCommonSetupEvent event) {
+//        //网络包
+//        BetterSoulStoneSyncing.Init();
+//    }
+
 }

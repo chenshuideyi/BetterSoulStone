@@ -9,6 +9,7 @@ import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 
 @SuppressWarnings("all")
 public class SoulStoneManager {
@@ -74,5 +75,16 @@ public class SoulStoneManager {
         return ABILITY_CACHE
                 .getOrDefault(entity.getUUID(), Collections.emptyMap())
                 .getOrDefault(clazz, Collections.emptyList());
+    }
+
+    //复用一下素材
+    public static <T> void forEachStone(LivingEntity entity, Class<T> capabilityClass, BiConsumer<T, ItemStack> action) {
+        if (entity == null || entity.level().isClientSide) return;
+        getStones(entity, capabilityClass).forEach(result -> {
+            ItemStack stack = result.stack();
+            if (capabilityClass.isInstance(stack.getItem())) {
+                action.accept(capabilityClass.cast(stack.getItem()), stack);
+            }
+        });
     }
 }
