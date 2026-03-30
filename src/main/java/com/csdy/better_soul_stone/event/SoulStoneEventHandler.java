@@ -6,7 +6,9 @@ import com.csdy.better_soul_stone.network.packet.LeftClickEmptyPacket;
 import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.*;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -15,8 +17,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
-
-import static com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneOnAttacked.dispatchAttackTrigger;
 
 @Mod.EventBusSubscriber(modid = BetterSoulStoneModMain.MODID)
 public class SoulStoneEventHandler {
@@ -67,6 +67,16 @@ public class SoulStoneEventHandler {
     public static void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
         if (event.getLevel().isClientSide) {
             BetterSoulStoneSyncing.CHANNEL.sendToServer(new LeftClickEmptyPacket());
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingAttack(LivingAttackEvent event) {
+        LivingEntity victim = event.getEntity();
+        Entity attacker = event.getSource().getEntity();
+
+        if (ISoulStoneOnAttacked.dispatchAttackTrigger(victim, event, attacker)) {
+            event.setCanceled(true);
         }
     }
 
