@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BNB",
+    "NMN",
+    "BNB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_powder"
+    },
+    "N": {
+      "item": "minecraft:netherrack"
+    },
+    "M": {
+      "item": "minecraft:lodestone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:blank_nether_soul_stone",
+    "count": 1
+  }
+}

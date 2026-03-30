@@ -18,7 +18,9 @@ public interface ISoulStoneOnAttacked extends ISoulStoneCapability {
      * @param stack 魂石堆栈
      * @return 返回 false 则取消攻击（免疫）
      */
-    boolean onAttacked(LivingAttackEvent event, LivingEntity wearer, Entity attacker, ItemStack stack);
+    default boolean onAttacked(LivingAttackEvent event, LivingEntity wearer, Entity attacker, ItemStack stack){
+        return true;
+    };
 
 
     static boolean dispatchAttackTrigger(LivingEntity wearer, LivingAttackEvent event, Entity attacker) {

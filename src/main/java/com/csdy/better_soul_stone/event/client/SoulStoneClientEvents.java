@@ -155,10 +155,16 @@ public class SoulStoneClientEvents {
         graphics.renderFakeItem(stack, -8, -8);
         graphics.blit(TOOLTIP_BG, 0, 0, 0, 0, (int)targetSize, (int)targetSize, 16, 16);
 
+//        MultiBufferSource bufferSource = event.getGraphics().bufferSource();
+//        if (bufferSource instanceof MultiBufferSource.BufferSource sb) {
+//            sb.endBatch();
+//        }
+
         graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableDepthTest();
         RenderSystem.disableBlend();
         graphics.pose().popPose();
+        graphics.bufferSource().endBatch();
     }
 
 //    @SubscribeEvent

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DBD",
+    "BEB",
+    "DBD"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:dragon_breath"
+    },
+    "B": {
+      "item": "minecraft:end_stone_bricks"
+    },
+    "E": {
+      "item": "minecraft:end_rod"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:blank_end_soul_stone",
+    "count": 1
+  }
+}

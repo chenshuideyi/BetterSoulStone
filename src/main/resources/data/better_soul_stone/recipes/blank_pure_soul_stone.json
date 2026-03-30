@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MSM",
+    "S*S",
+    "MSM"
+  ],
+  "key": {
+    "M": {
+      "item": "minecraft:milk_bucket"
+    },
+    "S": {
+      "item": "minecraft:beacon"
+    },
+    "*": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:blank_pure_soul_stone",
+    "count": 1
+  }
+}

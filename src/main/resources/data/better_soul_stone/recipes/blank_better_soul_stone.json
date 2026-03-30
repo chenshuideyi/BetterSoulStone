@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "CDE",
+    "AFA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:enchanted_golden_apple"
+    },
+    "B": {
+      "item": "better_soul_stone:blank_soul_stone"
+    },
+    "C": {
+      "item": "better_soul_stone:blank_nether_soul_stone"
+    },
+    "D": {
+      "item": "minecraft:debug_stick"
+    },
+    "E": {
+      "item": "better_soul_stone:blank_end_soul_stone"
+    },
+    "F": {
+      "item": "better_soul_stone:blank_pure_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:blank_better_soul_stone",
+    "count": 1
+  }
+}

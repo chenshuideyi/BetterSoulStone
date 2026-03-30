@@ -17,6 +17,8 @@
   "item.better_soul_stone.pickaxe_soul_stone": "镐魂石",
   "item.better_soul_stone.axe_soul_stone": "斧魂石",
 
+  "item.better_soul_stone.diamond_soul_stone": "钻石魂石",
+
   "flavor.better_soul_stone.blank_soul_stone": "卑微的开始...... ",
   "flavor.better_soul_stone.blank_nether_soul_stone": "火热的开始...... ",
   "flavor.better_soul_stone.blank_end_soul_stone": "怕水的开始...... ",
@@ -31,6 +33,8 @@
   "flavor.better_soul_stone.pickaxe_soul_stone": "这下能挖个爽了",
   "flavor.better_soul_stone.axe_soul_stone": "高版本PVP享受者",
 
+  "flavor.better_soul_stone.diamond_soul_stone": "高玩的象征！",
+
   "text.better_soul_stone.blank_soul_stone": "灵魂容器",
   "text.better_soul_stone.blank_nether_soul_stone": "炙热容器",
   "text.better_soul_stone.blank_end_soul_stone": "虚幻容器",
@@ -42,14 +46,7 @@
   "text.better_soul_stone.sword_soul_stone": "砍的更快！",
   "text.better_soul_stone.armor_soul_stone": "多挨点揍!",
   "text.better_soul_stone.pickaxe_soul_stone": "橡胶手臂!",
-  "text.better_soul_stone.axe_soul_stone": "锤人更痛!"
+  "text.better_soul_stone.axe_soul_stone": "锤人更痛!",
 
-
-
-
-
-
-
-
-
+  "text.better_soul_stone.diamond_soul_stone": "伤害提升500%，受到伤害后该魂石被销毁"
 }

@@ -8,6 +8,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotContext;
+import top.theillusivec4.curios.api.SlotResult;
+import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +49,33 @@ public class SoulStoneUtil {
             list.add(stack);
         });
         return list;
+    }
+
+    /**
+     * 物理销毁玩家饰品栏中的特定魂石并触发更新
+     * @return 是否成功销毁
+     */
+    @SuppressWarnings("all")
+    public static boolean destroySoulStone(LivingEntity entity, ItemStack targetStack) {
+        if (entity == null || entity.level().isClientSide || targetStack.isEmpty()) return false;
+
+        return CuriosApi.getCuriosHelper().getCuriosHandler(entity).map(handler -> {
+            for (var entry : handler.getCurios().entrySet()) {
+                IDynamicStackHandler stackHandler = entry.getValue().getStacks();
+
+                for (int i = 0; i < stackHandler.getSlots(); i++) {
+                    ItemStack stackInSlot = stackHandler.getStackInSlot(i);
+
+                    if (stackInSlot == targetStack ||
+                            (!stackInSlot.isEmpty() && stackInSlot.getItem() == targetStack.getItem())) {
+
+                        stackHandler.setStackInSlot(i, ItemStack.EMPTY);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }).orElse(false);
     }
 
 }

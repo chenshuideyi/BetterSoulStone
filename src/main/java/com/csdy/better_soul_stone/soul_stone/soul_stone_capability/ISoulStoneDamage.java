@@ -11,7 +11,9 @@ import java.util.List;
 
 public interface ISoulStoneDamage extends ISoulStoneCapability{
 
-    float onDealingDamage(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, DamageSource source, float amount, ItemStack stack);
+    default float onDealingDamage(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, DamageSource source, float amount, ItemStack stack){
+        return amount;
+    };
 
 
     static float dispatchDamageTrigger(LivingEntity attacker, LivingHurtEvent event, LivingEntity target, DamageSource source, float amount) {

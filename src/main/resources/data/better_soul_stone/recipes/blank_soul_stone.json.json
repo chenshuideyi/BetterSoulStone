@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GQG",
+    "QLQ",
+    "GQG"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "L": {
+      "item": "minecraft:soul_lantern"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:blank_soul_stone",
+    "count": 1
+  }
+}

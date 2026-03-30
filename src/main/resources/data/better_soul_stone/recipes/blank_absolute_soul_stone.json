@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BTB",
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:wooden_axe"
+    },
+    "B": {
+      "item": "minecraft:bedrock"
+    },
+    "T": {
+      "item": "minecraft:turtle_helmet"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:blank_absolute_soul_stone",
+    "count": 1
+  }
+}

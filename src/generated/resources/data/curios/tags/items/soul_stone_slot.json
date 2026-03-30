@@ -47,6 +47,10 @@
     {
       "id": "better_soul_stone:sword_soul_stone",
       "required": false
+    },
+    {
+      "id": "better_soul_stone:diamond_soul_stone",
+      "required": false
     }
   ]
 }

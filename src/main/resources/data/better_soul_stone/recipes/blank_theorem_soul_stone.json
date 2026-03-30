@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MBM",
+    "BEB",
+    "MBM"
+  ],
+  "key": {
+    "M": {
+      "type": "forge:nbt",
+      "item": "minecraft:enchanted_book",
+      "count": 1,
+      "nbt": "{StoredEnchantments:[{id:\"minecraft:mending\",lvl:1s}]}"
+    },
+    "B": {
+      "tag": "minecraft:boats"
+    },
+    "E": {
+      "item": "minecraft:dragon_egg"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:blank_theorem_soul_stone",
+    "count": 1
+  }
+}
