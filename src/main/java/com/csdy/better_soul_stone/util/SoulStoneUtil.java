@@ -2,10 +2,16 @@ package com.csdy.better_soul_stone.util;
 
 import com.csdy.better_soul_stone.item.BaseSoulStone;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
@@ -76,6 +82,26 @@ public class SoulStoneUtil {
             }
             return false;
         }).orElse(false);
+    }
+
+    public static void dropStealLoot(LivingEntity target, Player player) {
+        if (target.level() instanceof ServerLevel serverLevel) {
+
+            ResourceLocation lootTableLocation = target.getLootTable();
+            LootTable lootTable = serverLevel.getServer().getLootData().getLootTable(lootTableLocation);
+
+            if (lootTable == LootTable.EMPTY) return;
+
+            LootParams params = new LootParams.Builder(serverLevel)
+                    .withParameter(LootContextParams.THIS_ENTITY, target)
+                    .withParameter(LootContextParams.ORIGIN, target.position())
+                    .withParameter(LootContextParams.DAMAGE_SOURCE, target.damageSources().playerAttack(player))
+                    .withParameter(LootContextParams.KILLER_ENTITY, player)
+                    .withOptionalParameter(LootContextParams.DIRECT_KILLER_ENTITY, player)
+                    .create(LootContextParamSets.ENTITY);
+
+            lootTable.getRandomItems(params).forEach(target::spawnAtLocation);
+        }
     }
 
 }

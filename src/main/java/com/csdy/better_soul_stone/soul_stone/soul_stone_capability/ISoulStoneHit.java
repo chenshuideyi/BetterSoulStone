@@ -12,9 +12,13 @@ import java.util.List;
 
 public interface ISoulStoneHit extends ISoulStoneCapability {
 
-    void beforeHit(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack);
+    default void beforeHit(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack){
 
-    void afterHit(LivingDamageEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack);
+    }
+
+    default void afterHit(LivingDamageEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack){
+
+    }
 
     static void dispatchBeforeHit(LivingHurtEvent event, LivingEntity attacker, LivingEntity target) {
         SoulStoneManager.forEachStone(attacker, ISoulStoneHit.class, (logic, stack) ->

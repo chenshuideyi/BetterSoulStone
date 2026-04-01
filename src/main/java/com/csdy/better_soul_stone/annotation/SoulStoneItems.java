@@ -14,5 +14,6 @@ public @interface SoulStoneItems {
     //尼玛 只有这样才叫常量
     String[] requiredMod() default {};
     boolean isSponsor() default false;
+    String sponsorName() default "";
 
 }

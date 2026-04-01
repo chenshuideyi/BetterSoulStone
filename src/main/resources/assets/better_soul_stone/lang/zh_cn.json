@@ -2,7 +2,9 @@
   "better_soul_stone_tab": "更好的魂石",
   "curios.identifier.soul_stone_slot": "魂石栏",
   "curios.modifiers.soul_stone_slot": "佩戴在魂石栏时",
+  "better_soul_stone.sponsor.format": "★赞助者 %s 的提案",
 
+  "--- 基础容器物品 ---": "",
   "item.better_soul_stone.blank_soul_stone": "空普通魂石",
   "item.better_soul_stone.blank_nether_soul_stone": "空下界魂石",
   "item.better_soul_stone.blank_end_soul_stone": "空末地魂石",
@@ -11,6 +13,7 @@
   "item.better_soul_stone.blank_absolute_soul_stone": "空绝对魂石",
   "item.better_soul_stone.blank_better_soul_stone": "空更好的魂石",
 
+  "--- 进阶成品魂石 ---": "",
   "item.better_soul_stone.test_soul_stone": "测试魂石",
   "item.better_soul_stone.sword_soul_stone": "剑魂石",
   "item.better_soul_stone.armor_soul_stone": "甲魂石",
@@ -19,6 +22,13 @@
 
   "item.better_soul_stone.diamond_soul_stone": "钻石魂石",
 
+  "--- 赞助者魂石 ---": "",
+  "item.better_soul_stone.marisa_soul_stone": "魔理沙的魂石",
+  "item.better_soul_stone.player_7_soul_stone": "PlayerVII之魂",
+
+
+
+  "--- 风味文本 (Flavor) ---": "",
   "flavor.better_soul_stone.blank_soul_stone": "卑微的开始...... ",
   "flavor.better_soul_stone.blank_nether_soul_stone": "火热的开始...... ",
   "flavor.better_soul_stone.blank_end_soul_stone": "怕水的开始...... ",
@@ -26,6 +36,8 @@
   "flavor.better_soul_stone.blank_theorem_soul_stone": "真理的开始...... ",
   "flavor.better_soul_stone.blank_absolute_soul_stone": "真正的开始...... ",
   "flavor.better_soul_stone.blank_better_soul_stone": "更好的开始...... ",
+
+
 
   "flavor.better_soul_stone.test_soul_stone": "你能拿到这个，绝对是开创了",
   "flavor.better_soul_stone.sword_soul_stone": "低版本PVP享受者",
@@ -35,6 +47,10 @@
 
   "flavor.better_soul_stone.diamond_soul_stone": "高玩的象征！",
 
+  "flavor.better_soul_stone.marisa_soul_stone": "死后一定还！",
+  "flavor.better_soul_stone.player_7_soul_stone": "相传，PlayerVII打什么都是无伤",
+
+  "--- 效果描述 (Text) ---": "",
   "text.better_soul_stone.blank_soul_stone": "灵魂容器",
   "text.better_soul_stone.blank_nether_soul_stone": "炙热容器",
   "text.better_soul_stone.blank_end_soul_stone": "虚幻容器",
@@ -48,5 +64,12 @@
   "text.better_soul_stone.pickaxe_soul_stone": "橡胶手臂!",
   "text.better_soul_stone.axe_soul_stone": "锤人更痛!",
 
-  "text.better_soul_stone.diamond_soul_stone": "伤害提升500%，受到伤害后该魂石被销毁"
+  "text.better_soul_stone.diamond_soul_stone": "伤害提升500%，受到伤害后该魂石被销毁",
+
+  "--- 赞助者魂石效果描述 ---": "",
+  "text.better_soul_stone.marisa_soul_stone": "攻击时窃取一次目标的战利品：这就是“借走不还”的魔法！",
+  "text.better_soul_stone.player_7_soul_stone": "受到的伤害提升至 400%",
+  "text.better_soul_stone.player_7_soul_stone1": "无法通过任何自然方式回血",
+  "text.better_soul_stone.player_7_soul_stone2": "满血状态时造成的伤害减半",
+  "text.better_soul_stone.player_7_soul_stone3": "当生命值降至1点以下时，造成的伤害翻倍"
 }

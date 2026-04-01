@@ -8,11 +8,10 @@ import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.*;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -59,8 +58,16 @@ public class SoulStoneEventHandler {
     }
 
     @SubscribeEvent
+    public static void onEntityItemPickup(EntityItemPickupEvent event) {
+        ISoulStonePickUpItem.dispatch(event.getEntity(), event.getItem());
+    }
+
+    @SubscribeEvent
     public static void onLivingTick(LivingEvent.LivingTickEvent event) {
         ISoulStoneTick.dispatch(event.getEntity());
+        if (event.getEntity() instanceof Player player) {
+            ISoulStoneHover.dispatchHoverTrigger(player);
+        }
     }
 
     @SubscribeEvent
@@ -95,6 +102,23 @@ public class SoulStoneEventHandler {
         newAmount = ISoulStoneLivingHurt.dispatchHurtTrigger(victim, event, source, newAmount);
 
         if (newAmount != originalAmount) {
+            event.setAmount(newAmount);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingHeal(LivingHealEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity == null) return;
+
+        float originalAmount = event.getAmount();
+
+        float newAmount = ISoulStoneOnHeal.dispatchHealTrigger(entity, event, originalAmount);
+
+        if (newAmount <= 0 || event.isCanceled()) {
+            event.setAmount(0);
+            event.setCanceled(true);
+        } else if (newAmount != originalAmount) {
             event.setAmount(newAmount);
         }
     }

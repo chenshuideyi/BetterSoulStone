@@ -1,5 +1,6 @@
 package com.csdy.better_soul_stone.item;
 
+import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.font.factory.SoulStoneFontFactory;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.client.ISpecialTooltipRendering;
 import com.google.common.collect.HashMultimap;
@@ -30,12 +31,24 @@ import java.util.function.Consumer;
 @SuppressWarnings({"all", "removal"})
 public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecialTooltipRendering {
 
+    protected final boolean isSponsor;
+    protected final String sponsorName;
+
     public BaseSoulStone() {
         this(new Item.Properties().stacksTo(1).fireResistant());
     }
 
     public BaseSoulStone(Item.Properties properties) {
         super(properties);
+
+        SoulStoneItems anno = this.getClass().getAnnotation(SoulStoneItems.class);
+        if (anno != null) {
+            this.isSponsor = anno.isSponsor();
+            this.sponsorName = (isSponsor && !anno.sponsorName().isEmpty()) ? anno.sponsorName() : null;
+        } else {
+            this.isSponsor = false;
+            this.sponsorName = null;
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -95,12 +108,37 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
         }
     }
 
+    @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        String FlavorId = this.getDescriptionId().replace("item.", "flavor.");
-        String descriptionId = this.getDescriptionId().replace("item.", "text.");
-        tooltip.add(Component.translatable(FlavorId).withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
-        tooltip.add(Component.translatable(descriptionId).withStyle(ChatFormatting.GRAY));
+
+        String flavorId = this.getDescriptionId().replace("item.", "flavor.");
+        tooltip.add(Component.translatable(flavorId).withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+
+        String baseDescriptionId = this.getDescriptionId().replace("item.", "text.");
+
+        if (net.minecraft.client.resources.language.I18n.exists(baseDescriptionId)) {
+            tooltip.add(Component.translatable(baseDescriptionId).withStyle(ChatFormatting.GRAY));
+        }
+
+        int i = 1;
+        while (true) {
+            String nextId = baseDescriptionId + i;
+            if (net.minecraft.client.resources.language.I18n.exists(nextId)) {
+                tooltip.add(Component.translatable(nextId).withStyle(ChatFormatting.GRAY));
+                i++;
+            } else {
+                break;
+            }
+        }
+
+        if (isSponsor && sponsorName != null) {
+            String sponsorKey = "better_soul_stone.sponsor.format";
+            tooltip.add(Component.empty());
+            tooltip.add(Component.translatable(sponsorKey, sponsorName)
+                    .withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC));
+        }
+
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 

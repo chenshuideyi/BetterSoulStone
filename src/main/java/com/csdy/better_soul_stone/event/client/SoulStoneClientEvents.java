@@ -4,6 +4,7 @@ import com.csdy.better_soul_stone.BetterSoulStoneModMain;
 import com.csdy.better_soul_stone.item.BaseSoulStone;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.client.ISpecialTooltipRendering;
 import com.csdy.better_soul_stone.util.SoulStoneUtil;
+import com.csdy.better_soul_stone.util.client.GenericKeyDetector;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderTooltipEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -44,6 +46,22 @@ public class SoulStoneClientEvents {
 //    public static void onRegisterTooltipFactories(RegisterClientTooltipComponentFactoriesEvent event) {
 //        event.register(CustomFontTooltipComponent.class, component -> component);
 //    }
+
+    private static boolean keysInitialized = false;
+    @SubscribeEvent
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.screen != null) return;
+
+        if (!keysInitialized) {
+            GenericKeyDetector.init(mc.options);
+            keysInitialized = true;
+        }
+
+        GenericKeyDetector.tick();
+    }
 
     @SubscribeEvent
     public static void onRenderLivingPost(RenderLivingEvent.Post<LivingEntity, ?> event) {
@@ -165,6 +183,17 @@ public class SoulStoneClientEvents {
         RenderSystem.disableBlend();
         graphics.pose().popPose();
         graphics.bufferSource().endBatch();
+    }
+
+    @SubscribeEvent
+    public static void onTooltipColor(RenderTooltipEvent.Color event) {
+        ItemStack stack = event.getItemStack();
+        if (stack.getItem() instanceof ISpecialTooltipRendering special && special.hasCustomToolTipGlint(stack)) {
+            int color = special.getToolTipGlintColor(stack);
+
+            event.setBorderStart(color);
+            event.setBorderEnd(color);
+        }
     }
 
 //    @SubscribeEvent

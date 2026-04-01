@@ -1,6 +1,7 @@
 package com.csdy.better_soul_stone.network;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
+import com.csdy.better_soul_stone.network.packet.DoubleClickPacket;
 import com.csdy.better_soul_stone.network.packet.LeftClickBlockPacket;
 import com.csdy.better_soul_stone.network.packet.LeftClickEmptyPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -39,6 +40,14 @@ public class BetterSoulStoneSyncing {
                 LeftClickEmptyPacket::encode,
                 LeftClickEmptyPacket::decode,
                 LeftClickEmptyPacket::handle,
+                Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
+        CHANNEL.registerMessage(
+                packetId++,
+                DoubleClickPacket.class,
+                DoubleClickPacket::encode,
+                DoubleClickPacket::decode,
+                DoubleClickPacket::handle,
                 Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
     }

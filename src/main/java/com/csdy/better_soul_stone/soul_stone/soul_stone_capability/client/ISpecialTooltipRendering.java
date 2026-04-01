@@ -17,4 +17,18 @@ public interface ISpecialTooltipRendering extends ISoulStoneCapability {
         return 0xFFFFFF;
     }
 
+    /**
+     * ToolTip颜色
+     */
+    default int getToolTipGlintColor(ItemStack stack) {
+        return 0xFFFFFF;
+    }
+
+    /**
+     * 是否启用自定义光泽效果
+     */
+    default boolean hasCustomToolTipGlint(ItemStack stack) {
+        return false;
+    }
+
 }

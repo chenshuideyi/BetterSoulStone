@@ -12,6 +12,8 @@ import org.joml.Matrix4f;
 import java.util.function.Function;
 
 public class AbsoluteSoulStoneFont extends Font {
+    int goldEdge = 0xFFD4AF37;
+    int coreBlack = 0xFF111111;
     public AbsoluteSoulStoneFont(Function<ResourceLocation, FontSet> fontSetGetter, boolean useLegacy) {
         super(fontSetGetter, useLegacy);
     }
@@ -44,9 +46,6 @@ public class AbsoluteSoulStoneFont extends Font {
             charMatrix.translate(currentX + width(character) / 2f, y + 4f, 0);
             charMatrix.scale(scale, scale, 1.0f);
             charMatrix.translate(-(currentX + width(character) / 2f), -(y + 4f), 0);
-
-            int goldEdge = 0xFFD4AF37;
-            int coreBlack = 0xFF111111;
 
             super.drawInBatch(character, currentX + 0.6f, y + 0.6f, goldEdge, false, charMatrix, buffer, mode, bgColor, light);
             super.drawInBatch(character, currentX - 0.6f, y - 0.6f, goldEdge, false, charMatrix, buffer, mode, bgColor, light);
