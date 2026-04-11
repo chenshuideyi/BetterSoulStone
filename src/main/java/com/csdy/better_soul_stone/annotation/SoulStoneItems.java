@@ -11,9 +11,13 @@ import java.lang.annotation.Target;
 public @interface SoulStoneItems {
 
     String id();
-    //尼玛 只有这样才叫常量
+
     String[] requiredMod() default {};
+
     boolean isSponsor() default false;
+
     String sponsorName() default "";
+
+    String parentId() default "";
 
 }

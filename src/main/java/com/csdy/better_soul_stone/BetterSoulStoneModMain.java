@@ -30,6 +30,7 @@ public class BetterSoulStoneModMain {
     public BetterSoulStoneModMain(FMLJavaModLoadingContext context) {
         IEventBus bus = context.getModEventBus();
         BetterSoulStoneSyncing.Init();
+        SoulStoneRegistry.initialize();
         SoulStoneItemRegister.autoRegisterSoulStones();
         SoulStoneItemRegister.ITEMS.register(bus);
         BetterSoulStoneTab.CREATIVE_MODE_TABS.register(bus);

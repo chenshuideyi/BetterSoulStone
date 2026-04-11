@@ -2,12 +2,14 @@ package com.csdy.better_soul_stone.item;
 
 import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.font.factory.SoulStoneFontFactory;
+import com.csdy.better_soul_stone.register.SoulStoneRegistry;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.client.ISpecialTooltipRendering;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -40,7 +42,6 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
 
     public BaseSoulStone(Item.Properties properties) {
         super(properties);
-
         SoulStoneItems anno = this.getClass().getAnnotation(SoulStoneItems.class);
         if (anno != null) {
             this.isSponsor = anno.isSponsor();
@@ -72,15 +73,9 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
         });
     }
 
-
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
         return CuriosApi.getCuriosHelper().findFirstCurio(slotContext.entity(), stack.getItem()).isEmpty();
-    }
-
-    @Override
-    public boolean isFoil(@NotNull ItemStack stack) {
-        return false;
     }
 
     @Override
@@ -88,59 +83,71 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
         return HashMultimap.create();
     }
 
-
-    public int getTier(ItemStack stack) {
-        if (stack.hasTag()) {
-            return stack.getOrCreateTag().getInt("SoulStoneTier");
-        }
-        return 1;
-    }
-
-
-    public void setTier(ItemStack stack, int tier) {
-        stack.getOrCreateTag().putInt("SoulStoneTier", tier);
-    }
-
-    @Override
-    public void onCraftedBy(ItemStack stack, Level level, Player player) {
-        if (!stack.hasTag()) {
-            this.setTier(stack, 1);
-        }
+    protected String getSoulStoneId() {
+        SoulStoneItems anno = this.getClass().getAnnotation(SoulStoneItems.class);
+        return anno != null ? anno.id() : "";
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+        String currentId = getSoulStoneId();
+        if (currentId.isEmpty()) return;
 
-        String flavorId = this.getDescriptionId().replace("item.", "flavor.");
+        String flavorId = "flavor.better_soul_stone." + currentId;
         tooltip.add(Component.translatable(flavorId).withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+        tooltip.add(Component.empty());
 
-        String baseDescriptionId = this.getDescriptionId().replace("item.", "text.");
-
-        if (net.minecraft.client.resources.language.I18n.exists(baseDescriptionId)) {
-            tooltip.add(Component.translatable(baseDescriptionId).withStyle(ChatFormatting.GRAY));
-        }
-
-        int i = 1;
-        while (true) {
-            String nextId = baseDescriptionId + i;
-            if (net.minecraft.client.resources.language.I18n.exists(nextId)) {
-                tooltip.add(Component.translatable(nextId).withStyle(ChatFormatting.GRAY));
-                i++;
-            } else {
-                break;
-            }
+        // 递归获取
+        List<String> chain = SoulStoneRegistry.getParentChain(currentId);
+        
+        for (String id : chain) {
+            boolean isSelf = id.equals(currentId);
+            appendTierDescription(tooltip, id, !isSelf);
         }
 
         if (isSponsor && sponsorName != null) {
-            String sponsorKey = "better_soul_stone.sponsor.format";
             tooltip.add(Component.empty());
-            tooltip.add(Component.translatable(sponsorKey, sponsorName)
+            tooltip.add(Component.translatable("better_soul_stone.sponsor.format", sponsorName)
                     .withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC));
         }
 
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
+    @OnlyIn(Dist.CLIENT)
+    private void appendTierDescription(List<Component> tooltip, String id, boolean isInherited) {
+        String baseKey = "text.better_soul_stone." + id;
 
+        if (isInherited) {
+            String itemNameKey = "item.better_soul_stone." + id;
+            tooltip.add(Component.translatable("text.better_soul_stone.inherited_logic", 
+                    Component.translatable(itemNameKey)).withStyle(ChatFormatting.DARK_AQUA));
+        }
+
+        addLinesIfExist(tooltip, baseKey, isInherited);
+        
+        int i = 1;
+        while (true) {
+            String nextKey = baseKey + i;
+            if (net.minecraft.client.resources.language.I18n.exists(nextKey)) {
+                addLinesIfExist(tooltip, nextKey, isInherited);
+                i++;
+            } else {
+                break;
+            }
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void addLinesIfExist(List<Component> tooltip, String key, boolean indent) {
+        if (net.minecraft.client.resources.language.I18n.exists(key)) {
+            MutableComponent text = Component.translatable(key).withStyle(ChatFormatting.GRAY);
+            if (indent) {
+                tooltip.add(Component.literal("  ").append(text));
+            } else {
+                tooltip.add(text);
+            }
+        }
+    }
 }

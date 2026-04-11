@@ -84,6 +84,7 @@ public class SoulStoneUtil {
         }).orElse(false);
     }
 
+    //这样可以破封装 防止你覆写了dropAllDeathLoot
     public static void dropStealLoot(LivingEntity target, Player player) {
         if (target.level() instanceof ServerLevel serverLevel) {
 
