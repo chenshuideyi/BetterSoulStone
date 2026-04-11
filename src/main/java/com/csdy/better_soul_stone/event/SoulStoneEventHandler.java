@@ -10,10 +10,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
@@ -130,6 +128,42 @@ public class SoulStoneEventHandler {
         if (player == null || player.level().isClientSide) return;
 
         ISoulStoneOnRespawn.dispatchRespawnTrigger(player);
+    }
+
+    @SubscribeEvent
+    public static void onBlockBreak(BlockEvent.BreakEvent event) {
+        if (event.getPlayer() instanceof Player player && !player.level().isClientSide) {
+            ISoulStoneOnBlockBreak.dispatch(event, player);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
+        if (event.getEntity() instanceof Player player && !player.level().isClientSide) {
+            ISoulStoneOnBlockPlace.dispatch(event, player);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onExperienceChange(PlayerXpEvent.XpChange event) {
+        Player player = event.getEntity();
+        if (player == null || player.level().isClientSide) return;
+
+        ISoulStoneOnExperience.dispatch(event, player);
+    }
+
+    @SubscribeEvent
+    public static void onPlayerJump(PlayerEvent.JumpEvent event) {
+        if (event.getEntity() instanceof Player player && !player.level().isClientSide) {
+            ISoulStoneOnJump.dispatchJumpTrigger(player);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingFall(LivingFallEvent event) {
+        if (event.getEntity() instanceof Player player && !player.level().isClientSide) {
+            ISoulStoneOnFall.dispatchFallTrigger(player, event.getDistance(), event.getDamageMultiplier());
+        }
     }
 
 }
