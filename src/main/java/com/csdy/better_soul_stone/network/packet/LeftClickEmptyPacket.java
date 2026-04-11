@@ -22,7 +22,7 @@ public class LeftClickEmptyPacket {
         ctx.enqueueWork(() -> {
             ServerPlayer player = ctx.getSender();
             if (player != null) {
-                SoulStoneManager.forEachStone(player, ISoulStoneLeftClick.class, (logic, stack) ->
+                SoulStoneManager.forEachLogic(player, ISoulStoneLeftClick.class, (logic, stack) ->
                         logic.onLeftClickEmpty(null, player, player.level(), stack));
             }
         });

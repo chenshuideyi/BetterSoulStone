@@ -53,6 +53,10 @@
       "required": false
     },
     {
+      "id": "better_soul_stone:test_ex_soul_stone",
+      "required": false
+    },
+    {
       "id": "better_soul_stone:test_soul_stone",
       "required": false
     },

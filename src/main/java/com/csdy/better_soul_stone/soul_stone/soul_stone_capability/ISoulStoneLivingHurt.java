@@ -5,26 +5,23 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import top.theillusivec4.curios.api.SlotResult;
-
-import java.util.List;
 
 public interface ISoulStoneLivingHurt extends ISoulStoneCapability {
 
     float livingHurt(LivingHurtEvent event, LivingEntity wearer, DamageSource source, float amount, ItemStack stack);
 
     static float dispatchHurtTrigger(LivingEntity wearer, LivingHurtEvent event, DamageSource source, float amount) {
-        List<SlotResult> soulStones = SoulStoneManager.getStones(wearer, ISoulStoneLivingHurt.class);
-        if (soulStones.isEmpty()) return amount;
+        var logics = SoulStoneManager.getLogics(wearer, ISoulStoneLivingHurt.class);
+        if (logics.isEmpty()) return amount;
 
         float currentAmount = amount;
-        for (SlotResult result : soulStones) {
-            ItemStack stack = result.stack();
-            if (stack.getItem() instanceof ISoulStoneLivingHurt logic) {
-                currentAmount = logic.livingHurt(event, wearer, source, currentAmount, stack);
-            }
+
+        for (var active : logics) {
+            ISoulStoneLivingHurt logic = (ISoulStoneLivingHurt) active.logicItem();
+            ItemStack stack = active.slotResult().stack();
+            currentAmount = logic.livingHurt(event, wearer, source, currentAmount, stack);
         }
+
         return currentAmount;
     }
-
 }

@@ -11,7 +11,7 @@ public interface ISoulStoneOnCraft extends ISoulStoneCapability {
     void onCraft(Player player, ItemStack crafted, Recipe<?> recipe, ItemStack soulStone);
 
     static void dispatchCraftTrigger(Player player, ItemStack crafted, Recipe<?> recipe) {
-        SoulStoneManager.forEachStone(player, ISoulStoneOnCraft.class, (capability, stack) -> {
+        SoulStoneManager.forEachLogic(player, ISoulStoneOnCraft.class, (capability, stack) -> {
             capability.onCraft(player, crafted, recipe, stack);
         });
     }

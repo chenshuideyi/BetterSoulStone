@@ -196,7 +196,6 @@ public class SoulStoneClientEvents {
         ItemStack itemStack = event.getItemStack();
         if (!(itemStack.getItem() instanceof BaseSoulStone soulStone)) return;
 
-        // 依然保留去重，防止逻辑嵌套导致同一行显示两次
         java.util.Set<String> handledKeys = new java.util.HashSet<>();
 
         String currentId = soulStone.getSoulStoneId();
@@ -211,21 +210,18 @@ public class SoulStoneClientEvents {
             String baseKey = "text.better_soul_stone." + id;
             ItemStack iconStack = new ItemStack(item);
 
-            // --- 1. 处理主标题行 ---
             if (!handledKeys.contains(baseKey) && net.minecraft.client.resources.language.I18n.exists(baseKey)) {
                 Component title = Component.translatable(baseKey).withStyle(ChatFormatting.GRAY);
                 // 每一行都用 Either.right 包装
                 event.getTooltipElements().add(Either.right(new SoulStoneEntryTooltip(iconStack, title)));
                 handledKeys.add(baseKey);
 
-                // --- 2. 处理多行描述 (text1, text2...) ---
                 int i = 1;
                 while (true) {
                     String nextKey = baseKey + i;
                     if (net.minecraft.client.resources.language.I18n.exists(nextKey)) {
                         if (!handledKeys.contains(nextKey)) {
                             Component extraText = Component.translatable(nextKey).withStyle(ChatFormatting.GRAY);
-                            // 关键修改：子行也使用 SoulStoneEntryTooltip 包装，实现每行带图
                             event.getTooltipElements().add(Either.right(new SoulStoneEntryTooltip(iconStack, extraText)));
                             handledKeys.add(nextKey);
                         }

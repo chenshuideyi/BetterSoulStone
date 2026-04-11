@@ -18,7 +18,7 @@ public interface ISoulStoneOnBlockBreak extends ISoulStoneCapability {
         BlockState state = level.getBlockState(pos);
         ItemStack tool = player.getMainHandItem();
 
-        SoulStoneManager.forEachStone(player, ISoulStoneOnBlockBreak.class, (logic, stack) ->
+        SoulStoneManager.forEachLogic(player, ISoulStoneOnBlockBreak.class, (logic, stack) ->
                 logic.onBlockBreak(event, player, level, pos, state, tool));
     }
 }

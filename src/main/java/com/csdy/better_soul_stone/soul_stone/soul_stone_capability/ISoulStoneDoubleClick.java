@@ -15,7 +15,7 @@ public interface ISoulStoneDoubleClick extends ISoulStoneCapability {
     void onDoubleClick(ItemStack stack, Player player, String keyType);
 
     static void dispatch(Player player, String keyType) {
-        SoulStoneManager.forEachStone(player, ISoulStoneDoubleClick.class, (logic, stack) ->
+        SoulStoneManager.forEachLogic(player, ISoulStoneDoubleClick.class, (logic, stack) ->
                 logic.onDoubleClick(stack, player, keyType));
     }
 }

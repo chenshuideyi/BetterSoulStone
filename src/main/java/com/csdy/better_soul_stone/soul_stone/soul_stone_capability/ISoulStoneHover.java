@@ -33,7 +33,7 @@ public interface ISoulStoneHover extends ISoulStoneCapability {
 
         if (target != null) {
             Entity finalTarget = target;
-            SoulStoneManager.forEachStone(entity, ISoulStoneHover.class, (logic, stack) ->
+            SoulStoneManager.forEachLogic(entity, ISoulStoneHover.class, (logic, stack) ->
                     logic.onHoverEntity(entity, finalTarget, stack));
         }
     }

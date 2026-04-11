@@ -10,7 +10,7 @@ public interface ISoulStoneOnChat extends ISoulStoneCapability {
     void onChat(Player player, Component message, ItemStack soulStone);
 
     static void dispatchChatTrigger(Player player, Component message) {
-        SoulStoneManager.forEachStone(player, ISoulStoneOnChat.class, (capability, stack) -> {
+        SoulStoneManager.forEachLogic(player, ISoulStoneOnChat.class, (capability, stack) -> {
             capability.onChat(player, message, stack);
         });
     }

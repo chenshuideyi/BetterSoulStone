@@ -19,12 +19,12 @@ public interface ISoulStoneLeftClick extends ISoulStoneCapability {
     void onLeftClickEntity(AttackEntityEvent event, Player player, Entity target, ItemStack stack);
 
     static void dispatchLeftClickEntity(AttackEntityEvent event) {
-        SoulStoneManager.forEachStone(event.getEntity(), ISoulStoneLeftClick.class, (logic, stack) ->
+        SoulStoneManager.forEachLogic(event.getEntity(), ISoulStoneLeftClick.class, (logic, stack) ->
                 logic.onLeftClickEntity(event, event.getEntity(), event.getTarget(), stack));
     }
 
     static void dispatchLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
-        SoulStoneManager.forEachStone(event.getEntity(), ISoulStoneLeftClick.class, (logic, stack) ->
+        SoulStoneManager.forEachLogic(event.getEntity(), ISoulStoneLeftClick.class, (logic, stack) ->
                 logic.onLeftClickBlock(event, event.getEntity(), event.getLevel(), event.getPos(),
                         event.getLevel().getBlockState(event.getPos()), stack));
     }

@@ -11,7 +11,7 @@ public interface ISoulStoneOnJump extends ISoulStoneCapability {
     void onJump(LivingEntity jumper, ItemStack stack);
 
     static void dispatchJumpTrigger(LivingEntity jumper) {
-        SoulStoneManager.forEachStone(jumper, ISoulStoneOnJump.class, (capability, stack) -> {
+        SoulStoneManager.forEachLogic(jumper, ISoulStoneOnJump.class, (capability, stack) -> {
             capability.onJump(jumper, stack);
         });
     }

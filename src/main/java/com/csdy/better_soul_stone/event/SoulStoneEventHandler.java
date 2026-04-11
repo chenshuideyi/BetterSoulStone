@@ -28,11 +28,17 @@ public class SoulStoneEventHandler {
         LivingEntity entity = event.getEntity();
         if (entity == null || entity.level().isClientSide) return;
 
-        var oldStones = SoulStoneManager.getStones(entity, ISoulStoneEquipmentChange.class);
-        SoulStoneManager.refresh(entity);
-        var newStones = SoulStoneManager.getStones(entity, ISoulStoneEquipmentChange.class);
+        SoulStoneManager.forEachLogic(entity, ISoulStoneEquipmentChange.class, (logic, stack) -> {
+            logic.onUnequip(entity, stack);
+        });
 
-        ISoulStoneEquipmentChange.dispatchChangeTrigger(entity, oldStones, newStones);
+        SoulStoneManager.refresh(entity);
+
+
+        SoulStoneManager.forEachLogic(entity, ISoulStoneEquipmentChange.class, (logic, stack) -> {
+            logic.onEquip(entity, stack);
+        });
+
     }
 
     @SubscribeEvent

@@ -35,7 +35,7 @@ public class LeftClickBlockPacket {
                 BlockPos pos = msg.pos;
                 BlockState state = level.getBlockState(pos);
 
-                SoulStoneManager.forEachStone(player, ISoulStoneLeftClick.class, (logic, stack) ->
+                SoulStoneManager.forEachLogic(player, ISoulStoneLeftClick.class, (logic, stack) ->
                         logic.onLeftClickBlock(null, player, level, pos, state, stack));
             }
         });

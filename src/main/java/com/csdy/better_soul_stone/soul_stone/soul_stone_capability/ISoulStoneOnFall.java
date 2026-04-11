@@ -11,7 +11,7 @@ public interface ISoulStoneOnFall extends ISoulStoneCapability {
     void onFall(LivingEntity faller, float distance, float damageMultiplier, ItemStack stack);
 
     static void dispatchFallTrigger(LivingEntity faller, float distance, float damageMultiplier) {
-        SoulStoneManager.forEachStone(faller, ISoulStoneOnFall.class, (capability, stack) -> {
+        SoulStoneManager.forEachLogic(faller, ISoulStoneOnFall.class, (capability, stack) -> {
             capability.onFall(faller, distance, damageMultiplier, stack);
         });
     }

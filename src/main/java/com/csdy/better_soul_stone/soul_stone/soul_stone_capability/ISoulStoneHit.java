@@ -21,12 +21,12 @@ public interface ISoulStoneHit extends ISoulStoneCapability {
     }
 
     static void dispatchBeforeHit(LivingHurtEvent event, LivingEntity attacker, LivingEntity target) {
-        SoulStoneManager.forEachStone(attacker, ISoulStoneHit.class, (logic, stack) ->
+        SoulStoneManager.forEachLogic(attacker, ISoulStoneHit.class, (logic, stack) ->
                 logic.beforeHit(event, attacker, target, stack));
     }
 
     static void dispatchAfterHit(LivingDamageEvent event, LivingEntity attacker, LivingEntity target) {
-        SoulStoneManager.forEachStone(attacker, ISoulStoneHit.class, (logic, stack) ->
+        SoulStoneManager.forEachLogic(attacker, ISoulStoneHit.class, (logic, stack) ->
                 logic.afterHit(event, attacker, target, stack));
     }
 

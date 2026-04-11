@@ -1,9 +1,14 @@
 package com.csdy.better_soul_stone.soul_stone.manager;
 
+import com.csdy.better_soul_stone.BetterSoulStoneModMain;
+import com.csdy.better_soul_stone.item.BaseSoulStone;
+import com.csdy.better_soul_stone.register.SoulStoneRegistry;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneCapability;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.SlotResult;
@@ -14,7 +19,14 @@ import java.util.function.BiConsumer;
 @SuppressWarnings("all")
 public class SoulStoneManager {
 
-    private static final Map<UUID, Map<Class<?>, List<SlotResult>>> ABILITY_CACHE = new WeakHashMap<>();
+    /**
+     * 核心记录类
+     * logicItem: 真正实现接口的那个物品对象（可能是父级魂石）
+     * slotResult: 玩家当前装备的那个魂石堆栈信息
+     */
+    public record ActiveLogic(Object logicItem, SlotResult slotResult) {}
+
+    private static final Map<UUID, Map<Class<?>, List<ActiveLogic>>> ABILITY_CACHE = new WeakHashMap<>();
     private static final Set<Class<? extends ISoulStoneCapability>> REGISTERED_INTERFACES = new java.util.concurrent.ConcurrentHashMap<>().newKeySet();
 
     public static void markInterfaceAsActive(Class<?> clazz) {
@@ -29,28 +41,33 @@ public class SoulStoneManager {
         }
     }
 
-    /**
-     * 只在 CurioChangeEvent 和 EntityJoinLevelEvent时调用
-     */
     public static void refresh(LivingEntity entity) {
-        if (entity == null || entity.level().isClientSide) return; // 基础保护
+        if (entity == null || entity.level().isClientSide) return;
 
-        Map<Class<?>, List<SlotResult>> playerAbilities = new HashMap<>();
+        Map<Class<?>, List<ActiveLogic>> playerAbilities = new HashMap<>();
 
         CuriosApi.getCuriosHelper().getCuriosHandler(entity).ifPresent(handler -> {
             handler.getCurios().forEach((identifier, stackHandler) -> {
                 var stacks = stackHandler.getStacks();
                 for (int i = 0; i < stacks.getSlots(); i++) {
                     ItemStack stack = stacks.getStackInSlot(i);
-                    if (stack.isEmpty()) continue;
+                    if (stack.isEmpty() || !(stack.getItem() instanceof BaseSoulStone equippedStone)) continue;
 
-                    Item item = stack.getItem();
-                    for (Class<? extends ISoulStoneCapability> iface : REGISTERED_INTERFACES) {
-                        if (iface.isInstance(item)) {
-                            SlotContext slotContext = new SlotContext(identifier, entity, i, false, true);
-                            // 存入 copy 副本 解决 stack 变更问题 骑士史莱姆做不到的我来做
-                            playerAbilities.computeIfAbsent(iface, k -> new ArrayList<>())
-                                    .add(new SlotResult(slotContext, stack.copy()));
+                    SlotContext slotContext = new SlotContext(identifier, entity, i, false, true);
+                    SlotResult slotResult = new SlotResult(slotContext, stack.copy());
+
+                    Set<String> allLogicIds = new LinkedHashSet<>();
+                    collectAllLogicIds(equippedStone.getSoulStoneId(), allLogicIds);
+
+                    for (String logicId : allLogicIds) {
+                        Item logicItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(BetterSoulStoneModMain.MODID, logicId));
+                        if (logicItem == null) continue;
+
+                        for (Class<? extends ISoulStoneCapability> iface : REGISTERED_INTERFACES) {
+                            if (iface.isInstance(logicItem)) {
+                                playerAbilities.computeIfAbsent(iface, k -> new ArrayList<>())
+                                        .add(new ActiveLogic(logicItem, slotResult));
+                            }
                         }
                     }
                 }
@@ -59,32 +76,31 @@ public class SoulStoneManager {
         ABILITY_CACHE.put(entity.getUUID(), playerAbilities);
     }
 
-    public static void clear(UUID playerUUID) {
-        ABILITY_CACHE.remove(playerUUID);
+    public static void clear(UUID uuid){
+        ABILITY_CACHE.remove(uuid);
     }
 
-    private static void registerIfMatch(Object item, Class<?> clazz, SlotResult result, Map<Class<?>, List<SlotResult>> map) {
-        if (clazz.isInstance(item)) {
-            map.computeIfAbsent(clazz, k -> new ArrayList<>()).add(result);
+    private static void collectAllLogicIds(String currentId, Set<String> result) {
+        if (currentId == null || currentId.isEmpty() || result.contains(currentId)) return;
+        result.add(currentId);
+        List<String> parents = SoulStoneRegistry.getParentIds(currentId);
+        if (parents != null) {
+            for (String pid : parents) collectAllLogicIds(pid, result);
         }
     }
 
-
-    @SuppressWarnings("unchecked")
-    public static <T> List<SlotResult> getStones(LivingEntity entity, Class<T> clazz) {
+    public static <T> List<ActiveLogic> getLogics(LivingEntity entity, Class<T> capabilityClass) {
         return ABILITY_CACHE
                 .getOrDefault(entity.getUUID(), Collections.emptyMap())
-                .getOrDefault(clazz, Collections.emptyList());
+                .getOrDefault(capabilityClass, Collections.emptyList());
     }
 
-    //复用一下素材
-    public static <T> void forEachStone(LivingEntity entity, Class<T> capabilityClass, BiConsumer<T, ItemStack> action) {
-        if (entity == null || entity.level().isClientSide) return;
-        getStones(entity, capabilityClass).forEach(result -> {
-            ItemStack stack = result.stack();
-            if (capabilityClass.isInstance(stack.getItem())) {
-                action.accept(capabilityClass.cast(stack.getItem()), stack);
-            }
-        });
+    // 给各种 dispatch 使用的通用遍历方法
+    public static <T> void forEachLogic(LivingEntity entity, Class<T> capabilityClass, BiConsumer<T, ItemStack> action) {
+        if (entity == null) return;
+        List<ActiveLogic> logics = getLogics(entity, capabilityClass);
+        for (ActiveLogic active : logics) {
+            action.accept((T) active.logicItem(), active.slotResult().stack());
+        }
     }
 }

@@ -11,32 +11,28 @@ import top.theillusivec4.curios.api.SlotResult;
 import java.util.List;
 
 public interface ISoulStoneOnAttacked extends ISoulStoneCapability {
+
     /**
-     * @param event 原生受击事件
-     * @param wearer 佩戴魂石的人（受害者）
-     * @param attacker 攻击者（可能为 null）
-     * @param stack 魂石堆栈
      * @return 返回 false 则取消攻击（免疫）
      */
-    default boolean onAttacked(LivingAttackEvent event, LivingEntity wearer, Entity attacker, ItemStack stack){
+    default boolean onAttacked(LivingAttackEvent event, LivingEntity wearer, Entity attacker, ItemStack stack) {
         return true;
-    };
-
+    }
 
     static boolean dispatchAttackTrigger(LivingEntity wearer, LivingAttackEvent event, Entity attacker) {
-        List<SlotResult> soulStones = SoulStoneManager.getStones(wearer, ISoulStoneOnAttacked.class);
-        if (soulStones.isEmpty()) return false;
+        var logics = SoulStoneManager.getLogics(wearer, ISoulStoneOnAttacked.class);
+        if (logics.isEmpty()) return false;
 
         boolean globalCancel = false;
-        for (SlotResult result : soulStones) {
+        for (var active : logics) {
             try {
-                ItemStack stack = result.stack();
-                ISoulStoneOnAttacked logic = (ISoulStoneOnAttacked) stack.getItem();
+                ISoulStoneOnAttacked logic = (ISoulStoneOnAttacked) active.logicItem();
+                ItemStack stack = active.slotResult().stack();
                 if (!logic.onAttacked(event, wearer, attacker, stack)) {
                     globalCancel = true;
                 }
             } catch (Exception e) {
-                BetterSoulStoneModMain.LOGGER.error("Soul Stone trigger error", e);
+                BetterSoulStoneModMain.LOGGER.error("魂石受击逻辑执行异常", e);
             }
         }
         return globalCancel;

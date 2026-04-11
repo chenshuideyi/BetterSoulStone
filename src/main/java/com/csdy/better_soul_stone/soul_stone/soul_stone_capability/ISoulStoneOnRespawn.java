@@ -17,7 +17,7 @@ public interface ISoulStoneOnRespawn extends ISoulStoneCapability {
      * @param player 重生的玩家
      */
     static void dispatchRespawnTrigger(Player player) {
-        SoulStoneManager.forEachStone(player, ISoulStoneOnRespawn.class, (capability, stack) -> {
+        SoulStoneManager.forEachLogic(player, ISoulStoneOnRespawn.class, (capability, stack) -> {
             capability.onRespawn(player);
         });
     }

@@ -16,7 +16,7 @@ public interface ISoulStoneOnHeal extends ISoulStoneCapability {
     static float dispatchHealTrigger(LivingEntity entity, LivingHealEvent event, float amount) {
         final float[] finalAmount = {amount};
 
-        SoulStoneManager.forEachStone(entity, ISoulStoneOnHeal.class, (logic, stack) -> {
+        SoulStoneManager.forEachLogic(entity, ISoulStoneOnHeal.class, (logic, stack) -> {
             finalAmount[0] = logic.onHeal(event, entity, finalAmount[0], stack);
         });
 

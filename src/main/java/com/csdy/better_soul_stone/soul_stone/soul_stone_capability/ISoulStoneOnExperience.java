@@ -11,7 +11,7 @@ public interface ISoulStoneOnExperience extends ISoulStoneCapability {
 
     static void dispatch(PlayerXpEvent.XpChange event, Player player) {
         int amount = event.getAmount();
-        SoulStoneManager.forEachStone(player, ISoulStoneOnExperience.class, (logic, stack) ->
+        SoulStoneManager.forEachLogic(player, ISoulStoneOnExperience.class, (logic, stack) ->
                 logic.onExperienceAdd(event, player, amount, stack));
     }
 }

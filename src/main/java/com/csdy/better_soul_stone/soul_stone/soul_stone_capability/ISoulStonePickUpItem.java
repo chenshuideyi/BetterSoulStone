@@ -10,7 +10,7 @@ public interface ISoulStonePickUpItem extends ISoulStoneCapability {
     void onPickUp(ItemStack soulStoneStack, LivingEntity entity, ItemEntity itemEntity);
 
     static void dispatch(LivingEntity entity, ItemEntity itemEntity) {
-        SoulStoneManager.forEachStone(entity, ISoulStonePickUpItem.class, (logic, stack) ->
+        SoulStoneManager.forEachLogic(entity, ISoulStonePickUpItem.class, (logic, stack) ->
                 logic.onPickUp(stack, entity, itemEntity));
     }
 }

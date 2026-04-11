@@ -9,7 +9,7 @@ public interface ISoulStoneTick extends ISoulStoneCapability {
     void onTick(ItemStack stack, LivingEntity entity);
 
     static void dispatch(LivingEntity entity) {
-        SoulStoneManager.forEachStone(entity, ISoulStoneTick.class, (logic, stack) ->
+        SoulStoneManager.forEachLogic(entity, ISoulStoneTick.class, (logic, stack) ->
                 logic.onTick(stack, entity));
     }
 
