@@ -9,6 +9,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.level.BlockEvent;
@@ -164,6 +166,24 @@ public class SoulStoneEventHandler {
         if (event.getEntity() instanceof Player player && !player.level().isClientSide) {
             ISoulStoneOnFall.dispatchFallTrigger(player, event.getDistance(), event.getDamageMultiplier());
         }
+    }
+
+    @SubscribeEvent
+    public static void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
+        Player player = event.getEntity();
+        if (player == null || player.level().isClientSide) return;
+
+        ItemStack crafted = event.getCrafting();
+        Recipe<?> recipe = event.getRecipe();
+        ISoulStoneOnCraft.dispatchCraftTrigger(player, crafted, recipe);
+    }
+
+    @SubscribeEvent
+    public static void onChat(ServerChatEvent event) {
+        Player player = event.getPlayer();
+        if (player == null || player.level().isClientSide) return;
+
+        ISoulStoneOnChat.dispatchChatTrigger(player, event.getMessage());
     }
 
 }
