@@ -23,6 +23,7 @@ public class GenericKeyDetector {
         WATCH_LIST.add(options.keyLeft);
         WATCH_LIST.add(options.keyRight);
         WATCH_LIST.add(options.keyJump);
+        WATCH_LIST.add(options.keyShift);
 
         for (KeyMapping key : WATCH_LIST) {
             KEY_PUMP_LOCK.put(key, false);

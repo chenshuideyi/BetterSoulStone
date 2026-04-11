@@ -22,6 +22,8 @@
 
   "item.better_soul_stone.diamond_soul_stone": "钻石魂石",
 
+  "item.better_soul_stone.bone_meal_soul_stone": "骨粉魂石",
+
   "--- 赞助者魂石 ---": "",
   "item.better_soul_stone.marisa_soul_stone": "魔理沙的魂石",
   "item.better_soul_stone.player_7_soul_stone": "PlayerVII之魂",
@@ -47,6 +49,8 @@
 
   "flavor.better_soul_stone.diamond_soul_stone": "高玩的象征！",
 
+  "flavor.better_soul_stone.bone_meal_soul_stone": "农夫最爱",
+
   "flavor.better_soul_stone.marisa_soul_stone": "死后一定还！",
   "flavor.better_soul_stone.player_7_soul_stone": "相传，PlayerVII打什么都是无伤",
 
@@ -65,6 +69,8 @@
   "text.better_soul_stone.axe_soul_stone": "锤人更痛!",
 
   "text.better_soul_stone.diamond_soul_stone": "伤害提升500%，受到伤害后该魂石被销毁",
+
+  "text.better_soul_stone.bone_meal_soul_stone": "双击下蹲释放自己,催熟周围植物",
 
   "--- 赞助者魂石效果描述 ---": "",
   "text.better_soul_stone.marisa_soul_stone": "攻击时窃取一次目标的战利品：这就是“借走不还”的魔法！",
