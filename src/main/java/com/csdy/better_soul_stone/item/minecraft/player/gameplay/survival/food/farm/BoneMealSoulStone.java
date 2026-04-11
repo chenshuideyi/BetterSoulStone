@@ -1,4 +1,4 @@
-package com.csdy.better_soul_stone.item.minecraft.farm;
+package com.csdy.better_soul_stone.item.minecraft.player.gameplay.survival.food.farm;
 
 import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.item.BaseSoulStone;

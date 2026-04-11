@@ -1,4 +1,4 @@
-package com.csdy.better_soul_stone.item.minecraft.tool;
+package com.csdy.better_soul_stone.item.minecraft.player.gameplay.adventure.weapon;
 
 import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.item.BaseSoulStone;
@@ -14,17 +14,17 @@ import java.util.UUID;
 
 import static com.csdy.better_soul_stone.util.SoulStoneUtil.makeModifierName;
 
-@SoulStoneItems(id = "axe_soul_stone")
-public class AxeSoulStone extends BaseSoulStone {
+@SoulStoneItems(id = "sword_soul_stone")
+public class SwordSoulStone extends BaseSoulStone {
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> modifiers = HashMultimap.create();
-        modifiers.put(Attributes.ATTACK_DAMAGE,
+        modifiers.put(Attributes.ATTACK_SPEED,
                 new AttributeModifier(
                         uuid,
-                        makeModifierName(this,Attributes.ATTACK_DAMAGE),
-                        3.0,
+                        makeModifierName(this,Attributes.ATTACK_SPEED),
+                        1.0,
                         AttributeModifier.Operation.ADDITION
                 ));
         return modifiers;
