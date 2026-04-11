@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ISoulStoneEquipmentChange extends ISoulStoneCapability {
 
-    void onEquip(LivingEntity wearer, ItemStack stack);
+    default void onEquip(LivingEntity wearer, ItemStack stack){};
 
-    void onUnequip(LivingEntity wearer, ItemStack stack);
+    default void onUnequip(LivingEntity wearer, ItemStack stack){};
 
     /**
      * 对比新旧快照，触发变更回调

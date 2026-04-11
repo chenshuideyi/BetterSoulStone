@@ -4,7 +4,6 @@ import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.player.ServerChatEvent;
 
 public interface ISoulStoneOnChat extends ISoulStoneCapability {
 

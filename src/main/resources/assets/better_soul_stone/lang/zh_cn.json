@@ -15,6 +15,7 @@
 
   "--- 进阶成品魂石 ---": "",
   "item.better_soul_stone.test_soul_stone": "测试魂石",
+  "item.better_soul_stone.test_ex_soul_stone": "测试魂石2",
   "item.better_soul_stone.sword_soul_stone": "剑魂石",
   "item.better_soul_stone.armor_soul_stone": "甲魂石",
   "item.better_soul_stone.pickaxe_soul_stone": "镐魂石",
@@ -27,7 +28,7 @@
   "--- 赞助者魂石 ---": "",
   "item.better_soul_stone.marisa_soul_stone": "魔理沙的魂石",
   "item.better_soul_stone.player_7_soul_stone": "PlayerVII之魂",
-
+  "item.better_soul_stone.csdy_soul_stone": "CSDY之魂",
 
 
   "--- 风味文本 (Flavor) ---": "",
@@ -42,6 +43,7 @@
 
 
   "flavor.better_soul_stone.test_soul_stone": "你能拿到这个，绝对是开创了",
+  "flavor.better_soul_stone.test_ex_soul_stone": "你能拿到这个，绝绝绝对是开创了",
   "flavor.better_soul_stone.sword_soul_stone": "低版本PVP享受者",
   "flavor.better_soul_stone.armor_soul_stone": "勇者不能不穿裤子",
   "flavor.better_soul_stone.pickaxe_soul_stone": "这下能挖个爽了",
@@ -51,8 +53,9 @@
 
   "flavor.better_soul_stone.bone_meal_soul_stone": "农夫最爱",
 
-  "flavor.better_soul_stone.marisa_soul_stone": "死后一定还！",
+  "flavor.better_soul_stone.marisa_soul_stone": "相传，Kiri34借走的东西死后一定还",
   "flavor.better_soul_stone.player_7_soul_stone": "相传，PlayerVII打什么都是无伤",
+  "flavor.better_soul_stone.csdy_soul_stone": "相传，CSDY用拳头打死了一个监守者",
 
   "--- 效果描述 (Text) ---": "",
   "text.better_soul_stone.blank_soul_stone": "灵魂容器",
@@ -63,7 +66,8 @@
   "text.better_soul_stone.blank_absolute_soul_stone": "绝对容器",
   "text.better_soul_stone.blank_better_soul_stone": "和模组名字一样的容器",
   "text.better_soul_stone.test_soul_stone": "请输入文本",
-  "text.better_soul_stone.sword_soul_stone": "砍的更快！",
+  "text.better_soul_stone.test_ex_soul_stone": "请输入文本2",
+  "text.better_soul_stone.sword_soul_stone": "砍得更快！",
   "text.better_soul_stone.armor_soul_stone": "多挨点揍!",
   "text.better_soul_stone.pickaxe_soul_stone": "橡胶手臂!",
   "text.better_soul_stone.axe_soul_stone": "锤人更痛!",
@@ -75,7 +79,12 @@
   "--- 赞助者魂石效果描述 ---": "",
   "text.better_soul_stone.marisa_soul_stone": "攻击时窃取一次目标的战利品：这就是“借走不还”的魔法！",
   "text.better_soul_stone.player_7_soul_stone": "受到的伤害提升至 400%",
-  "text.better_soul_stone.player_7_soul_stone1": "无法通过任何自然方式回血",
-  "text.better_soul_stone.player_7_soul_stone2": "满血状态时造成的伤害减半",
-  "text.better_soul_stone.player_7_soul_stone3": "当生命值降至1点以下时，造成的伤害翻倍"
+  "text.better_soul_stone.player_7_soul_stone1": "无法通过任何自然方式回血;戴上时，你的血量变为1",
+  "text.better_soul_stone.player_7_soul_stone2": "当生命值降至1点以下时，造成的伤害翻倍",
+  "text.better_soul_stone.player_7_soul_stone3": "解锁双击冲刺",
+  "text.better_soul_stone.csdy_soul_stone": "空手伤害增加500%"
+
+
+
+
 }

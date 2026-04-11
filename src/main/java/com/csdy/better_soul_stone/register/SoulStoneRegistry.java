@@ -1,5 +1,6 @@
 package com.csdy.better_soul_stone.register;
 
+import com.csdy.better_soul_stone.BetterSoulStoneModMain;
 import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.item.BaseSoulStone;
 import net.minecraft.world.item.Item;
@@ -10,13 +11,13 @@ import java.util.*;
 public class SoulStoneRegistry {
 
     private static final Map<String, Class<? extends BaseSoulStone>> SOUL_STONE_CLASSES = new HashMap<>();
-    private static final Map<String, String> PARENT_MAP = new HashMap<>();
+    private static final Map<String, List<String>> PARENT_MAP = new HashMap<>();
     private static volatile boolean initialized = false;
 
-    public static void registerSoulStone(String id, Class<? extends BaseSoulStone> clazz, String parentId) {
+    public static void registerSoulStone(String id, Class<? extends BaseSoulStone> clazz, String[] parentIds) {
         SOUL_STONE_CLASSES.put(id, clazz);
-        if (parentId != null && !parentId.isEmpty()) {
-            PARENT_MAP.put(id, parentId);
+        if (parentIds != null && parentIds.length > 0) {
+            PARENT_MAP.put(id, Arrays.asList(parentIds));
         }
         initialized = false;
     }
@@ -46,12 +47,13 @@ public class SoulStoneRegistry {
                         
                         SoulStoneItems annotation = clazz.getAnnotation(SoulStoneItems.class);
                         String registryId = annotation.id();
-                        String parentId = annotation.parentId();
+                        String[] parentIds = annotation.parentIds();
 
                         SOUL_STONE_CLASSES.put(registryId, soulStoneClass);
-                        if (parentId != null && !parentId.isEmpty()) {
-                            PARENT_MAP.put(registryId, parentId);
+                        if (parentIds != null && parentIds.length > 0) {
+                            PARENT_MAP.put(registryId, Arrays.asList(parentIds));
                         }
+
                     }
                 } catch (Exception | NoClassDefFoundError ignored) {
                     BetterSoulStoneModMain.LOGGER.error("Failed to load class {} for SoulStoneRegistry", className, ignored);
@@ -61,28 +63,35 @@ public class SoulStoneRegistry {
         }
     }
 
-    public static String getParentId(String id) {
-        return PARENT_MAP.get(id);
+    public static List<String> getParentIds(String id) {
+        return PARENT_MAP.getOrDefault(id, Collections.emptyList());
     }
 
     public static List<String> getParentChain(String id) {
         List<String> chain = new ArrayList<>();
-        String current = id;
-        Set<String> visited = new HashSet<>();
+        Queue<String> queue = new LinkedList<>();
+        Set<String> visited = new LinkedHashSet<>(); // LinkedHashSet 保持插入顺序并去重
 
-        while (current != null && !visited.contains(current)) {
-            visited.add(current);
-            chain.add(current);
-            current = getParentId(current);
+        queue.add(id);
+        while (!queue.isEmpty()) {
+            String current = queue.poll();
+            if (current != null && !visited.contains(current)) {
+                visited.add(current);
+                List<String> parents = PARENT_MAP.get(current);
+                if (parents != null) {
+                    queue.addAll(parents);
+                }
+            }
         }
 
+        chain.addAll(visited);
         return chain;
     }
 
     public static List<String> getChildIds(String parentId) {
         List<String> children = new ArrayList<>();
-        for (Map.Entry<String, String> entry : PARENT_MAP.entrySet()) {
-            if (parentId.equals(entry.getValue())) {
+        for (Map.Entry<String, List<String>> entry : PARENT_MAP.entrySet()) {
+            if (entry.getValue().contains(parentId)) {
                 children.add(entry.getKey());
             }
         }

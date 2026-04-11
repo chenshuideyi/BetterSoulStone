@@ -3,8 +3,12 @@ package com.csdy.better_soul_stone;
 import com.csdy.better_soul_stone.event.client.SoulStoneClientEvents;
 import com.csdy.better_soul_stone.network.BetterSoulStoneSyncing;
 import com.csdy.better_soul_stone.register.SoulStoneItemRegister;
+import com.csdy.better_soul_stone.register.SoulStoneRegistry;
+import com.csdy.better_soul_stone.util.client.SoulStoneEntryRenderer;
+import com.csdy.better_soul_stone.util.client.SoulStoneEntryTooltip;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,8 +33,8 @@ public class BetterSoulStoneModMain {
 
     public BetterSoulStoneModMain(FMLJavaModLoadingContext context) {
         IEventBus bus = context.getModEventBus();
-        BetterSoulStoneSyncing.Init();
         SoulStoneRegistry.initialize();
+        BetterSoulStoneSyncing.Init();
         SoulStoneItemRegister.autoRegisterSoulStones();
         SoulStoneItemRegister.ITEMS.register(bus);
         BetterSoulStoneTab.CREATIVE_MODE_TABS.register(bus);
@@ -44,5 +48,11 @@ public class BetterSoulStoneModMain {
 //        //网络包
 //        BetterSoulStoneSyncing.Init();
 //    }
+
+//    @SubscribeEvent
+//    public static void onRegisterTooltipComponent(RegisterClientTooltipComponentFactoriesEvent event) {
+//        event.register(SoulStoneEntryTooltip.class, SoulStoneEntryRenderer::new);
+//    }
+
 
 }

@@ -14,7 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -86,43 +85,43 @@ public class TestSoulStone extends BaseSoulStone implements ISoulStoneOnAttacked
 
     @Override
     public void onDoubleClick(ItemStack stack, Player player, String keyType) {
-        // 基础冲刺强度
-        double speed = 6.5;
-        var level = player.level();
-        // 获取实体当前的朝向（偏航角），用于计算左/右/后退的方向
-        float yaw = player.getYRot();
-        Vec3 moveVec = Vec3.ZERO;
-
-        switch (keyType) {
-            case "key.forward" -> {
-                // 向前冲刺：直接取视线方向（去掉 Y 轴影响，防止飞天或钻地）
-                moveVec = player.getLookAngle().multiply(1, 0, 1).normalize().scale(speed);
-            }
-            case "key.back" -> {
-                // 向后冲刺：视线方向反向
-                moveVec = player.getLookAngle().multiply(1, 0, 1).normalize().scale(-speed * 0.8);
-            }
-            case "key.left" -> {
-                // 向左冲刺：偏航角 -90 度
-                moveVec = Vec3.directionFromRotation(0, yaw - 90).scale(speed * 0.8);
-            }
-            case "key.right" -> {
-                // 向右冲刺：偏航角 +90 度
-                moveVec = Vec3.directionFromRotation(0, yaw + 90).scale(speed * 0.8);
-            }
-
-        }
-
-        if (!level.isClientSide) {
-            player.displayClientMessage(net.minecraft.network.chat.Component.literal("双击成功！发动魂石冲刺"), true);
-        }
-
-        if (moveVec != Vec3.ZERO) {
-            // 应用冲刺速度
-            player.setDeltaMovement(moveVec.x, player.getDeltaMovement().y + 0.1, moveVec.z);
-            // 标记客户端需要更新运动状态（防止拉回）
-            player.hurtMarked = true;
-        }
+//        // 基础冲刺强度
+//        double speed = 6.5;
+//        var level = player.level();
+//        // 获取实体当前的朝向（偏航角），用于计算左/右/后退的方向
+//        float yaw = player.getYRot();
+//        Vec3 moveVec = Vec3.ZERO;
+//
+//        switch (keyType) {
+//            case "key.forward" -> {
+//                // 向前冲刺：直接取视线方向（去掉 Y 轴影响，防止飞天或钻地）
+//                moveVec = player.getLookAngle().multiply(1, 0, 1).normalize().scale(speed);
+//            }
+//            case "key.back" -> {
+//                // 向后冲刺：视线方向反向
+//                moveVec = player.getLookAngle().multiply(1, 0, 1).normalize().scale(-speed * 0.8);
+//            }
+//            case "key.left" -> {
+//                // 向左冲刺：偏航角 -90 度
+//                moveVec = Vec3.directionFromRotation(0, yaw - 90).scale(speed * 0.8);
+//            }
+//            case "key.right" -> {
+//                // 向右冲刺：偏航角 +90 度
+//                moveVec = Vec3.directionFromRotation(0, yaw + 90).scale(speed * 0.8);
+//            }
+//
+//        }
+//
+//        if (!level.isClientSide) {
+//            player.displayClientMessage(net.minecraft.network.chat.Component.literal("双击成功！发动魂石冲刺"), true);
+//        }
+//
+//        if (moveVec != Vec3.ZERO) {
+//            // 应用冲刺速度
+//            player.setDeltaMovement(moveVec.x, player.getDeltaMovement().y + 0.1, moveVec.z);
+//            // 标记客户端需要更新运动状态（防止拉回）
+//            player.hurtMarked = true;
+//        }
     }
 
 

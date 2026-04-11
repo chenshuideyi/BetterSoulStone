@@ -11,6 +11,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.level.BlockEvent;
@@ -134,8 +135,8 @@ public class SoulStoneEventHandler {
 
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
-        if (event.getPlayer() instanceof Player player && !player.level().isClientSide) {
-            ISoulStoneOnBlockBreak.dispatch(event, player);
+        if (event.getPlayer() != null && !event.getPlayer().level().isClientSide) {
+            ISoulStoneOnBlockBreak.dispatch(event, event.getPlayer());
         }
     }
 
@@ -155,28 +156,30 @@ public class SoulStoneEventHandler {
     }
 
     @SubscribeEvent
-    public static void onPlayerJump(PlayerEvent.JumpEvent event) {
-        if (event.getEntity() instanceof Player player && !player.level().isClientSide) {
-            ISoulStoneOnJump.dispatchJumpTrigger(player);
+    public static void onPlayerJump(LivingEvent.LivingJumpEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (entity != null && !entity.level().isClientSide) {
+            ISoulStoneOnJump.dispatchJumpTrigger(entity);
         }
     }
 
     @SubscribeEvent
     public static void onLivingFall(LivingFallEvent event) {
-        if (event.getEntity() instanceof Player player && !player.level().isClientSide) {
-            ISoulStoneOnFall.dispatchFallTrigger(player, event.getDistance(), event.getDamageMultiplier());
+        LivingEntity entity = event.getEntity();
+        if (entity != null && !entity.level().isClientSide) {
+            ISoulStoneOnFall.dispatchFallTrigger(entity, event.getDistance(), event.getDamageMultiplier());
         }
     }
 
-    @SubscribeEvent
-    public static void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
-        Player player = event.getEntity();
-        if (player == null || player.level().isClientSide) return;
-
-        ItemStack crafted = event.getCrafting();
-        Recipe<?> recipe = event.getRecipe();
-        ISoulStoneOnCraft.dispatchCraftTrigger(player, crafted, recipe);
-    }
+//    @SubscribeEvent
+//    public static void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
+//        Player player = event.getEntity();
+//        if (player == null || player.level().isClientSide) return;
+//
+//        ItemStack crafted = event.getCrafting();
+//        Recipe<?> recipe = event.getRecipe();
+//        ISoulStoneOnCraft.dispatchCraftTrigger(player, crafted, recipe);
+//    }
 
     @SubscribeEvent
     public static void onChat(ServerChatEvent event) {

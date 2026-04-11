@@ -14,8 +14,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.SlotContext;
-import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.ArrayList;

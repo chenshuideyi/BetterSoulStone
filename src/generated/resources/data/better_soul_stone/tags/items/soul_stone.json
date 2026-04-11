@@ -7,13 +7,14 @@
     "better_soul_stone:blank_pure_soul_stone",
     "better_soul_stone:blank_soul_stone",
     "better_soul_stone:blank_theorem_soul_stone",
-    "better_soul_stone:bone_meal_soul_stone",
-    "better_soul_stone:test_soul_stone",
+    "better_soul_stone:diamond_soul_stone",
     "better_soul_stone:armor_soul_stone",
     "better_soul_stone:axe_soul_stone",
-    "better_soul_stone:pickaxe_soul_stone",
     "better_soul_stone:sword_soul_stone",
-    "better_soul_stone:diamond_soul_stone",
+    "better_soul_stone:bone_meal_soul_stone",
+    "better_soul_stone:pickaxe_soul_stone",
+    "better_soul_stone:test_soul_stone",
+    "better_soul_stone:diamond_ore_soul_stone",
     "better_soul_stone:marisa_soul_stone",
     "better_soul_stone:player_7_soul_stone"
   ]

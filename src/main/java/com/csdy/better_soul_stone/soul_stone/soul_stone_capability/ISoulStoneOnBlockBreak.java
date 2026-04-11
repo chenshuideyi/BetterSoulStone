@@ -13,7 +13,7 @@ public interface ISoulStoneOnBlockBreak extends ISoulStoneCapability {
     void onBlockBreak(BlockEvent.BreakEvent event, Player player, Level level, BlockPos pos, BlockState state, ItemStack stack);
 
     static void dispatch(BlockEvent.BreakEvent event, Player player) {
-        Level level = event.getLevel();
+        Level level = player.level();
         BlockPos pos = event.getPos();
         BlockState state = level.getBlockState(pos);
         ItemStack tool = player.getMainHandItem();

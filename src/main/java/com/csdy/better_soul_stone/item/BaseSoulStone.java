@@ -8,6 +8,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -83,47 +84,25 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
         return HashMultimap.create();
     }
 
-    protected String getSoulStoneId() {
+    public String getSoulStoneId() {
         SoulStoneItems anno = this.getClass().getAnnotation(SoulStoneItems.class);
         return anno != null ? anno.id() : "";
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        String currentId = getSoulStoneId();
-        if (currentId.isEmpty()) return;
-
-        String flavorId = "flavor.better_soul_stone." + currentId;
-        tooltip.add(Component.translatable(flavorId).withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
-        tooltip.add(Component.empty());
-
-        // 递归获取
-        List<String> chain = SoulStoneRegistry.getParentChain(currentId);
-        
-        for (String id : chain) {
-            boolean isSelf = id.equals(currentId);
-            appendTierDescription(tooltip, id, !isSelf);
+        String flavorKey = "flavor.better_soul_stone." + getSoulStoneId();
+        if (I18n.exists(flavorKey)) {
+            tooltip.add(Component.translatable(flavorKey).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         }
-
         if (isSponsor && sponsorName != null) {
-            tooltip.add(Component.empty());
-            tooltip.add(Component.translatable("better_soul_stone.sponsor.format", sponsorName)
-                    .withStyle(ChatFormatting.GOLD, ChatFormatting.ITALIC));
+            tooltip.add(Component.translatable("better_soul_stone.sponsor.format", sponsorName).withStyle(ChatFormatting.GOLD));
         }
-
-        super.appendHoverText(stack, worldIn, tooltip, flagIn);
     }
 
     @OnlyIn(Dist.CLIENT)
     private void appendTierDescription(List<Component> tooltip, String id, boolean isInherited) {
         String baseKey = "text.better_soul_stone." + id;
-
-        if (isInherited) {
-            String itemNameKey = "item.better_soul_stone." + id;
-            tooltip.add(Component.translatable("text.better_soul_stone.inherited_logic", 
-                    Component.translatable(itemNameKey)).withStyle(ChatFormatting.DARK_AQUA));
-        }
 
         addLinesIfExist(tooltip, baseKey, isInherited);
         

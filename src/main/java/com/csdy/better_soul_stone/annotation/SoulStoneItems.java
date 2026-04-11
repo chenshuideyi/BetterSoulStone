@@ -18,6 +18,6 @@ public @interface SoulStoneItems {
 
     String sponsorName() default "";
 
-    String parentId() default "";
+    String[] parentIds() default {};
 
 }

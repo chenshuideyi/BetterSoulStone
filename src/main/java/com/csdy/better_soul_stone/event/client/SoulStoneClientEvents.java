@@ -2,18 +2,24 @@ package com.csdy.better_soul_stone.event.client;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
 import com.csdy.better_soul_stone.item.BaseSoulStone;
+import com.csdy.better_soul_stone.register.SoulStoneRegistry;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.client.ISpecialTooltipRendering;
 import com.csdy.better_soul_stone.util.SoulStoneUtil;
 import com.csdy.better_soul_stone.util.client.GenericKeyDetector;
+import com.csdy.better_soul_stone.util.client.SoulStoneEntryTooltip;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.datafixers.util.Either;
 import com.mojang.math.Axis;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -42,10 +48,6 @@ public class SoulStoneClientEvents {
                 entity.getId()
         );
     }
-
-//    public static void onRegisterTooltipFactories(RegisterClientTooltipComponentFactoriesEvent event) {
-//        event.register(CustomFontTooltipComponent.class, component -> component);
-//    }
 
     private static boolean keysInitialized = false;
     @SubscribeEvent
@@ -91,8 +93,6 @@ public class SoulStoneClientEvents {
             if (!(stack.getItem() instanceof ISpecialTooltipRendering renderer)) continue;
             if (!renderer.shouldRenderAroundHolder(stack)) continue;
 
-            int tier = item.getTier(stack);
-
             poseStack.pushPose();
 
             float angleOffset = (float) (i * Math.PI * 2.0 / soulStones.size());
@@ -109,23 +109,18 @@ public class SoulStoneClientEvents {
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
 
-            float glowAlpha = tier >= 3 ? 0.3F : 0.1F;
-            if (tier >= 3) {
-                RenderSystem.setShaderColor(1.0F, 0.9F, 0.4F, glowAlpha);
-            } else {
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, glowAlpha);
-            }
+            float glowAlpha = 0.3F;
+
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, glowAlpha);
             renderStaticItem(stack, maxLight, poseStack, bufferSource, entity);
 
             if (bufferSource instanceof MultiBufferSource.BufferSource sb) {
                 sb.endBatch();
             }
 
-            if (tier >= 3) {
-                RenderSystem.setShaderColor(1.0F, 0.8F, 0.4F, 0.9F);
-            } else {
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
-            }
+
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
+
             renderStaticItem(stack, maxLight, poseStack, bufferSource, entity);
 
             if (bufferSource instanceof MultiBufferSource.BufferSource sb) {
@@ -193,6 +188,53 @@ public class SoulStoneClientEvents {
 
             event.setBorderStart(color);
             event.setBorderEnd(color);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onTooltipGather(RenderTooltipEvent.GatherComponents event) {
+        ItemStack itemStack = event.getItemStack();
+        if (!(itemStack.getItem() instanceof BaseSoulStone soulStone)) return;
+
+        // 依然保留去重，防止逻辑嵌套导致同一行显示两次
+        java.util.Set<String> handledKeys = new java.util.HashSet<>();
+
+        String currentId = soulStone.getSoulStoneId();
+        List<String> chain = SoulStoneRegistry.getParentChain(currentId);
+
+        for (String id : chain) {
+            Item item = net.minecraftforge.registries.ForgeRegistries.ITEMS.getValue(
+                    ResourceLocation.fromNamespaceAndPath("better_soul_stone", id)
+            );
+            if (item == null) continue;
+
+            String baseKey = "text.better_soul_stone." + id;
+            ItemStack iconStack = new ItemStack(item);
+
+            // --- 1. 处理主标题行 ---
+            if (!handledKeys.contains(baseKey) && net.minecraft.client.resources.language.I18n.exists(baseKey)) {
+                Component title = Component.translatable(baseKey).withStyle(ChatFormatting.GRAY);
+                // 每一行都用 Either.right 包装
+                event.getTooltipElements().add(Either.right(new SoulStoneEntryTooltip(iconStack, title)));
+                handledKeys.add(baseKey);
+
+                // --- 2. 处理多行描述 (text1, text2...) ---
+                int i = 1;
+                while (true) {
+                    String nextKey = baseKey + i;
+                    if (net.minecraft.client.resources.language.I18n.exists(nextKey)) {
+                        if (!handledKeys.contains(nextKey)) {
+                            Component extraText = Component.translatable(nextKey).withStyle(ChatFormatting.GRAY);
+                            // 关键修改：子行也使用 SoulStoneEntryTooltip 包装，实现每行带图
+                            event.getTooltipElements().add(Either.right(new SoulStoneEntryTooltip(iconStack, extraText)));
+                            handledKeys.add(nextKey);
+                        }
+                        i++;
+                    } else {
+                        break;
+                    }
+                }
+            }
         }
     }
 
