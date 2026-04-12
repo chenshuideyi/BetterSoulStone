@@ -4,8 +4,10 @@ import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.client.rendering.renderers.BetterRenderer;
 import com.csdy.better_soul_stone.font.factory.SoulStoneFontFactory;
 import com.csdy.better_soul_stone.register.SoulStoneRegistry;
+import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.client.ISpecialTooltipRendering;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.logging.LogUtils;
 import net.minecraft.ChatFormatting;
@@ -14,6 +16,8 @@ import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -77,16 +81,6 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
                 }
                 return null;
             }
-//
-//            @Override public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-//                LogUtils.getLogger().debug("VVVVV getCustomRenderer()");
-//                LogUtils.getLogger().debug("VVVVV type: {}", type);
-//                if (type != null && type.equals("better")) {
-//                    LogUtils.getLogger().debug("VVVVV returned better renderer");
-//                    return BetterRenderer.INSTANCE;
-//                }
-//                return IClientItemExtensions.super.getCustomRenderer();
-//            }
         });
     }
 
@@ -97,7 +91,55 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
-        return HashMultimap.create();
+        Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
+
+        LivingEntity entity = slotContext.entity();
+        if (entity == null) {
+            return modifiers;
+        }
+
+        List<SoulStoneManager.ActiveLogic> logics = SoulStoneManager.getLogics(entity, ICurioItem.class);
+
+        for (SoulStoneManager.ActiveLogic active : logics) {
+            if (active.slotResult().stack() == stack) {
+                Object logicItem = active.logicItem();
+                if (logicItem instanceof ICurioItem curioLogic) {
+                    modifiers.putAll(curioLogic.getAttributeModifiers(slotContext, uuid, stack));
+                }
+            }
+        }
+        return modifiers;
+    }
+
+    @Override
+    public int getFortuneLevel(SlotContext slotContext, net.minecraft.world.level.storage.loot.LootContext lootContext, ItemStack stack) {
+        int totalFortune = 0;
+        List<SoulStoneManager.ActiveLogic> logics = SoulStoneManager.getLogics(slotContext.entity(), ICurioItem.class);
+
+        for (SoulStoneManager.ActiveLogic active : logics) {
+            if (active.slotResult().stack() == stack) {
+                if (active.logicItem() instanceof ICurioItem curioLogic) {
+                    totalFortune += curioLogic.getFortuneLevel(slotContext, lootContext, stack);
+                }
+            }
+        }
+        return totalFortune;
+    }
+
+    @Override
+    public int getLootingLevel(SlotContext slotContext, DamageSource source, LivingEntity target, int baseLooting, ItemStack stack) {
+        int totalLooting = 0;
+        List<SoulStoneManager.ActiveLogic> logics = SoulStoneManager.getLogics(slotContext.entity(), ICurioItem.class);
+
+        for (SoulStoneManager.ActiveLogic active : logics) {
+            if (active.slotResult().stack() == stack) {
+                if (active.logicItem() instanceof ICurioItem curioLogic) {
+
+                    totalLooting += curioLogic.getLootingLevel(slotContext, source, target, 0, stack);
+                }
+            }
+        }
+        return baseLooting + totalLooting;
     }
 
     public String getSoulStoneId() {

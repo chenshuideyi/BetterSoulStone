@@ -1,4 +1,4 @@
-// 1.20.1	2026-04-12T12:06:36.6930657	Item Models: better_soul_stone
+// 1.20.1	2026-04-12T19:00:34.0116084	Item Models: better_soul_stone
 3bd9be46939061071dcdaef09ca46e5af915380f assets/better_soul_stone/models/item/armor_soul_stone.json
 616682d3865df5c809816d14ce6f09da90b856f8 assets/better_soul_stone/models/item/axe_soul_stone.json
 9d898c298cf498f52fb7ca820dad9995161b4152 assets/better_soul_stone/models/item/blank_absolute_soul_stone.json
@@ -9,9 +9,12 @@ c87cd13fcd4e30f6c8f7f934063d20ccfe78813a assets/better_soul_stone/models/item/bl
 81e51729792998d592e2c84b500c2da69a600a18 assets/better_soul_stone/models/item/blank_soul_stone.json
 fb309fa7b4bdb1f144a3211af9fd335f1063a7a2 assets/better_soul_stone/models/item/blank_theorem_soul_stone.json
 92dd7f032437f5736b9c9a047f61e7e5bc2cf7a9 assets/better_soul_stone/models/item/bone_meal_soul_stone.json
+ebcada2d16dd06e3529031f446d86a649069c466 assets/better_soul_stone/models/item/coal_ore_soul_stone.json
+5948a4e1ca55e3590ac4fe1c25c0b6cfcfc62ff2 assets/better_soul_stone/models/item/copper_ore_soul_stone.json
 e89d31fab7ab79c629554a53de33e90877f4f0fb assets/better_soul_stone/models/item/csdy_soul_stone.json
 7a561b132e5a2c3fe86009a766c9e99c50d1f6dd assets/better_soul_stone/models/item/diamond_ore_soul_stone.json
 7859bfe74c2fd6cc3e2ffdae87341950b7cf730a assets/better_soul_stone/models/item/diamond_soul_stone.json
+fb1b4f1a7274014afaee1b21584294ac1e10dc08 assets/better_soul_stone/models/item/iron_ore_soul_stone.json
 5cde8b4f2c5be6a73b5e760169c6178cec2357c7 assets/better_soul_stone/models/item/marisa_soul_stone.json
 be4b3bd475acd71678b919703d6fe295b42a3328 assets/better_soul_stone/models/item/pickaxe_soul_stone.json
 80cf1578b23571d2e75ff52151ea105fdb9b6b36 assets/better_soul_stone/models/item/player_7_soul_stone.json

@@ -61,7 +61,19 @@
       "required": false
     },
     {
+      "id": "better_soul_stone:coal_ore_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:copper_ore_soul_stone",
+      "required": false
+    },
+    {
       "id": "better_soul_stone:diamond_ore_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:iron_ore_soul_stone",
       "required": false
     },
     {

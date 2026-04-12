@@ -2,26 +2,38 @@ package com.csdy.better_soul_stone.item.minecraft.world.level.overworld.terra.or
 
 import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.item.BaseSoulStone;
-import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneDamage;
-import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneOnAttacked;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneHover;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 @SoulStoneItems(id = "diamond_ore_soul_stone")
-public class DiamondOreSoulStone extends BaseSoulStone implements ISoulStoneDamage, ISoulStoneOnAttacked {
+public class DiamondOreSoulStone extends BaseSoulStone implements ISoulStoneHover {
 
     @Override
-    public float onDealingDamage(LivingHurtEvent event, LivingEntity attacker, LivingEntity target, DamageSource source, float amount, ItemStack stack) {
-        return amount * 5;
-    }
+    public void onHoverBlock(Player player, BlockHitResult hitResult, ItemStack stack) {
+        Level level = player.level();
+        if (level.isClientSide) return;
+        BlockPos pos = hitResult.getBlockPos();
+        BlockState currentState = level.getBlockState(pos);
 
-    @Override
-    public boolean onAttacked(LivingAttackEvent event, LivingEntity wearer, Entity attacker, ItemStack stack) {
-        return false;
-    }
 
+        if (currentState.is(Blocks.GLOW_LICHEN)) {
+
+            BlockState newState;
+            if (pos.getY() < 0) {
+                newState = Blocks.DEEPSLATE_DIAMOND_ORE.defaultBlockState();
+            } else {
+                newState = Blocks.DIAMOND_ORE.defaultBlockState();
+            }
+
+
+            level.setBlock(pos, newState, 3);
+
+        }
+    }
 }

@@ -14,14 +14,6 @@ public class SoulStoneRegistry {
     private static final Map<String, List<String>> PARENT_MAP = new HashMap<>();
     private static volatile boolean initialized = false;
 
-    public static void registerSoulStone(String id, Class<? extends BaseSoulStone> clazz, String[] parentIds) {
-        SOUL_STONE_CLASSES.put(id, clazz);
-        if (parentIds != null && parentIds.length > 0) {
-            PARENT_MAP.put(id, Arrays.asList(parentIds));
-        }
-        initialized = false;
-    }
-
     public static void initialize() {
         if (initialized) return;
 

@@ -7,9 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 
 public interface ISoulStoneHover extends ISoulStoneCapability {
 
@@ -18,24 +16,55 @@ public interface ISoulStoneHover extends ISoulStoneCapability {
      * 非玩家生物则对仇恨目标触发
      */
 
-    void onHoverEntity(LivingEntity wearer, Entity target, ItemStack stack);
+    default void onHoverEntity(LivingEntity wearer, Entity target, ItemStack stack){
+
+    }
+
+    /**
+     * 当玩家准星指向某个方块时触发
+     */
+
+    default void onHoverBlock(Player player, BlockHitResult hitResult, ItemStack stack) {
+
+    }
 
     static void dispatchHoverTrigger(LivingEntity entity) {
         if (entity.level().isClientSide || entity.tickCount % 2 != 0) return;
 
-        Entity target = null;
-
+        Entity targetEntity = null;
         if (entity instanceof Player player) {
-            target = getLookingAtEntity(player, 20.0);
+            targetEntity = getLookingAtEntity(player, 20.0);
         } else if (entity instanceof Mob mob) {
-            target = mob.getTarget();
+            targetEntity = mob.getTarget();
         }
 
-        if (target != null) {
-            Entity finalTarget = target;
+        if (targetEntity != null) {
+            Entity finalTarget = targetEntity;
             SoulStoneManager.forEachLogic(entity, ISoulStoneHover.class, (logic, stack) ->
                     logic.onHoverEntity(entity, finalTarget, stack));
         }
+
+        if (entity instanceof Player player) {
+            BlockHitResult blockHit = getLookingAtBlock(player, 12.0);
+            if (blockHit != null && blockHit.getType() == HitResult.Type.BLOCK) {
+                SoulStoneManager.forEachLogic(player, ISoulStoneHover.class, (logic, stack) ->
+                        logic.onHoverBlock(player, blockHit, stack));
+            }
+        }
+    }
+
+    private static BlockHitResult getLookingAtBlock(Player player, double range) {
+        Vec3 eyePos = player.getEyePosition(1.0F);
+        Vec3 viewVec = player.getViewVector(1.0F).scale(range);
+        Vec3 reachVec = eyePos.add(viewVec);
+
+        return player.level().clip(new net.minecraft.world.level.ClipContext(
+                eyePos,
+                reachVec,
+                net.minecraft.world.level.ClipContext.Block.OUTLINE,
+                net.minecraft.world.level.ClipContext.Fluid.NONE,
+                player
+        ));
     }
 
     private static Entity getLookingAtEntity(Player player, double range) {
