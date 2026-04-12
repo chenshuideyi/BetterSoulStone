@@ -65,11 +65,23 @@
       "required": false
     },
     {
+      "id": "better_soul_stone:csdy_soul_stone",
+      "required": false
+    },
+    {
       "id": "better_soul_stone:marisa_soul_stone",
       "required": false
     },
     {
       "id": "better_soul_stone:player_7_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:test0_better_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:test1_better_soul_stone",
       "required": false
     }
   ]

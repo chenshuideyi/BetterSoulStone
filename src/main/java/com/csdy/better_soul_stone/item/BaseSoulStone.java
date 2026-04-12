@@ -1,13 +1,16 @@
 package com.csdy.better_soul_stone.item;
 
 import com.csdy.better_soul_stone.annotation.SoulStoneItems;
+import com.csdy.better_soul_stone.client.rendering.renderers.BetterRenderer;
 import com.csdy.better_soul_stone.font.factory.SoulStoneFontFactory;
 import com.csdy.better_soul_stone.register.SoulStoneRegistry;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.client.ISpecialTooltipRendering;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.mojang.logging.LogUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -21,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -60,6 +64,8 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        var type = getSoulStoneType();
+
         consumer.accept(new IClientItemExtensions() {
             @Override
             public @Nullable Font getFont(ItemStack stack, FontContext context) {
@@ -71,6 +77,16 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
                 }
                 return null;
             }
+//
+//            @Override public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+//                LogUtils.getLogger().debug("VVVVV getCustomRenderer()");
+//                LogUtils.getLogger().debug("VVVVV type: {}", type);
+//                if (type != null && type.equals("better")) {
+//                    LogUtils.getLogger().debug("VVVVV returned better renderer");
+//                    return BetterRenderer.INSTANCE;
+//                }
+//                return IClientItemExtensions.super.getCustomRenderer();
+//            }
         });
     }
 
@@ -105,7 +121,7 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
         String baseKey = "text.better_soul_stone." + id;
 
         addLinesIfExist(tooltip, baseKey, isInherited);
-        
+
         int i = 1;
         while (true) {
             String nextKey = baseKey + i;
@@ -129,4 +145,6 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
             }
         }
     }
+
+
 }

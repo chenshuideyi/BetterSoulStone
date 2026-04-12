@@ -16,7 +16,10 @@
     "better_soul_stone:test_ex_soul_stone",
     "better_soul_stone:test_soul_stone",
     "better_soul_stone:diamond_ore_soul_stone",
+    "better_soul_stone:csdy_soul_stone",
     "better_soul_stone:marisa_soul_stone",
-    "better_soul_stone:player_7_soul_stone"
+    "better_soul_stone:player_7_soul_stone",
+    "better_soul_stone:test0_better_soul_stone",
+    "better_soul_stone:test1_better_soul_stone"
   ]
 }
