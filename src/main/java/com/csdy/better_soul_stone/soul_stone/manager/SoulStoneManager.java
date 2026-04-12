@@ -24,7 +24,8 @@ public class SoulStoneManager {
      * logicItem: 真正实现接口的那个物品对象（可能是父级魂石）
      * slotResult: 玩家当前装备的那个魂石堆栈信息
      */
-    public record ActiveLogic(Object logicItem, SlotResult slotResult) {}
+    public record ActiveLogic(Object logicItem, SlotResult slotResult) {
+    }
 
     private static final Map<UUID, Map<Class<?>, List<ActiveLogic>>> ABILITY_CACHE = new WeakHashMap<>();
     private static final Set<Class<? extends ISoulStoneCapability>> REGISTERED_INTERFACES = new java.util.concurrent.ConcurrentHashMap<>().newKeySet();
@@ -73,10 +74,10 @@ public class SoulStoneManager {
                 }
             });
         });
-        ABILITY_CACHE.put(entity.getUUID(), playerAbilities);
+        if (playerAbilities != null) ABILITY_CACHE.put(entity.getUUID(), playerAbilities);
     }
 
-    public static void clear(UUID uuid){
+    public static void clear(UUID uuid) {
         ABILITY_CACHE.remove(uuid);
     }
 
