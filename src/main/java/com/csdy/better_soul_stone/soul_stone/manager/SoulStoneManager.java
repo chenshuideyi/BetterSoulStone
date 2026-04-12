@@ -60,7 +60,7 @@ public class SoulStoneManager {
                     collectAllLogicIds(equippedStone.getSoulStoneId(), allLogicIds);
 
                     for (String logicId : allLogicIds) {
-                        Item logicItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(BetterSoulStoneModMain.MODID, logicId));
+                        Item logicItem = ForgeRegistries.ITEMS.getValue(ResourceLocation.fromNamespaceAndPath(BetterSoulStoneModMain.MODID, logicId));
                         if (logicItem == null) continue;
 
                         for (Class<? extends ISoulStoneCapability> iface : REGISTERED_INTERFACES) {

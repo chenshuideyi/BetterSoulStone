@@ -1,13 +1,16 @@
 package com.csdy.better_soul_stone.util;
 
 import com.csdy.better_soul_stone.item.BaseSoulStone;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -18,10 +21,13 @@ import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.BiConsumer;
 
 public class SoulStoneUtil {
     //孩子们，util类不需要写单例
+
+    public static final Random CSDY_RANDOM = new Random();
 
     public static String makeModifierName(Item item, Attribute attribute) {
         ResourceLocation itemKey = ForgeRegistries.ITEMS.getKey(item);
@@ -102,5 +108,38 @@ public class SoulStoneUtil {
             lootTable.getRandomItems(params).forEach(target::spawnAtLocation);
         }
     }
+
+    public static void spawnItemFromEntity(LivingEntity entity, ItemStack dropStack) {
+        if (entity == null || entity.level().isClientSide || dropStack.isEmpty()) return;
+
+        ItemEntity itemEntity = new ItemEntity(
+                entity.level(),
+                entity.getX(), entity.getY() + 0.5, entity.getZ(), // 稍微抬高一点防止掉进地板
+                dropStack
+        );
+
+        itemEntity.setDeltaMovement(
+                entity.level().random.nextGaussian() * 0.05D,
+                0.2D,
+                entity.level().random.nextGaussian() * 0.05D
+        );
+
+        entity.level().addFreshEntity(itemEntity);
+    }
+
+    public static void dropItemAt(Level level, BlockPos pos, ItemStack stack) {
+        if (level.isClientSide || stack.isEmpty()) return;
+
+        double x = pos.getX() + 0.5D;
+        double y = pos.getY() + 0.5D;
+        double z = pos.getZ() + 0.5D;
+
+        ItemEntity itementity = new ItemEntity(level, x, y, z, stack);
+        itementity.setDefaultPickUpDelay();
+        level.addFreshEntity(itementity);
+    }
+
+
+
 
 }
