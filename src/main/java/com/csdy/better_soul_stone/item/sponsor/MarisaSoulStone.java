@@ -16,12 +16,6 @@ public class MarisaSoulStone extends BaseSoulStone implements ISoulStoneHit {
     @Override
     public void afterHit(LivingDamageEvent event, LivingEntity attacker, LivingEntity target, ItemStack stack) {
         if (attacker.level().isClientSide || !(attacker instanceof Player player)) return;
-
-//        // 2. 冷却检查：利用我们之前讨论的 NBT 时间戳
-//        long currentTime = player.level().getGameTime();
-//        long lastUsed = stack.getOrCreateTag().getLong("LastStealTime");
-//        if (currentTime < lastUsed + 600) return; // 30秒冷却
-
         SoulStoneUtil.dropStealLoot(target,player);
     }
 
