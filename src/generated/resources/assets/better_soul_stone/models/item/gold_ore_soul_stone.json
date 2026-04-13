@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "better_soul_stone:item/gold_ore_soul_stone"
+  }
+}

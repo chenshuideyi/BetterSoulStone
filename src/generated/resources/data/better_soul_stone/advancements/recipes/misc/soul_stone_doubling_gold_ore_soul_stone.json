@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_test0_better_soul_stone": {
+    "has_gold_ore_soul_stone": {
       "conditions": {
         "items": [
           {
             "items": [
-              "better_soul_stone:test0_better_soul_stone"
+              "better_soul_stone:gold_ore_soul_stone"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "better_soul_stone:soul_stone_doubling_test0_better_soul_stone"
+        "recipe": "better_soul_stone:soul_stone_doubling_gold_ore_soul_stone"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_test0_better_soul_stone",
+      "has_gold_ore_soul_stone",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "better_soul_stone:soul_stone_doubling_test0_better_soul_stone"
+      "better_soul_stone:soul_stone_doubling_gold_ore_soul_stone"
     ]
   },
   "sends_telemetry_event": false

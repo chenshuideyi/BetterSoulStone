@@ -24,11 +24,23 @@
   "item.better_soul_stone.coal_ore_soul_stone": "煤矿魂石",
   "item.better_soul_stone.copper_ore_soul_stone": "铜矿魂石",
   "item.better_soul_stone.iron_ore_soul_stone": "铁矿魂石",
+  "item.better_soul_stone.gold_ore_soul_stone": "金矿魂石",
   "item.better_soul_stone.diamond_ore_soul_stone": "钻石矿魂石",
+  "item.better_soul_stone.emerald_ore_soul_stone": "绿宝石矿魂石",
+  "item.better_soul_stone.lapis_ore_soul_stone": "青金石矿魂石",
+  "item.better_soul_stone.redstone_ore_soul_stone": "红石矿魂石",
+  "item.better_soul_stone.debris_ore_soul_stone": "残骸魂石",
+  "item.better_soul_stone.ores_soul_stone": "矿石之魂",
+
 
   "item.better_soul_stone.diamond_soul_stone": "钻石魂石",
 
   "item.better_soul_stone.bone_meal_soul_stone": "骨粉魂石",
+
+  "item.better_soul_stone.minecraft_soul_stone": "Minecraft之魂",
+
+
+
 
   "--- 赞助者魂石 ---": "",
   "item.better_soul_stone.marisa_soul_stone": "魔理沙的魂石",
@@ -57,11 +69,20 @@
   "flavor.better_soul_stone.coal_ore_soul_stone": "古法制取煤炭",
   "flavor.better_soul_stone.copper_ore_soul_stone": "cos避雷针",
   "flavor.better_soul_stone.iron_ore_soul_stone": "1.12的预感",
+  "flavor.better_soul_stone.gold_ore_soul_stone": "速通领域大神",
   "flavor.better_soul_stone.diamond_ore_soul_stone": "终于摆脱这该死的发光地衣了！",
+  "flavor.better_soul_stone.emerald_ore_soul_stone": "一把抓住村民，顷刻炼化",
+  "flavor.better_soul_stone.lapis_ore_soul_stone": "这下不缺附魔了",
+  "flavor.better_soul_stone.redstone_ore_soul_stone": "简易刷铁轨机",
+  "flavor.better_soul_stone.debris_ore_soul_stone": "爆破挖矿享受者",
+  "flavor.better_soul_stone.ores_soul_stone": "“世界即是矿床，而我负责将其打包。”",
 
   "flavor.better_soul_stone.diamond_soul_stone": "高玩的象征！",
 
   "flavor.better_soul_stone.bone_meal_soul_stone": "农夫最爱",
+
+  "flavor.better_soul_stone.minecraft_soul_stone": "Notch:移除了herobrime MoJang:移除了Notch",
+
 
   "flavor.better_soul_stone.marisa_soul_stone": "相传，Kiri34借走的东西死后一定还",
   "flavor.better_soul_stone.player_7_soul_stone": "相传，PlayerVII打什么都是无伤",
@@ -85,11 +106,20 @@
   "text.better_soul_stone.coal_ore_soul_stone": "殴打凋灵骷髅会获得煤炭",
   "text.better_soul_stone.copper_ore_soul_stone": "捡起粗铜会遭雷劈",
   "text.better_soul_stone.iron_ore_soul_stone": "挖掘铁矿时会额外掉落一个原矿",
+  "text.better_soul_stone.gold_ore_soul_stone": "挖掘金矿概率掉落烈焰棒和末影珍珠",
   "text.better_soul_stone.diamond_ore_soul_stone": "你指着的发光地衣会变成钻石矿",
+  "text.better_soul_stone.emerald_ore_soul_stone": "殴打村民会获得绿宝石",
+  "text.better_soul_stone.lapis_ore_soul_stone": "挖掘青金石矿时会掉落一个书架",
+  "text.better_soul_stone.redstone_ore_soul_stone": "挖掘动力铁轨时会额外掉落一个",
+  "text.better_soul_stone.debris_ore_soul_stone": "挖掘下界岩或玄武岩会掉落床",
+  "text.better_soul_stone.ores_soul_stone": "拥有所有矿石魂石的能力，指向原矿时将其精炼为对应的矿物块",
 
-  "text.better_soul_stone.diamond_soul_stone": "伤害提升500%，受到伤害后该魂石被销毁",
+  "text.better_soul_stone.diamond_soul_stone": "伤害提升500%，受到伤害后该效果被禁用24分钟",
 
   "text.better_soul_stone.bone_meal_soul_stone": "双击下蹲释放自己,催熟周围植物",
+
+  "text.better_soul_stone.minecraft_soul_stone": "将所有魂石的力量玩弄于股掌之间，是“玩家”，“世界”与“Minecraft”至高无上的特权",
+  "text.better_soul_stone.minecraft_soul_stone1": "未完成，尽请期待...",
 
   "--- 赞助者魂石效果描述 ---": "",
   "text.better_soul_stone.marisa_soul_stone": "攻击时窃取一次目标的战利品：这就是“借走不还”的魔法！",

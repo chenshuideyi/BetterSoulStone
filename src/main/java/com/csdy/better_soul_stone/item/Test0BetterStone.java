@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import top.theillusivec4.curios.api.SlotContext;
 
-@SoulStoneItems(id = "test0_better_soul_stone")
+//@SoulStoneItems(id = "test0_better_soul_stone")
 public class Test0BetterStone extends BaseSoulStone {
 
     public Test0BetterStone() {

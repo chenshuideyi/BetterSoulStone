@@ -1,6 +1,7 @@
 package com.csdy.better_soul_stone.soul_stone.soul_stone_capability;
 
 import com.csdy.better_soul_stone.util.CooldownManager;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -25,18 +26,41 @@ public interface ISoulStoneCapability {
     default boolean isOnCooldown(LivingEntity entity, ItemStack stack) {
         int cooldown = getCooldownTicks();
         if (cooldown <= 0) return false;
-        return CooldownManager.isOnCooldown((net.minecraft.world.entity.player.Player) entity, stack, getAbilityId());
+
+        long currentTime = entity.level().getGameTime();
+        long unlockTime = getUnlockTime(stack, getAbilityId());
+
+        return currentTime < unlockTime;
     }
 
     default int getRemainingCooldown(LivingEntity entity, ItemStack stack) {
-        return CooldownManager.getRemainingCooldown((net.minecraft.world.entity.player.Player) entity, stack, getAbilityId());
+        long currentTime = entity.level().getGameTime();
+        long unlockTime = getUnlockTime(stack, getAbilityId());
+        return (int) Math.max(0, unlockTime - currentTime);
     }
 
     default void setCooldown(LivingEntity entity, ItemStack stack) {
         int cooldown = getCooldownTicks();
         if (cooldown > 0) {
-            CooldownManager.setCooldown((net.minecraft.world.entity.player.Player) entity, stack, getAbilityId(), cooldown);
+            long unlockTime = entity.level().getGameTime() + cooldown;
+            saveUnlockTime(stack, getAbilityId(), unlockTime);
         }
+    }
+
+    private long getUnlockTime(ItemStack stack, String abilityId) {
+        CompoundTag nbt = stack.getTag();
+        if (nbt != null && nbt.contains("SoulStoneCooldowns")) {
+            return nbt.getCompound("SoulStoneCooldowns").getLong(abilityId);
+        }
+        return 0L;
+    }
+
+    private void saveUnlockTime(ItemStack stack, String abilityId, long unlockTime) {
+        CompoundTag nbt = stack.getOrCreateTag();
+        if (!nbt.contains("SoulStoneCooldowns")) {
+            nbt.put("SoulStoneCooldowns", new CompoundTag());
+        }
+        nbt.getCompound("SoulStoneCooldowns").putLong(abilityId, unlockTime);
     }
 
 }

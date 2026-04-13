@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "better_soul_stone:item/test0_better_soul_stone"
+    "layer0": "better_soul_stone:item/redstone_ore_soul_stone"
   }
 }

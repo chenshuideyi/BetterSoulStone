@@ -7,6 +7,7 @@
     "better_soul_stone:blank_pure_soul_stone",
     "better_soul_stone:blank_soul_stone",
     "better_soul_stone:blank_theorem_soul_stone",
+    "better_soul_stone:minecraft_soul_stone",
     "better_soul_stone:diamond_soul_stone",
     "better_soul_stone:armor_soul_stone",
     "better_soul_stone:axe_soul_stone",
@@ -17,12 +18,16 @@
     "better_soul_stone:test_soul_stone",
     "better_soul_stone:coal_ore_soul_stone",
     "better_soul_stone:copper_ore_soul_stone",
+    "better_soul_stone:debris_ore_soul_stone",
     "better_soul_stone:diamond_ore_soul_stone",
+    "better_soul_stone:emerald_ore_soul_stone",
+    "better_soul_stone:gold_ore_soul_stone",
     "better_soul_stone:iron_ore_soul_stone",
+    "better_soul_stone:lapis_ore_soul_stone",
+    "better_soul_stone:redstone_ore_soul_stone",
+    "better_soul_stone:ores_soul_stone",
     "better_soul_stone:csdy_soul_stone",
     "better_soul_stone:marisa_soul_stone",
-    "better_soul_stone:player_7_soul_stone",
-    "better_soul_stone:test0_better_soul_stone",
-    "better_soul_stone:test1_better_soul_stone"
+    "better_soul_stone:player_7_soul_stone"
   ]
 }

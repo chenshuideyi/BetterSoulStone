@@ -4,24 +4,24 @@ import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.item.BaseSoulStone;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneOnBlockBreak;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.level.BlockEvent;
 
-import static com.csdy.better_soul_stone.util.SoulStoneUtil.*;
+import static com.csdy.better_soul_stone.util.SoulStoneUtil.dropItemAt;
 
-@SoulStoneItems(id = "iron_ore_soul_stone")
-public class IronOreSoulStone extends BaseSoulStone implements ISoulStoneOnBlockBreak {
+@SoulStoneItems(id = "debris_ore_soul_stone")
+public class DebrisOreSoulStone extends BaseSoulStone implements ISoulStoneOnBlockBreak {
 
     @Override
     public void onBlockBreak(BlockEvent.BreakEvent event, Player player, Level level, BlockPos pos, BlockState state, ItemStack stack) {
         if (level.isClientSide) return;
-        if (state.is(Blocks.IRON_ORE) || state.is(Blocks.DEEPSLATE_IRON_ORE)) {
-            ItemStack bonusDrop = new ItemStack(state.getBlock().asItem());
+        if (state.is(Blocks.NETHERRACK) || state.is(Blocks.BASALT)) {
+            ItemStack bonusDrop = new ItemStack(Items.RED_BED);
             dropItemAt(level, pos, bonusDrop);
         }
     }
