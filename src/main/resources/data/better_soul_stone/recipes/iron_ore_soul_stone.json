@@ -10,7 +10,7 @@
       "item": "minecraft:raw_iron"
     },
     "B": {
-      "item": "forge:ores/iron"
+      "tag": "forge:ores/iron"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

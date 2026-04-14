@@ -7,7 +7,7 @@
   ],
   "key": {
     "A": {
-      "item": "forge:ores/lapis"
+      "tag": "forge:ores/lapis"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

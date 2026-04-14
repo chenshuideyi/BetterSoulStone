@@ -10,7 +10,7 @@
       "item": "minecraft:raw_gold"
     },
     "B": {
-      "item": "forge:ores/gold"
+      "tag": "forge:ores/gold"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

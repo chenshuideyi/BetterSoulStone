@@ -10,7 +10,7 @@
       "item": "minecraft:redstone"
     },
     "B": {
-      "item": "forge:ores/redstone"
+      "tag": "forge:ores/redstone"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"
