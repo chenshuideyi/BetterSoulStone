@@ -1,4 +1,4 @@
-// 1.20.1	2026-04-14T12:33:56.7668704	Item Models: better_soul_stone
+// 1.20.1	2026-04-14T15:21:35.6515153	Item Models: better_soul_stone
 3bd9be46939061071dcdaef09ca46e5af915380f assets/better_soul_stone/models/item/armor_soul_stone.json
 616682d3865df5c809816d14ce6f09da90b856f8 assets/better_soul_stone/models/item/axe_soul_stone.json
 9d898c298cf498f52fb7ca820dad9995161b4152 assets/better_soul_stone/models/item/blank_absolute_soul_stone.json
@@ -22,6 +22,7 @@ e89d31fab7ab79c629554a53de33e90877f4f0fb assets/better_soul_stone/models/item/cs
 80f1b398314af25273f8381a1b6aabaf677fc39b assets/better_soul_stone/models/item/emerald_soul_stone.json
 7b047e80b17a1a943bfd881bd0185680c964d932 assets/better_soul_stone/models/item/gold_ore_soul_stone.json
 116e896932b4f08ae9c58a2496b636618d202d7c assets/better_soul_stone/models/item/gold_soul_stone.json
+31d46078315473c6b4a8307828bb7c3313b30a25 assets/better_soul_stone/models/item/ingots_soul_stone.json
 fb1b4f1a7274014afaee1b21584294ac1e10dc08 assets/better_soul_stone/models/item/iron_ore_soul_stone.json
 2434db15e1956245d71299e35ca8ccc643172c66 assets/better_soul_stone/models/item/iron_soul_stone.json
 c8ea25d5851d4768f8ab8a107a14bb8bfada0e6e assets/better_soul_stone/models/item/lapis_ore_soul_stone.json

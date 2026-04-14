@@ -1,5 +1,6 @@
 package com.csdy.better_soul_stone;
 
+import com.csdy.better_soul_stone.item.BlankBetterStone;
 import com.csdy.better_soul_stone.register.SoulStoneItemRegister;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -17,7 +18,11 @@ public class BetterSoulStoneTab {
     public static final RegistryObject<CreativeModeTab> TAB = CREATIVE_MODE_TABS.register(MODID, () -> CreativeModeTab.builder()
             .title(Component.translatable("better_soul_stone_tab"))
             .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
-            .icon(() -> new ItemStack(Items.END_ROD))
+            .icon(() -> SoulStoneItemRegister.ITEMS.getEntries().stream()
+                    .filter(ro -> ro.getId().getPath().equals("blank_better_soul_stone"))
+                    .findFirst()
+                    .map(ro -> new ItemStack(ro.get()))
+                    .orElseGet(() -> new ItemStack(Items.END_ROD)))
             .displayItems((enabledFeatures, output) -> {
                 for(RegistryObject<Item> item : SoulStoneItemRegister.ITEMS.getEntries()){
                     output.accept(item.get());
