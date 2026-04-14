@@ -20,4 +20,7 @@ public @interface SoulStoneItems {
 
     String[] parentIds() default {};
 
+    float scale() default Float.NaN;
+
+
 }

@@ -13,9 +13,13 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 @SoulStoneItems(
         id = "ores_soul_stone",
@@ -29,7 +33,8 @@ import java.util.Map;
                 "lapis_ore_soul_stone",
                 "redstone_ore_soul_stone",
                 "debris_ore_soul_stone"
-        }
+        },
+        scale = 1.5f
 )
 public class OresSoulStone extends BaseSoulStone implements ISoulStoneHover {
 
@@ -86,6 +91,11 @@ public class OresSoulStone extends BaseSoulStone implements ISoulStoneHover {
         }
     }
 
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public String getSoulStoneType() {
+        return "better";
+    }
 
 
 }

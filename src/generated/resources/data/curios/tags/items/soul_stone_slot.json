@@ -33,7 +33,39 @@
       "required": false
     },
     {
+      "id": "better_soul_stone:coal_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:copper_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:debris_soul_stone",
+      "required": false
+    },
+    {
       "id": "better_soul_stone:diamond_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:emerald_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:gold_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:iron_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:lapis_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:redstone_soul_stone",
       "required": false
     },
     {

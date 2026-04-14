@@ -5,10 +5,15 @@ import com.csdy.better_soul_stone.network.BetterSoulStoneSyncing;
 import com.csdy.better_soul_stone.network.packet.LeftClickEmptyPacket;
 import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.*;
+import net.minecraft.world.Container;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
@@ -175,15 +180,25 @@ public class SoulStoneEventHandler {
         }
     }
 
-//    @SubscribeEvent
-//    public static void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
-//        Player player = event.getEntity();
-//        if (player == null || player.level().isClientSide) return;
-//
-//        ItemStack crafted = event.getCrafting();
-//        Recipe<?> recipe = event.getRecipe();
-//        ISoulStoneOnCraft.dispatchCraftTrigger(player, crafted, recipe);
-//    }
+    @SubscribeEvent
+    public static void onItemCrafted(PlayerEvent.ItemCraftedEvent event) {
+        Player player = event.getEntity();
+        if (player == null || player.level().isClientSide) return;
+
+        ItemStack crafted = event.getCrafting();
+        Container craftMatrix = event.getInventory();
+
+        Recipe<?> recipe = null;
+        if (craftMatrix instanceof CraftingContainer craftingContainer) {
+            recipe = player.level().getRecipeManager()
+                    .getRecipeFor(RecipeType.CRAFTING, craftingContainer, player.level())
+                    .orElse(null);
+        }
+
+        if (recipe != null) {
+            ISoulStoneOnCraft.dispatchCraftTrigger(player, crafted, recipe);
+        }
+    }
 
     @SubscribeEvent
     public static void onChat(ServerChatEvent event) {

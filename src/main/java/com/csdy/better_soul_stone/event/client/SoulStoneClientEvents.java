@@ -103,8 +103,8 @@ public class SoulStoneClientEvents {
             poseStack.translate(Math.cos(currentAngle) * radius, yOffset, Math.sin(currentAngle) * radius);
             poseStack.mulPose(Axis.YP.rotationDegrees(time * 50.0F));
 
-            float scale = 2F;
-            poseStack.scale(scale, scale, scale);
+            float baseScale = 2.0F;
+            poseStack.scale(baseScale, baseScale, baseScale);
 
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
@@ -234,48 +234,4 @@ public class SoulStoneClientEvents {
         }
     }
 
-//    @SubscribeEvent
-//    public static void onRenderTooltip(RenderTooltipEvent.Pre event) {
-//        ItemStack stack = event.getItemStack();
-//        if (!(stack.getItem() instanceof ISpecialTooltipRendering special)) return;
-//        if (!special.shouldRenderIconBackground(stack)) return;
-//
-//        GuiGraphics graphics = event.getGraphics();
-//
-//        // 【关键修复 3】：绝对不要用鼠标实际坐标算位置！
-//        // Tooltip 事件自带 x 和 y 坐标，这是经过 GUI 缩放处理的安全坐标
-//        int x = event.getX();
-//        int y = event.getY();
-//
-//        graphics.pose().pushPose();
-//
-//        // 开启混合并把深度往后推，确保它在字体的“下层”
-//        RenderSystem.enableBlend();
-//        RenderSystem.defaultBlendFunc();
-//        // 不要关 DepthTest，用 translate 的 Z 轴来控制层级
-//        graphics.pose().translate(x - 8, y - 8, -50);
-//
-//        // 中心点偏移（为了让旋转围绕中心点）
-//        float targetSize = 32.0f; // 我们画个 32x32 的背景
-//        graphics.pose().translate(targetSize / 2f, targetSize / 2f, 0);
-//
-//        // 旋转动画
-//        float time = (float) (System.currentTimeMillis() % 10000L) / 1000.0F;
-//        graphics.pose().mulPose(Axis.ZP.rotationDegrees(time * 36.0F));
-//
-//        // 移回去
-//        graphics.pose().translate(-targetSize / 2f, -targetSize / 2f, 0);
-//
-//        // 渲染贴图 (半透明红色为例，你可以自己改颜色或改回 1.0F)
-//        graphics.setColor(1.0F, 0.5F, 0.5F, 0.6F);
-//
-//        // blit 用法：材质，屏幕X，屏幕Y，材质U偏移，材质V偏移，绘制宽，绘制高，材质总宽，材质总高
-//        graphics.blit(TOOLTIP_BG, 0, 0, 0, 0, (int)targetSize, (int)targetSize, 16, 16);
-//
-//        // 【关键修复 4】：画完立刻还原颜色，否则整个 GUI 里的字和原版物品都会变红变透明！
-//        graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-//        RenderSystem.disableBlend();
-//
-//        graphics.pose().popPose();
-//    }
 }

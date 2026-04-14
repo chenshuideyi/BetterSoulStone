@@ -1,7 +1,10 @@
 package com.csdy.better_soul_stone.data.provider;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
+import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 
@@ -23,19 +26,43 @@ public class ItemTexturesProvider extends ItemModelProvider {
                 .filter(entry -> entry.getValue() instanceof BaseSoulStone)
                 .forEach(entry -> {
                     Item item = entry.getValue();
-                    String name = entry.getKey().location().getPath();
 
-                    // 生成{"parent": "item/generated", "textures": {"layer0": "modid:item/name"}}
-                    // 对应src/main/resources/assets/better_soul_stone/textures/item/name.png
-                    simpleItem(item);
+                    SoulStoneItems annotation = item.getClass().getAnnotation(SoulStoneItems.class);
+
+                    if (annotation != null && !Float.isNaN(annotation.scale())) {
+                        bigItem(item, annotation.scale());
+                    }
+
+                    else {
+                        simpleItem(item);
+                    }
+
                 });
     }
 
     private void simpleItem(Item item) {
         String name = ForgeRegistries.ITEMS.getKey(item).getPath();
+        withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/" + name));
+    }
 
-        withExistingParent(name, ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(BetterSoulStoneModMain.MODID, "item/" + name))
-        ;
+    private void bigItem(Item item, float scale) {
+        String name = ForgeRegistries.ITEMS.getKey(item).getPath();
+
+        ItemModelBuilder builder = withExistingParent(name, mcLoc("item/generated"))
+                .texture("layer0", modLoc("item/" + name));
+
+        // 这对应 JSON 中的 "display": { "gui": { "scale": [s, s, s] } }
+        builder.transforms()
+                .transform(ItemDisplayContext.GUI)
+                .scale(scale, scale, scale)
+                .translation(0, 0, 0)
+                .rotation(0, 0, 0)
+                .end();
+
+        builder.transforms()
+                .transform(ItemDisplayContext.GUI).scale(scale).end()
+                .transform(ItemDisplayContext.GROUND).scale(scale).end();
+
     }
 }
