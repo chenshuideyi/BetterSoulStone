@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ATA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:ancient_debris"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_nether_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:debris_ore_soul_stone",
+    "count": 1
+  }
+}

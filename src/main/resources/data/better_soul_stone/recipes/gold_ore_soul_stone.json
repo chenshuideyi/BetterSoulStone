@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BTB",
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:gold_ore"
+    },
+    "B": {
+      "item": "minecraft:deepslate_gold_ore"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:gold_ore_soul_stone",
+    "count": 1
+  }
+}

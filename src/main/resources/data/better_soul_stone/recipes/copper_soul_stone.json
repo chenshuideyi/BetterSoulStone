@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BCD",
+    "ATA",
+    "EFG"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:lightning_rod"
+    },
+    "B": {
+      "item": "minecraft:exposed_copper"
+    },
+    "C": {
+      "item": "minecraft:waxed_oxidized_copper"
+    },
+    "D": {
+      "item": "minecraft:waxed_exposed_copper"
+    },
+    "E": {
+      "item": "minecraft:oxidized_copper"
+    },
+    "F": {
+      "item": "minecraft:waxed_copper_block"
+    },
+    "G": {
+      "item": "minecraft:weathered_copper"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:copper_soul_stone",
+    "count": 1
+  }
+}

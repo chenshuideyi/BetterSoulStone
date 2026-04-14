@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BCD",
+    "ATA",
+    "ECG"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:redstone_block"
+    },
+    "B": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "minecraft:redstone_torch"
+    },
+    "D": {
+      "item": "minecraft:redstone_lamp"
+    },
+    "E": {
+      "item": "minecraft:repeater"
+    },
+    "G": {
+      "item": "minecraft:comparator"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:redstone_soul_stone",
+    "count": 1
+  }
+}

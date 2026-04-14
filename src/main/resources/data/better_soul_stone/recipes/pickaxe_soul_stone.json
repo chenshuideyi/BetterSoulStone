@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAC",
+    "ATA",
+    "DAE"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_pickaxe"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    },
+    "B": {
+      "item": "minecraft:golden_pickaxe"
+    },
+    "C": {
+      "item": "minecraft:diamond_pickaxe"
+    },
+    "D": {
+      "item": "minecraft:netherite_pickaxe"
+    },
+    "E": {
+      "item": "minecraft:stone_pickaxe"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:pickaxe_soul_stone",
+    "count": 1
+  }
+}

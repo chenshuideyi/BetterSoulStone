@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BTB",
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:emerald_block"
+    },
+    "B": {
+      "item": "minecraft:emerald"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:emerald_soul_stone",
+    "count": 1
+  }
+}

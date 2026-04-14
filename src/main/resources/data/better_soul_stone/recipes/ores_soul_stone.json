@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHI"
+  ],
+  "key": {
+    "A": {
+      "item": "better_soul_stone:emerald_ore_soul_stone"
+    },
+    "B": {
+      "item": "better_soul_stone:debris_ore_soul_stone"
+    },
+    "C": {
+      "item": "better_soul_stone:diamond_ore_soul_stone"
+    },
+    "D": {
+      "item": "better_soul_stone:lapis_ore_soul_stone"
+    },
+    "E": {
+      "item": "better_soul_stone:coal_ore_soul_stone"
+    },
+    "F": {
+      "item": "better_soul_stone:gold_ore_soul_stone"
+    },
+    "G": {
+      "item": "better_soul_stone:copper_ore_soul_stone"
+    },
+    "H": {
+      "item": "better_soul_stone:redstone_ore_soul_stone"
+    },
+    "I": {
+      "item": "better_soul_stone:iron_ore_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:ores_soul_stone",
+    "count": 1
+  }
+}

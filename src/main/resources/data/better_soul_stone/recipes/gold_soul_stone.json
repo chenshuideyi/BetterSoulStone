@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SAB",
+    "ATA",
+    "NAC"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:gold_ingot"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    },
+    "S": {
+      "item": "minecraft:bone"
+    },
+    "B": {
+      "item": "minecraft:rabbit_foot"
+    },
+    "N": {
+      "item": "minecraft:grass"
+    },
+    "C": {
+      "item": "minecraft:light_blue_dye"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:gold_soul_stone",
+    "count": 1
+  }
+}

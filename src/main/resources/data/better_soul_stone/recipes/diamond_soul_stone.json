@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ACA",
+    "BTB",
+    "ACA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:diamond_block"
+    },
+    "B": {
+      "item": "minecraft:diamond_horse_armor"
+    },
+    "C": {
+      "item": "minecraft:diamond"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:diamond_soul_stone",
+    "count": 1
+  }
+}

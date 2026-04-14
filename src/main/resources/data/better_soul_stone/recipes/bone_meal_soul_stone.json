@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAB",
+    "CTC",
+    "ACA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:bone_block"
+    },
+    "B": {
+      "item": "minecraft:bone_meal"
+    },
+    "C": {
+      "item": "minecraft:bone"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:bone_meal_soul_stone",
+    "count": 1
+  }
+}

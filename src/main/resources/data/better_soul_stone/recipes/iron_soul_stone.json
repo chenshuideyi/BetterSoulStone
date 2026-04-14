@@ -1,0 +1,38 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BCD",
+    "ATA",
+    "EFG"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_block"
+    },
+    "B": {
+      "item": "minecraft:bucket"
+    },
+    "C": {
+      "item": "minecraft:iron_horse_armor"
+    },
+    "D": {
+      "item": "minecraft:raw_iron"
+    },
+    "E": {
+      "item": "minecraft:iron_nugget"
+    },
+    "F": {
+      "item": "minecraft:anvil"
+    },
+    "G": {
+      "item": "minecraft:iron_ingot"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:iron_soul_stone",
+    "count": 1
+  }
+}

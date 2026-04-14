@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAC",
+    "ATA",
+    "DAE"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_chestplate"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    },
+    "B": {
+      "item": "minecraft:golden_chestplate"
+    },
+    "C": {
+      "item": "minecraft:diamond_chestplate"
+    },
+    "D": {
+      "item": "minecraft:netherite_chestplate"
+    },
+    "E": {
+      "item": "minecraft:chainmail_chestplate"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:armor_soul_stone",
+    "count": 1
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAC",
+    "ATA",
+    "DAE"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_axe"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    },
+    "B": {
+      "item": "minecraft:golden_axe"
+    },
+    "C": {
+      "item": "minecraft:diamond_axe"
+    },
+    "D": {
+      "item": "minecraft:netherite_axe"
+    },
+    "E": {
+      "item": "minecraft:stone_axe"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:axe_soul_stone",
+    "count": 1
+  }
+}

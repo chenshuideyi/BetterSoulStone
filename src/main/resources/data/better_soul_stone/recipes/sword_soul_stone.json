@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAC",
+    "ATA",
+    "DAE"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:iron_sword"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    },
+    "B": {
+      "item": "minecraft:golden_sword"
+    },
+    "C": {
+      "item": "minecraft:diamond_sword"
+    },
+    "D": {
+      "item": "minecraft:netherite_sword"
+    },
+    "E": {
+      "item": "minecraft:stone_sword"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:sword_soul_stone",
+    "count": 1
+  }
+}

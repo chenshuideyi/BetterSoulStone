@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BTB",
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:copper_ore"
+    },
+    "B": {
+      "item": "minecraft:deepslate_copper_ore"
+    },
+    "T": {
+      "item": "better_soul_stone:blank_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:copper_ore_soul_stone",
+    "count": 1
+  }
+}
