@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "BCD",
+    "BDC",
     "ATA",
-    "EFG"
+    "FAG"
   ],
   "key": {
     "A": {
@@ -16,16 +16,13 @@
       "item": "minecraft:iron_horse_armor"
     },
     "D": {
-      "item": "minecraft:raw_iron"
-    },
-    "E": {
-      "item": "minecraft:iron_nugget"
+      "item": "minecraft:carved_pumpkin"
     },
     "F": {
       "item": "minecraft:anvil"
     },
     "G": {
-      "item": "minecraft:iron_ingot"
+      "item": "minecraft:minecart"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

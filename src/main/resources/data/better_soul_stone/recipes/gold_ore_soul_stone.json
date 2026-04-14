@@ -7,10 +7,10 @@
   ],
   "key": {
     "A": {
-      "item": "minecraft:gold_ore"
+      "item": "minecraft:raw_gold"
     },
     "B": {
-      "item": "minecraft:deepslate_gold_ore"
+      "item": "forge:ores/gold"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

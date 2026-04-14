@@ -1,17 +1,22 @@
 package com.csdy.better_soul_stone.event;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
+import com.csdy.better_soul_stone.item.sponsor.PlayerVIISoulStone;
 import com.csdy.better_soul_stone.network.BetterSoulStoneSyncing;
 import com.csdy.better_soul_stone.network.packet.LeftClickEmptyPacket;
 import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
 import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.*;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.event.ServerChatEvent;
@@ -20,6 +25,7 @@ import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
 
 @Mod.EventBusSubscriber(modid = BetterSoulStoneModMain.MODID)
@@ -206,6 +212,43 @@ public class SoulStoneEventHandler {
         if (player == null || player.level().isClientSide) return;
 
         ISoulStoneOnChat.dispatchChatTrigger(player, event.getMessage());
+    }
+
+
+
+    @SubscribeEvent
+    public static void onPlayerFirstLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        Player player = event.getEntity();
+
+        CompoundTag persistentData = player.getPersistentData();
+        if (!persistentData.contains(Player.PERSISTED_NBT_TAG)) {
+            persistentData.put(Player.PERSISTED_NBT_TAG, new CompoundTag());
+        }
+        CompoundTag forgeData = persistentData.getCompound(Player.PERSISTED_NBT_TAG);
+
+        if (!forgeData.getBoolean("has_received_starter_item")) {
+
+            ResourceLocation itemId = ResourceLocation.fromNamespaceAndPath("better_soul_stone", "player_7_soul_stone");
+            Item item = ForgeRegistries.ITEMS.getValue(itemId);
+
+            if (item != null && item != Items.AIR) {
+                ItemStack starterItem = new ItemStack(item);
+
+                CompoundTag nbt = starterItem.getOrCreateTag();
+                nbt.putString("Source", "NewbieGift");
+                nbt.putInt("Level", 1);
+
+                if (!player.getInventory().add(starterItem)) {
+                    player.drop(starterItem, false);
+                }
+
+                forgeData.putBoolean("has_received_starter_item", true);
+                persistentData.put(Player.PERSISTED_NBT_TAG, forgeData);
+            } else {
+                // 只有在没找到物品时才打印警告，避免报错
+                BetterSoulStoneModMain.LOGGER.error("Not Found Item by Id {}", itemId);
+            }
+        }
     }
 
 }

@@ -2,6 +2,10 @@ package com.csdy.better_soul_stone.item.minecraft.player.creation.craft.forge.in
 
 import com.csdy.better_soul_stone.annotation.SoulStoneItems;
 import com.csdy.better_soul_stone.item.BaseSoulStone;
+import com.csdy.better_soul_stone.soul_stone.soul_stone_capability.ISoulStoneTick;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 @SoulStoneItems(
         id = "ingots_soul_stone",
@@ -18,8 +22,15 @@ import com.csdy.better_soul_stone.item.BaseSoulStone;
         },
         scale = 1.5f
 )
-public class IngotsSoulStone extends BaseSoulStone {
+public class IngotsSoulStone extends BaseSoulStone implements ISoulStoneTick {
 
-
+    @Override
+    public void onTick(ItemStack stack, LivingEntity entity, Level level) {
+        if (level.isClientSide) return;
+        if (entity.isOnFire()) {
+            entity.clearFire();
+            entity.heal(5);
+        }
+    }
 
 }

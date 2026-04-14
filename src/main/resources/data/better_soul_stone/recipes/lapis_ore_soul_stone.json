@@ -1,16 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "ABA",
-    "BTB",
-    "ABA"
+    "AAA",
+    "ATA",
+    "AAA"
   ],
   "key": {
     "A": {
-      "item": "minecraft:lapis_ore"
-    },
-    "B": {
-      "item": "minecraft:deepslate_lapis_ore"
+      "item": "forge:ores/lapis"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

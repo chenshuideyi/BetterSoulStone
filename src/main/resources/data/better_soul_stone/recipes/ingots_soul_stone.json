@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGC",
+    "DRE",
+    "LBN"
+  ],
+  "key": {
+    "I": {
+      "item": "better_soul_stone:iron_soul_stone"
+    },
+    "G": {
+      "item": "better_soul_stone:gold_soul_stone"
+    },
+    "C": {
+      "item": "better_soul_stone:copper_soul_stone"
+    },
+    "D": {
+      "item": "better_soul_stone:diamond_soul_stone"
+    },
+    "R": {
+      "item": "better_soul_stone:redstone_soul_stone"
+    },
+    "E": {
+      "item": "better_soul_stone:emerald_soul_stone"
+    },
+    "L": {
+      "item": "better_soul_stone:lapis_soul_stone"
+    },
+    "B": {
+      "item": "better_soul_stone:coal_soul_stone"
+    },
+    "N": {
+      "item": "better_soul_stone:debris_soul_stone"
+    }
+  },
+  "result": {
+    "item": "better_soul_stone:ingots_soul_stone",
+    "count": 1
+  }
+}

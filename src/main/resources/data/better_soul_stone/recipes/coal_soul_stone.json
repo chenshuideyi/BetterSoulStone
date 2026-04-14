@@ -1,13 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "AAA",
-    "ATA",
-    "AAA"
+    "ABA",
+    "BTB",
+    "ABA"
   ],
   "key": {
     "A": {
       "item": "minecraft:coal_block"
+    },
+    "B": {
+      "item": "minecraft:bone"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

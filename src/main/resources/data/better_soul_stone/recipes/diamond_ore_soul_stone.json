@@ -7,10 +7,10 @@
   ],
   "key": {
     "A": {
-      "item": "minecraft:diamond_ore"
+      "item": "minecraft:diamond"
     },
     "B": {
-      "item": "minecraft:deepslate_diamond_ore"
+      "item": "forge:ores/diamond"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

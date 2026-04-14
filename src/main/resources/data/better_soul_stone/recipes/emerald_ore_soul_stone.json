@@ -7,10 +7,10 @@
   ],
   "key": {
     "A": {
-      "item": "minecraft:emerald_ore"
+      "item": "minecraft:emerald"
     },
     "B": {
-      "item": "minecraft:deepslate_emerald_ore"
+      "tag": "forge:ores/emerald"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

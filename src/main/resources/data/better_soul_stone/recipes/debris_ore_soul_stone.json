@@ -1,12 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "AAA",
-    "ATA",
-    "AAA"
+    "ABA",
+    "BTB",
+    "ABA"
   ],
   "key": {
     "A": {
+      "item": "minecraft:basalt"
+    },
+    "B": {
       "item": "minecraft:ancient_debris"
     },
     "T": {
