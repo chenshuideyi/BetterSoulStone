@@ -10,7 +10,7 @@
       "item": "minecraft:coal"
     },
     "B": {
-      "item": "forge:ores/coal"
+      "tag": "forge:ores/coal"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

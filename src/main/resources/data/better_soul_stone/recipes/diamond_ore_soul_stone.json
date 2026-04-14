@@ -10,7 +10,7 @@
       "item": "minecraft:diamond"
     },
     "B": {
-      "item": "forge:ores/diamond"
+      "tag": "forge:ores/diamond"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"

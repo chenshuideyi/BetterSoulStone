@@ -10,7 +10,7 @@
       "item": "minecraft:raw_copper"
     },
     "B": {
-      "item": "forge:ores/copper"
+      "tag": "forge:ores/copper"
     },
     "T": {
       "item": "better_soul_stone:blank_soul_stone"
