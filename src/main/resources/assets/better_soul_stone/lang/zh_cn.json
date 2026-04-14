@@ -32,6 +32,16 @@
   "item.better_soul_stone.debris_ore_soul_stone": "残骸魂石",
   "item.better_soul_stone.ores_soul_stone": "矿石之魂",
 
+  "item.better_soul_stone.coal_soul_stone": "煤魂石",
+  "item.better_soul_stone.copper_soul_stone": "铜魂石",
+  "item.better_soul_stone.iron_soul_stone": "铁魂石",
+  "item.better_soul_stone.gold_soul_stone": "金魂石",
+  "item.better_soul_stone.diamond_soul_stone": "钻石魂石",
+  "item.better_soul_stone.emerald_soul_stone": "绿宝石魂石",
+  "item.better_soul_stone.lapis_soul_stone": "青金石魂石",
+  "item.better_soul_stone.redstone_soul_stone": "红石魂石",
+  "item.better_soul_stone.debris_soul_stone": "残骸魂石",
+  "item.better_soul_stone.ingots_soul_stone": "矿物之魂",
 
   "item.better_soul_stone.diamond_soul_stone": "钻石魂石",
 
@@ -77,7 +87,16 @@
   "flavor.better_soul_stone.debris_ore_soul_stone": "爆破挖矿享受者",
   "flavor.better_soul_stone.ores_soul_stone": "“世界即是矿床，而我负责将其打包。”",
 
+  "flavor.better_soul_stone.coal_soul_stone": "能超进化成钻石",
+  "flavor.better_soul_stone.copper_soul_stone": "我们已将这诅咒，化为了力量",
+  "flavor.better_soul_stone.iron_soul_stone": "铁屁股",
+  "flavor.better_soul_stone.gold_soul_stone": "小舞姐，真的值得吗",
   "flavor.better_soul_stone.diamond_soul_stone": "高玩的象征！",
+  "flavor.better_soul_stone.emerald_soul_stone": "多出来的一份，就当关税了",
+  "flavor.better_soul_stone.lapis_soul_stone": "这是匠魂2？",
+  "flavor.better_soul_stone.redstone_soul_stone": "生电杀手",
+  "flavor.better_soul_stone.debris_soul_stone": "真骸不怕火炼",
+  "flavor.better_soul_stone.ingots_soul_stone": "“地脉之力汇聚与此”",
 
   "flavor.better_soul_stone.bone_meal_soul_stone": "农夫最爱",
 
@@ -114,7 +133,16 @@
   "text.better_soul_stone.debris_ore_soul_stone": "挖掘下界岩或玄武岩会掉落床",
   "text.better_soul_stone.ores_soul_stone": "拥有所有矿石魂石的能力，指向原矿时将其精炼为对应的矿物块",
 
+  "text.better_soul_stone.coal_soul_stone": "好好玩就有钻石拿！",
+  "text.better_soul_stone.copper_soul_stone": "闪电不会伤害你，还会修复你的护甲",
+  "text.better_soul_stone.iron_soul_stone": "减免来自你背后的伤害",
+  "text.better_soul_stone.gold_soul_stone": "每天最多使用三次，抵挡住致死的伤害",
   "text.better_soul_stone.diamond_soul_stone": "伤害提升500%，受到伤害后该效果被禁用24分钟",
+  "text.better_soul_stone.emerald_soul_stone": "与村民交易会获得双倍物品",
+  "text.better_soul_stone.lapis_soul_stone": "获得时运3，抢夺3",
+  "text.better_soul_stone.redstone_soul_stone": "充能脚底下的方块",
+  "text.better_soul_stone.debris_soul_stone": "免疫火焰",
+  "text.better_soul_stone.ingots_soul_stone": "拥有所有矿物魂石的能力",
 
   "text.better_soul_stone.bone_meal_soul_stone": "双击下蹲释放自己,催熟周围植物",
 

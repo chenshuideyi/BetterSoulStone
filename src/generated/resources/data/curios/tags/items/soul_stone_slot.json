@@ -69,6 +69,10 @@
       "required": false
     },
     {
+      "id": "better_soul_stone:ingots_soul_stone",
+      "required": false
+    },
+    {
       "id": "better_soul_stone:armor_soul_stone",
       "required": false
     },

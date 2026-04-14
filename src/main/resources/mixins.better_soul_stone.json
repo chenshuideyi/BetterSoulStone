@@ -5,6 +5,8 @@
   "package": "com.csdy.better_soul_stone.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "MerchantContainerAccessor",
+    "MixinMerchantResultSlot"
   ],
   "injectors": {
     "defaultRequire": 1
