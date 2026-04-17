@@ -16,8 +16,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
-import static com.csdy.better_soul_stone.util.SoulStoneUtil.CSDY_RANDOM;
-import static com.csdy.better_soul_stone.util.SoulStoneUtil.dropItemAt;
 
 @SoulStoneItems(id = "gold_soul_stone")
 public class GoldSoulStone extends BaseSoulStone implements ISoulStoneLivingHurt, ISoulStoneDailyLimit {

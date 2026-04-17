@@ -34,7 +34,9 @@ import java.util.function.Consumer;
                 "redstone_ore_soul_stone",
                 "debris_ore_soul_stone"
         },
-        scale = 1.5f
+        scale = 1.5f,
+        chance = 1,
+        droppedBy = "minecraft:zombie"
 )
 public class OresSoulStone extends BaseSoulStone implements ISoulStoneHover {
 

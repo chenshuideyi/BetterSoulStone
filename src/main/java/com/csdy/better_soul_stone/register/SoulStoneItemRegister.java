@@ -2,11 +2,15 @@ package com.csdy.better_soul_stone.register;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
 import com.csdy.better_soul_stone.annotation.SoulStoneItems;
+import com.csdy.better_soul_stone.item.BaseSoulStone;
+import com.csdy.better_soul_stone.item.minecraft.DisabledSoulStone;
+import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneDropManager;
 import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneManager;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,18 +38,28 @@ public class SoulStoneItemRegister {
 
                 SoulStoneItems annotation = clazz.getAnnotation(SoulStoneItems.class);
                 String[] requiredMods = annotation.requiredMod();
-                if (requiredMods.length > 0 && !Arrays.stream(requiredMods).allMatch(ModList.get()::isLoaded)) {
-                    continue;
-                }
+
+                boolean allModsLoaded = requiredMods.length == 0 ||
+                        Arrays.stream(requiredMods).allMatch(ModList.get()::isLoaded);
 
                 String registryId = annotation.id();
-                ITEMS.register(registryId, () -> {
+
+                RegistryObject<Item> registeredItem = ITEMS.register(registryId, () -> {
+                    if (!allModsLoaded) {
+                        return new DisabledSoulStone(requiredMods);
+                    }
                     try {
-                        return (Item) clazz.getDeclaredConstructor().newInstance();
+                        return (BaseSoulStone) clazz.getDeclaredConstructor().newInstance();
                     } catch (Exception e) {
-                        throw new RuntimeException("实例化魂石失败: " + registryId, e);
+                        return new DisabledSoulStone(requiredMods);
                     }
                 });
+
+                if (annotation.droppedBy().length > 0 && annotation.chance() > 0) {
+                    for (String mobId : annotation.droppedBy()) {
+                        SoulStoneDropManager.addEntry(mobId, registeredItem, annotation.chance());
+                    }
+                }
 
                 SoulStoneManager.markInterfaceAsActive(clazz);
 

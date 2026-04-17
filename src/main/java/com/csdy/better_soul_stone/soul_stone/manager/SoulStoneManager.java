@@ -20,9 +20,8 @@ import java.util.function.BiConsumer;
 public class SoulStoneManager {
 
     /**
-     * 核心记录类
      * logicItem: 真正实现接口的那个物品对象（可能是父级魂石）
-     * slotResult: 玩家当前装备的那个魂石堆栈信息
+     * slotResult: 当前装备的那个魂石堆栈信息
      */
     public record ActiveLogic(Object logicItem, SlotResult slotResult) {
     }

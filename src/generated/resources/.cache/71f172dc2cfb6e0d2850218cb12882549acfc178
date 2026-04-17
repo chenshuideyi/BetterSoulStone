@@ -1,4 +1,4 @@
-// 1.20.1	2026-04-14T15:21:35.6515153	Item Models: better_soul_stone
+// 1.20.1	2026-04-17T19:10:14.5214942	Item Models: better_soul_stone
 3bd9be46939061071dcdaef09ca46e5af915380f assets/better_soul_stone/models/item/armor_soul_stone.json
 616682d3865df5c809816d14ce6f09da90b856f8 assets/better_soul_stone/models/item/axe_soul_stone.json
 9d898c298cf498f52fb7ca820dad9995161b4152 assets/better_soul_stone/models/item/blank_absolute_soul_stone.json
@@ -37,3 +37,4 @@ ea02ba7dd1630a4562d98ed4aaa3b4322d704fa0 assets/better_soul_stone/models/item/re
 9d89954202a28b35bec276446c4208a2ab6142c6 assets/better_soul_stone/models/item/sword_soul_stone.json
 595c01d430b8b8adc00d80093696bd472968d9b6 assets/better_soul_stone/models/item/test_ex_soul_stone.json
 222f6947ceef71d86943aa62920ed2189029509f assets/better_soul_stone/models/item/test_soul_stone.json
+204934be6796fe09abc51ff96c222dd3822f3cf4 assets/better_soul_stone/models/item/xiao_wu_soul_stone.json

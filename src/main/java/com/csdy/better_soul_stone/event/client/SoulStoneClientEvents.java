@@ -70,6 +70,8 @@ public class SoulStoneClientEvents {
         LivingEntity entity = event.getEntity();
         if (entity == null || entity.isInvisible()) return;
 
+
+
         List<ItemStack> soulStones = SoulStoneUtil.getUniqueSoulStonesForRender(entity);
         if (soulStones.isEmpty()) return;
 
@@ -95,37 +97,44 @@ public class SoulStoneClientEvents {
 
             poseStack.pushPose();
 
+            // 1. 设置轨道的基本参数
             float angleOffset = (float) (i * Math.PI * 2.0 / soulStones.size());
-            float currentAngle = time + angleOffset;
-            float radius = 1.4F;
-            float yOffset = entity.getBbHeight() * 0.6F + (float) Math.sin(time * 2.0F + i) * 0.1F;
+            float currentAngle = time + angleOffset; // 随时间旋转的角度
+            float radius = 2.0F; // 轨道半径
 
-            poseStack.translate(Math.cos(currentAngle) * radius, yOffset, Math.sin(currentAngle) * radius);
+            // 2. 将中心点移动到生物腹部高度
+            float centerY = entity.getBbHeight() * 0.5F;
+            poseStack.translate(0, centerY, 0);
+
+            // 3. 核心：倾斜轨道平面
+            // 这里的 30.0F 就是倾斜角度，ZP 旋转让轨道“左高右低”，XP 旋转可以调节前后倾斜
+            poseStack.mulPose(Axis.ZP.rotationDegrees(30.0F));
+            poseStack.mulPose(Axis.XP.rotationDegrees(15.0F));
+
+            // 4. 在倾斜后的平面上进行圆周运动
+            // 加上简单的 Y 轴上下漂浮，模拟不稳定的光晕感
+            float hover = (float) Math.sin(time * 2.0F + i) * 0.05F;
+            poseStack.translate(Math.cos(currentAngle) * radius, hover, Math.sin(currentAngle) * radius);
+
+            // 5. 让物品自转：为了更有黑洞的感觉，可以让它始终朝向中心或随轨道旋转
             poseStack.mulPose(Axis.YP.rotationDegrees(time * 50.0F));
 
+            // 6. 渲染部分（保持你原有的双层渲染逻辑）
             float baseScale = 2.0F;
             poseStack.scale(baseScale, baseScale, baseScale);
 
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
 
-            float glowAlpha = 0.3F;
-
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, glowAlpha);
+            // 第一层：外层淡光晕
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.3F);
             renderStaticItem(stack, maxLight, poseStack, bufferSource, entity);
+            if (bufferSource instanceof MultiBufferSource.BufferSource sb) sb.endBatch();
 
-            if (bufferSource instanceof MultiBufferSource.BufferSource sb) {
-                sb.endBatch();
-            }
-
-
+            // 第二层：核心实体
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
-
             renderStaticItem(stack, maxLight, poseStack, bufferSource, entity);
-
-            if (bufferSource instanceof MultiBufferSource.BufferSource sb) {
-                sb.endBatch();
-            }
+            if (bufferSource instanceof MultiBufferSource.BufferSource sb) sb.endBatch();
 
             poseStack.popPose();
         }
@@ -139,6 +148,7 @@ public class SoulStoneClientEvents {
         ItemStack stack = event.getItemStack();
         if (!(stack.getItem() instanceof ISpecialTooltipRendering special)) return;
         if (!special.shouldRenderIconBackground(stack)) return;
+
 
         GuiGraphics graphics = event.getGraphics();
         Minecraft mc = Minecraft.getInstance();

@@ -28,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.minecraftforge.fml.ModList;
 import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -44,6 +45,13 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
 
     protected final boolean isSponsor;
     protected final String sponsorName;
+    private boolean isDisabled = false;
+    private String[] missingMods = new String[0];
+
+    public void setDisabled(String[] mods) {
+        this.isDisabled = true;
+        this.missingMods = mods;
+    }
 
     public BaseSoulStone() {
         this(new Item.Properties().stacksTo(1).fireResistant());
@@ -86,11 +94,14 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
 
     @Override
     public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+        if (isDisabled) return false;
         return CuriosApi.getCuriosHelper().findFirstCurio(slotContext.entity(), stack.getItem()).isEmpty();
     }
 
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
+        if (isDisabled) return LinkedHashMultimap.create();
+
         Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
 
         LivingEntity entity = slotContext.entity();
@@ -149,10 +160,28 @@ public abstract class BaseSoulStone extends Item implements ICurioItem, ISpecial
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
+        if (isDisabled) return;
+
         String flavorKey = "flavor.better_soul_stone." + getSoulStoneId();
+        SoulStoneItems anno = this.getClass().getAnnotation(SoulStoneItems.class);
         if (I18n.exists(flavorKey)) {
             tooltip.add(Component.translatable(flavorKey).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
         }
+
+        if (anno != null && anno.requiredMod().length > 0) {
+            tooltip.add(Component.translatable("tooltip.better_soul_stone.mod_integration")
+                    .withStyle(ChatFormatting.BLUE, ChatFormatting.BOLD));
+
+            for (String modId : anno.requiredMod()) {
+                String modName = ModList.get().getModContainerById(modId)
+                        .map(container -> container.getModInfo().getDisplayName())
+                        .orElse(modId);
+
+                tooltip.add(Component.literal("  • ").withStyle(ChatFormatting.DARK_AQUA)
+                        .append(Component.literal(modName).withStyle(ChatFormatting.AQUA)));
+            }
+        }
+
         if (isSponsor && sponsorName != null) {
             tooltip.add(Component.translatable("better_soul_stone.sponsor.format", sponsorName).withStyle(ChatFormatting.GOLD));
         }

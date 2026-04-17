@@ -22,5 +22,8 @@ public @interface SoulStoneItems {
 
     float scale() default Float.NaN;
 
+    String[] droppedBy() default {};
+
+    double chance() default 0.0;
 
 }

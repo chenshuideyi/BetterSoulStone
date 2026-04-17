@@ -29,6 +29,10 @@
       "required": false
     },
     {
+      "id": "better_soul_stone:xiao_wu_soul_stone",
+      "required": false
+    },
+    {
       "id": "better_soul_stone:minecraft_soul_stone",
       "required": false
     },

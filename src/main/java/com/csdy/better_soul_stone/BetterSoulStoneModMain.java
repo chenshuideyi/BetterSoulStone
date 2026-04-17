@@ -39,9 +39,11 @@ public class BetterSoulStoneModMain {
         SoulStoneItemRegister.ITEMS.register(bus);
         BetterSoulStoneTab.CREATIVE_MODE_TABS.register(bus);
 //        bus.addListener(SoulStoneClientEvents::onRegisterTooltipFactories);
-
+//        bus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
     }
+
+
 
 //    @SubscribeEvent
 //    public static void onFMLCommonSetup(FMLCommonSetupEvent event) {

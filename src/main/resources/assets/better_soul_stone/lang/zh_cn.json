@@ -3,6 +3,9 @@
   "curios.identifier.soul_stone_slot": "魂石栏",
   "curios.modifiers.soul_stone_slot": "佩戴在魂石栏时",
   "better_soul_stone.sponsor.format": "★赞助者 %s 的提案",
+  "tooltip.better_soul_stone.disabled_title": "[!]联动模组未安装",
+  "tooltip.better_soul_stone.disabled_desc": "需要安装上述模组以解锁力量",
+
 
   "--- 基础容器物品 ---": "",
   "item.better_soul_stone.blank_soul_stone": "空普通魂石",
@@ -48,6 +51,12 @@
   "item.better_soul_stone.bone_meal_soul_stone": "骨粉魂石",
 
   "item.better_soul_stone.minecraft_soul_stone": "Minecraft之魂",
+
+  "--- goety联动 ---": "",
+  "item.better_soul_stone.xiao_wu_soul_stone": "柔骨兔魂石",
+  "flavor.better_soul_stone.xiao_wu_soul_stone": "复活吧！！！我的爱人！！！",
+  "text.better_soul_stone.xiao_wu_soul_stone": "双击移动键发动魂骨技能:瞬移",
+
 
 
 

@@ -140,10 +140,8 @@ public class SoulStoneUtil {
     }
 
     public static void repairAllArmor(LivingEntity entity, int repairAmount) {
-        // 遍历盔甲栏（通常是 4 格）
         entity.getArmorSlots().forEach(armorStack -> {
             if (!armorStack.isEmpty() && armorStack.isDamageableItem()) {
-                // setDamage 减去修复值，即增加耐久（0 为满耐久）
                 int newDamage = Math.max(0, armorStack.getDamageValue() - repairAmount);
                 armorStack.setDamageValue(newDamage);
             }
