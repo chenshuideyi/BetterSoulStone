@@ -1,0 +1,10 @@
+{
+  "entities": [
+    "minecraft:player",
+    "minecraft:wither",
+    "minecraft:zombie"
+  ],
+  "slots": [
+    "soul_stone_slot"
+  ]
+}

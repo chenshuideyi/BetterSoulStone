@@ -2,7 +2,6 @@ package com.csdy.better_soul_stone.event;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
 import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneDropManager;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -10,7 +9,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
-import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 @Mod.EventBusSubscriber(modid = BetterSoulStoneModMain.MODID)
 public class SoulStoneEntityEvents {
@@ -25,10 +23,8 @@ public class SoulStoneEntityEvents {
 
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
 
-        if (livingEntity instanceof net.minecraft.world.entity.decoration.ArmorStand) return;
-
-        CompoundTag persistentData = livingEntity.getPersistentData();
-        if (persistentData.getBoolean(NBT_CHECKED_FLAG)) return;
+//        CompoundTag persistentData = livingEntity.getPersistentData();
+//        if (persistentData.getBoolean(NBT_CHECKED_FLAG)) return;
 
         String entityName = ForgeRegistries.ENTITY_TYPES.getKey(livingEntity.getType()).toString();
         // BetterSoulStoneModMain.LOGGER.info("正在检查生物生成: " + entityName);
@@ -37,22 +33,26 @@ public class SoulStoneEntityEvents {
         ItemStack stoneToEquip = SoulStoneDropManager.rollForMob(livingEntity);
 
         if (!stoneToEquip.isEmpty()) {
-            persistentData.putBoolean(NBT_CHECKED_FLAG, true);
+
+            BetterSoulStoneModMain.LOGGER.info("Need Equip: " + stoneToEquip);
+
+//            persistentData.putBoolean(NBT_CHECKED_FLAG, true);
 
             CuriosApi.getCuriosInventory(livingEntity).ifPresent(handler -> {
-                handler.getStacksHandler("soul_stone").ifPresentOrElse(soulHandler -> {
-                    if (soulHandler.getSlots() <= 0) {
-                        soulHandler.grow(1);
-                    }
 
-                    soulHandler.getStacks().setStackInSlot(0, stoneToEquip);
+                var stacksHandler = handler.getStacksHandler("soul_stone_slot").orElse(null);
 
-                    BetterSoulStoneModMain.LOGGER.info("!!! [Success] Living: {} Add: {}",
-                            entityName, stoneToEquip.getHoverName().getString());
+                if (stacksHandler == null) {
+                    BetterSoulStoneModMain.LOGGER.warn("Entity {} Has No soul_stone_slot", entityName);
+                    return;
+                }
 
-                }, () -> {
-                    BetterSoulStoneModMain.LOGGER.error("!!! [Failed] living: {} err", entityName);
-                });
+                if (stacksHandler.getSlots() <= 0) {
+                    stacksHandler.grow(1);
+                }
+
+                stacksHandler.getStacks().setStackInSlot(0, stoneToEquip);
+                BetterSoulStoneModMain.LOGGER.info("!!! [Success] Living: {} Add: {}", entityName, stoneToEquip.getHoverName().getString());
             });
         }
     }

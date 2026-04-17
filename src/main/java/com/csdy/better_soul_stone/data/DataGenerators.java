@@ -1,10 +1,7 @@
 package com.csdy.better_soul_stone.data;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
-import com.csdy.better_soul_stone.data.provider.CuriosSlotProvider;
-import com.csdy.better_soul_stone.data.provider.ItemTexturesProvider;
-import com.csdy.better_soul_stone.data.provider.SoulStoneRecipeProvider;
-import com.csdy.better_soul_stone.data.provider.SoulStoneTagsProvider;
+import com.csdy.better_soul_stone.data.provider.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -36,6 +33,9 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(),
                 new SoulStoneRecipeProvider(packOutput));
+
+        generator.addProvider(event.includeServer(),
+                new CuriosEntitySlotProvider(packOutput,event));
 
     }
 }
