@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "better_soul_stone:zombie_soul_stone"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "better_soul_stone:zombie_soul_stone"
+  }
+}

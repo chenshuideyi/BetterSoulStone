@@ -5,7 +5,8 @@
   "better_soul_stone.sponsor.format": "★赞助者 %s 的提案",
   "tooltip.better_soul_stone.disabled_title": "[!]联动模组未安装",
   "tooltip.better_soul_stone.disabled_desc": "需要安装上述模组以解锁力量",
-
+  "tooltip.better_soul_stone.mod_integration": "已安装联动模组",
+  "tooltip.better_soul_stone.awakened_title": "§6§l唯一存在",
 
   "--- 基础容器物品 ---": "",
   "item.better_soul_stone.blank_soul_stone": "空普通魂石",
@@ -46,9 +47,12 @@
   "item.better_soul_stone.debris_soul_stone": "残骸魂石",
   "item.better_soul_stone.ingots_soul_stone": "矿物之魂",
 
-  "item.better_soul_stone.diamond_soul_stone": "钻石魂石",
-
   "item.better_soul_stone.bone_meal_soul_stone": "骨粉魂石",
+
+  "item.better_soul_stone.creeper_soul_stone": "苦力怕魂石",
+  "item.better_soul_stone.zombie_soul_stone": "僵尸魂石",
+  "item.better_soul_stone.skeleton_soul_stone": "骷髅魂石",
+  "item.better_soul_stone.wither_soul_stone": "凋零魂石",
 
   "item.better_soul_stone.minecraft_soul_stone": "Minecraft之魂",
 
@@ -109,6 +113,13 @@
 
   "flavor.better_soul_stone.bone_meal_soul_stone": "农夫最爱",
 
+  "flavor.better_soul_stone.creeper_soul_stone": "神风",
+  "flavor.better_soul_stone.zombie_soul_stone": "食腐者",
+  "flavor.better_soul_stone.skeleton_soul_stone": "基岩版小白",
+  "flavor.better_soul_stone.wither_soul_stone": "不是和她魂石",
+
+
+
   "flavor.better_soul_stone.minecraft_soul_stone": "Notch:移除了herobrime MoJang:移除了Notch",
 
 
@@ -154,6 +165,12 @@
   "text.better_soul_stone.ingots_soul_stone": "拥有所有矿物魂石的能力，吞食你身上的火焰恢复生命",
 
   "text.better_soul_stone.bone_meal_soul_stone": "双击下蹲释放自己,催熟周围植物",
+
+  "text.better_soul_stone.creeper_soul_stone": "获得速度2，死亡后自爆",
+  "text.better_soul_stone.zombie_soul_stone": "你吃辣条不用配牛奶，并且有额外治疗效果！",
+  "text.better_soul_stone.skeleton_soul_stone": "你的箭更快",
+  "text.better_soul_stone.wither_soul_stone": "对攻击你的生物造成凋零，左键空气发射一个凋零骷髅头",
+  "text.better_soul_stone.wither_soul_stone1": "死亡时掉落三个凋零骷髅头",
 
   "text.better_soul_stone.minecraft_soul_stone": "将所有魂石的力量玩弄于股掌之间，是“玩家”，“世界”与“Minecraft”至高无上的特权",
   "text.better_soul_stone.minecraft_soul_stone1": "未完成，尽请期待...",

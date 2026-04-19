@@ -12,11 +12,11 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public interface ISoulStoneLeftClick extends ISoulStoneCapability {
 
-    void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event, Player player, Level level, BlockPos pos, BlockState state, ItemStack stack);
+    default void onLeftClickBlock(PlayerInteractEvent.LeftClickBlock event, Player player, Level level, BlockPos pos, BlockState state, ItemStack stack){};
 
-    void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event, Player player, Level level, ItemStack stack);
+    default void onLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event, Player player, Level level, ItemStack stack){};
 
-    void onLeftClickEntity(AttackEntityEvent event, Player player, Entity target, ItemStack stack);
+    default void onLeftClickEntity(AttackEntityEvent event, Player player, Entity target, ItemStack stack){};
 
     static void dispatchLeftClickEntity(AttackEntityEvent event) {
         SoulStoneManager.forEachLogic(event.getEntity(), ISoulStoneLeftClick.class, (logic, stack) ->

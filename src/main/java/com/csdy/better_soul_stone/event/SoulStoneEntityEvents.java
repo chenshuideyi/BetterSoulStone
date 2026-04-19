@@ -2,6 +2,7 @@ package com.csdy.better_soul_stone.event;
 
 import com.csdy.better_soul_stone.BetterSoulStoneModMain;
 import com.csdy.better_soul_stone.soul_stone.manager.SoulStoneDropManager;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -23,8 +24,8 @@ public class SoulStoneEntityEvents {
 
         if (!(event.getEntity() instanceof LivingEntity livingEntity)) return;
 
-//        CompoundTag persistentData = livingEntity.getPersistentData();
-//        if (persistentData.getBoolean(NBT_CHECKED_FLAG)) return;
+        CompoundTag persistentData = livingEntity.getPersistentData();
+        if (persistentData.getBoolean(NBT_CHECKED_FLAG)) return;
 
         String entityName = ForgeRegistries.ENTITY_TYPES.getKey(livingEntity.getType()).toString();
         // BetterSoulStoneModMain.LOGGER.info("正在检查生物生成: " + entityName);
@@ -36,7 +37,7 @@ public class SoulStoneEntityEvents {
 
             BetterSoulStoneModMain.LOGGER.info("Need Equip: " + stoneToEquip);
 
-//            persistentData.putBoolean(NBT_CHECKED_FLAG, true);
+            persistentData.putBoolean(NBT_CHECKED_FLAG, true);
 
             CuriosApi.getCuriosInventory(livingEntity).ifPresent(handler -> {
 

@@ -20,7 +20,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-@SoulStoneItems(id = "test_soul_stone",chance = 1,droppedBy = "minecraft:wither")
+@SoulStoneItems(id = "test_soul_stone")
 public class TestSoulStone extends BaseSoulStone implements ISoulStoneOnAttacked, ISoulStoneEquipmentChange, ISoulStoneHit, ISoulStoneLeftClick, ISoulStoneDoubleClick {
 
 

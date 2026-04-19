@@ -13,6 +13,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +21,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.event.ServerChatEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.*;
 import net.minecraftforge.event.level.BlockEvent;
@@ -214,7 +216,12 @@ public class SoulStoneEventHandler {
         ISoulStoneOnChat.dispatchChatTrigger(player, event.getMessage());
     }
 
-
+    @SubscribeEvent
+    public static void onFoodFinish(LivingEntityUseItemEvent.Finish event) {
+        if (event.getItem().isEdible()) {
+            ISoulStoneOnEat.dispatchEatTrigger(event.getEntity(), event.getItem());
+        }
+    }
 
     @SubscribeEvent
     public static void onPlayerFirstLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
@@ -248,6 +255,22 @@ public class SoulStoneEventHandler {
                 // 只有在没找到物品时才打印警告，避免报错
                 BetterSoulStoneModMain.LOGGER.error("Not Found Item by Id {}", itemId);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingDeath(LivingDeathEvent event) {
+        if (event.getEntity() != null && event.getEntity().level().isClientSide) return; {
+            ISoulStoneOnDeath.dispatchDeathTrigger(event.getEntity(), event.getSource());
+        }
+    }
+
+    @SubscribeEvent
+    public static void onArrowJoinWorld(EntityJoinLevelEvent event) {
+        if (event.getLevel().isClientSide) return;
+
+        if (event.getEntity() instanceof AbstractArrow arrow && arrow.getOwner() instanceof LivingEntity shooter) {
+            ISoulStoneOnProjectile.dispatchProjectileTrigger(shooter, arrow);
         }
     }
 

@@ -13,10 +13,12 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -28,12 +30,14 @@ import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.joml.Matrix4f;
 
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = BetterSoulStoneModMain.MODID, value = Dist.CLIENT)
 public class SoulStoneClientEvents {
 
+    public static final String TITLE_KEY = "tooltip.better_soul_stone.awakened_title";
     private static final ResourceLocation TOOLTIP_BG = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/gui/light_dirt_background.png");
 
     private static void renderStaticItem(ItemStack stack, int light, PoseStack ms, MultiBufferSource buffer, LivingEntity entity) {
@@ -86,8 +90,8 @@ public class SoulStoneClientEvents {
             sb.endBatch();
         }
 
-        float time = (entity.level().getGameTime() + partialTicks) / 20.0F;
-        int maxLight = 15 << 4 | 15 << 20; // 满亮度
+        float time = (entity.level().getGameTime() + partialTicks) / 10.0F;
+        int maxLight = 15 << 4 | 15 << 20;
 
         for (int i = 0; i < soulStones.size(); i++) {
             ItemStack stack = soulStones.get(i);
@@ -97,41 +101,31 @@ public class SoulStoneClientEvents {
 
             poseStack.pushPose();
 
-            // 1. 设置轨道的基本参数
             float angleOffset = (float) (i * Math.PI * 2.0 / soulStones.size());
-            float currentAngle = time + angleOffset; // 随时间旋转的角度
-            float radius = 2.0F; // 轨道半径
+            float currentAngle = time + angleOffset;
+            float radius = 2.0F;
 
-            // 2. 将中心点移动到生物腹部高度
             float centerY = entity.getBbHeight() * 0.5F;
             poseStack.translate(0, centerY, 0);
 
-            // 3. 核心：倾斜轨道平面
-            // 这里的 30.0F 就是倾斜角度，ZP 旋转让轨道“左高右低”，XP 旋转可以调节前后倾斜
             poseStack.mulPose(Axis.ZP.rotationDegrees(30.0F));
             poseStack.mulPose(Axis.XP.rotationDegrees(15.0F));
 
-            // 4. 在倾斜后的平面上进行圆周运动
-            // 加上简单的 Y 轴上下漂浮，模拟不稳定的光晕感
             float hover = (float) Math.sin(time * 2.0F + i) * 0.05F;
             poseStack.translate(Math.cos(currentAngle) * radius, hover, Math.sin(currentAngle) * radius);
 
-            // 5. 让物品自转：为了更有黑洞的感觉，可以让它始终朝向中心或随轨道旋转
-            poseStack.mulPose(Axis.YP.rotationDegrees(time * 50.0F));
+            poseStack.mulPose(Axis.YP.rotationDegrees(time * 120.0F));
 
-            // 6. 渲染部分（保持你原有的双层渲染逻辑）
-            float baseScale = 2.0F;
+            float baseScale = 1.2F;
             poseStack.scale(baseScale, baseScale, baseScale);
 
             RenderSystem.enableBlend();
             RenderSystem.defaultBlendFunc();
 
-            // 第一层：外层淡光晕
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.3F);
             renderStaticItem(stack, maxLight, poseStack, bufferSource, entity);
             if (bufferSource instanceof MultiBufferSource.BufferSource sb) sb.endBatch();
 
-            // 第二层：核心实体
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
             renderStaticItem(stack, maxLight, poseStack, bufferSource, entity);
             if (bufferSource instanceof MultiBufferSource.BufferSource sb) sb.endBatch();
@@ -191,6 +185,44 @@ public class SoulStoneClientEvents {
     }
 
     @SubscribeEvent
+    public static void onRenderLivingNameTag(RenderLivingEvent.Post<LivingEntity, ?> event) {
+        LivingEntity entity = event.getEntity();
+        if (entity == null || entity.isInvisible()) return;
+
+        List<ItemStack> soulStones = SoulStoneUtil.getUniqueSoulStonesForRender(entity);
+        if (soulStones.isEmpty()) return;
+
+        Minecraft mc = Minecraft.getInstance();
+        Font font = mc.font;
+
+        MutableComponent fullText = Component.translatable(TITLE_KEY)
+                .append(" ")
+                .append(entity.getDisplayName());
+
+        PoseStack poseStack = event.getPoseStack();
+        poseStack.pushPose();
+
+        poseStack.translate(0.0D, entity.getBbHeight() + 0.5F, 0.0D);
+
+        poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
+        poseStack.scale(-0.025F, -0.025F, 0.025F);
+
+        Matrix4f matrix4f = poseStack.last().pose();
+
+        float bgOpacity = mc.options.getBackgroundOpacity(0.25F);
+        int backgroundColor = (int)(bgOpacity * 255.0F) << 24;
+
+        float textWidth = (float)(-font.width(fullText) / 2);
+        MultiBufferSource bufferSource = event.getMultiBufferSource();
+        int packedLight = event.getPackedLight();
+
+        font.drawInBatch(fullText, textWidth, 0, 553648127, false, matrix4f, bufferSource, Font.DisplayMode.SEE_THROUGH, backgroundColor, packedLight);
+        font.drawInBatch(fullText, textWidth, 0, -1, false, matrix4f, bufferSource, Font.DisplayMode.NORMAL, 0, packedLight);
+
+        poseStack.popPose();
+    }
+
+    @SubscribeEvent
     public static void onTooltipColor(RenderTooltipEvent.Color event) {
         ItemStack stack = event.getItemStack();
         if (stack.getItem() instanceof ISpecialTooltipRendering special && special.hasCustomToolTipGlint(stack)) {
@@ -243,5 +275,7 @@ public class SoulStoneClientEvents {
             }
         }
     }
+
+
 
 }

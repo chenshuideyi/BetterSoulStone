@@ -1,4 +1,4 @@
-// 1.20.1	2026-04-17T19:10:14.5214942	Item Models: better_soul_stone
+// 1.20.1	2026-04-19T14:31:16.3200339	Item Models: better_soul_stone
 3bd9be46939061071dcdaef09ca46e5af915380f assets/better_soul_stone/models/item/armor_soul_stone.json
 616682d3865df5c809816d14ce6f09da90b856f8 assets/better_soul_stone/models/item/axe_soul_stone.json
 9d898c298cf498f52fb7ca820dad9995161b4152 assets/better_soul_stone/models/item/blank_absolute_soul_stone.json
@@ -13,6 +13,7 @@ ebcada2d16dd06e3529031f446d86a649069c466 assets/better_soul_stone/models/item/co
 7a8db37bf6488f0ffc6d835a0719bba52936b908 assets/better_soul_stone/models/item/coal_soul_stone.json
 5948a4e1ca55e3590ac4fe1c25c0b6cfcfc62ff2 assets/better_soul_stone/models/item/copper_ore_soul_stone.json
 c3e93560fa702af4aea9b224b3c325b281975608 assets/better_soul_stone/models/item/copper_soul_stone.json
+56db8f4ce8f611c0c7c97884726310a7e1eae35c assets/better_soul_stone/models/item/creeper_soul_stone.json
 e89d31fab7ab79c629554a53de33e90877f4f0fb assets/better_soul_stone/models/item/csdy_soul_stone.json
 7594d78ee34d7fdb5cabed277f83689522587c5e assets/better_soul_stone/models/item/debris_ore_soul_stone.json
 55b194e09c656c18b43cd11f5e07f15a6d761708 assets/better_soul_stone/models/item/debris_soul_stone.json
@@ -34,7 +35,10 @@ be4b3bd475acd71678b919703d6fe295b42a3328 assets/better_soul_stone/models/item/pi
 80cf1578b23571d2e75ff52151ea105fdb9b6b36 assets/better_soul_stone/models/item/player_7_soul_stone.json
 926724c246c115b161f3caeb5e3f57791e18616d assets/better_soul_stone/models/item/redstone_ore_soul_stone.json
 ea02ba7dd1630a4562d98ed4aaa3b4322d704fa0 assets/better_soul_stone/models/item/redstone_soul_stone.json
+42e4bd3a04b4cfdd27170ca1ae24b6923be6af5a assets/better_soul_stone/models/item/skeleton_soul_stone.json
 9d89954202a28b35bec276446c4208a2ab6142c6 assets/better_soul_stone/models/item/sword_soul_stone.json
 595c01d430b8b8adc00d80093696bd472968d9b6 assets/better_soul_stone/models/item/test_ex_soul_stone.json
 222f6947ceef71d86943aa62920ed2189029509f assets/better_soul_stone/models/item/test_soul_stone.json
+4211b04a2d70869544ae4cc74eebd5605a8a5106 assets/better_soul_stone/models/item/wither_soul_stone.json
 204934be6796fe09abc51ff96c222dd3822f3cf4 assets/better_soul_stone/models/item/xiao_wu_soul_stone.json
+9180faa09be5a723a626fdd1090999da78c7389f assets/better_soul_stone/models/item/zombie_soul_stone.json

@@ -105,6 +105,22 @@
       "required": false
     },
     {
+      "id": "better_soul_stone:creeper_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:skeleton_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:wither_soul_stone",
+      "required": false
+    },
+    {
+      "id": "better_soul_stone:zombie_soul_stone",
+      "required": false
+    },
+    {
       "id": "better_soul_stone:coal_ore_soul_stone",
       "required": false
     },
