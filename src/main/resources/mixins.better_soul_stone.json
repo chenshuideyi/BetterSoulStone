@@ -3,6 +3,7 @@
   "minVersion": "0.8",
   "priority": 2147483647,
   "package": "com.csdy.better_soul_stone.mixin",
+  "refmap": "better_soul_stone.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "MerchantContainerAccessor",
